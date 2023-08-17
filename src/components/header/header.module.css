@@ -1,0 +1,31 @@
+.header {
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.cotainer {
+    margin-left: 9vw;
+    margin-right: 9vw;
+    height: 111px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.header__logo {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+

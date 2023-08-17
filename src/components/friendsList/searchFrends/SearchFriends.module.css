@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 0px solid;
+    background-color: #F3F6F8;
+}
+
+.serch {
+    background-color: #F3F6F8;
+    border: 0px;
+    margin-right: auto;
+    width: 20vw;
+}
+
+.serch_img {
+    margin: 7px;
+}
+
+.settings_img {
+    margin: 7px 20px;
+}
