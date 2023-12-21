@@ -6,7 +6,10 @@ import homePageReducer from "./homeReducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer} from 'redux-form'
+<<<<<<< HEAD
 import appReducer from './app-reducer copy';
+=======
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
 
 
 const reducers = combineReducers({
@@ -15,7 +18,10 @@ const reducers = combineReducers({
     usersPage: usersPageReducer,
     homePage: homePageReducer,
     auth: authReducer,
+<<<<<<< HEAD
     app: appReducer,
+=======
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
     form: formReducer
     
 });

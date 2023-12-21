@@ -69,7 +69,11 @@ const usersPageReducer = (state = initialState, action, userId) => {
                     : state.followingInProgress.filter(id => id !== action.userId)
             }
 
+<<<<<<< HEAD
         default: 
+=======
+        default:
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
             return state;
     }
 }
@@ -82,11 +86,19 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const toggleIsFollowingInProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
 
+<<<<<<< HEAD
 export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
 
         usersAPI.requestUsers(currentPage, pageSize)
+=======
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+
+        usersAPI.getUsers(currentPage, pageSize)
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
             .then(data => {
                 dispatch(setCurrentPage(currentPage));
                 dispatch(toggleIsFetching(false));

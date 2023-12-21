@@ -13,6 +13,7 @@ flex-direction: row;
 {
     border: solid red 2px;
     
+<<<<<<< HEAD
 }
 
 .formSummmaryError 
@@ -20,4 +21,6 @@ flex-direction: row;
 border: 1px red solid;
 padding: 5px;
 color: rosybrown;
+=======
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
 }

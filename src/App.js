@@ -2,10 +2,23 @@ import './App.css';
 // import Chats from "./pages/Chats";
 import SideMenu from './components/side-menu-bar/Side-menu';
 import Footer from './components/Footer/Footer';
+<<<<<<< HEAD
 
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Login from './components/Login/Login';
+=======
+
+import ProfileContainer from './components/Profile/ProfileContainer';
+import UsersContainer from './components/Users/UsersContainer';
+import Login from './components/Login/Login';
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import HeaderContainer from './components/Header/HeaderContainer';
+import HomeContainer from './components/Home/HomeContainer';
+import MessagesContainer from './components/Messages/MessagesContainer';
+
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
 
 import { Routes, Route } from "react-router-dom"
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -15,6 +28,7 @@ import MessagesContainer from './components/Messages/MessagesContainer';
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+<<<<<<< HEAD
 import { compose } from 'redux';
 
 
@@ -34,6 +48,10 @@ class App extends Component {
     return (
       <div className="App">
       
+=======
+    <div className="App">
+      <Router>
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
       <HeaderContainer />
         <SideMenu />
 
@@ -41,10 +59,19 @@ class App extends Component {
 
           <Routes>
             <Route path="/" element={<HomeContainer/>} />
+<<<<<<< HEAD
 
             <Route path="/profile/:profileId?" element={<ProfileContainer />} />
             <Route path="/messages" element={<MessagesContainer />} />
 
+=======
+
+            <Route path="/profile/:profileId?" element={<ProfileContainer
+              store={props.store}/>} />
+            <Route path="/messages" element={<MessagesContainer
+            />} />
+
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
             {/* <Route path="/chats" element={<Chats
               store={props.store}
             />} */}

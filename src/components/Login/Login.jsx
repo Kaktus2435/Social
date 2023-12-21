@@ -5,7 +5,11 @@ import { required, maxLengthCreator } from '../utils/validators/validators'
 import { connect } from "react-redux";
 import { login } from './../redux/auth-reducer.js';
 import { Navigate } from "react-router-dom";
+<<<<<<< HEAD
 import style from './../utils/forms/FormsControls.module.css';
+=======
+
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
 
 
 
@@ -28,11 +32,14 @@ const LoginForm = (props) => {
                 <div>
                     <Field component={Input} name='rememberMe' type="checkbox" /> Remember me
                 </div>
+<<<<<<< HEAD
 
                 {props.error && <div className={style.formSummmaryError}>
                     {props.error}
                 </div>
                 }
+=======
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
                 <div>
                     <button>Login</button>
                 </div>
@@ -45,11 +52,19 @@ const LoginForm = (props) => {
 
 const Login = (props) => {
     const onSubmit = (formData) => {
+<<<<<<< HEAD
         const { email, password, rememberMe } = formData
         props.login(email, password, rememberMe)
     }
 
     if (props.isAuth) return <Navigate to='/profile' />
+=======
+        const {email, password, rememberMe} = formData
+        props.login(email, password, rememberMe)
+    }
+
+    if (props.isAuth) return <Navigate to='/profile'/>
+>>>>>>> dce12c4e69743825c35f82af172bdbd5c759dba7
 
     return (
         <>
