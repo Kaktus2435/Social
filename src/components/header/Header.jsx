@@ -1,17 +1,21 @@
-import Buttons from "./Buttons header/Buttons";
-import css from "./header.module.css";
+import Buttons from "../Header/ButtonsHeader/Buttons";
+import styles from "./header.module.css";
 import Search from "./search/Search";
 
 
-const Header = () => {
+const Header = (props) => {
     return (
-        <header className={css.header}>
-            <div className={css.cotainer}>
-                <div className={css.header__logo}>
+        
+        <header className={styles.header}>
+            <div className={styles.cotainer}>
+                <div className={styles.header__logo}>
                     JassBee.in
                 </div>
                 <Search />
-                <Buttons />
+                <Buttons isAuth={props.isAuth} login={props.login} logout={props.logout}
+               
+                profile={props.profile}
+                />
             </div>
         </header>
     );

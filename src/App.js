@@ -1,47 +1,72 @@
 import './App.css';
-import Header from './components/header/Header';
-import Profile from "./pages/Profile";
-import Chats from "./pages/Chats";
+// import Chats from "./pages/Chats";
 import SideMenu from './components/side-menu-bar/Side-menu';
-import Footer from './components/footer/Footer';
-import Home from './pages/Home'
+import Footer from './components/Footer/Footer';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProfileContainer from './components/Profile/ProfileContainer';
+import UsersContainer from './components/Users/UsersContainer';
+import Login from './components/Login/Login';
 
-function App(props) {
+import { Routes, Route } from "react-router-dom"
+import HeaderContainer from './components/Header/HeaderContainer';
+import HomeContainer from './components/Home/HomeContainer';
+import MessagesContainer from './components/Messages/MessagesContainer';
 
-  return (
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-    <div className="App">
-      <Router>
-        <Header />
+import { compose } from 'redux';
+
+
+import preloader from './components/img/Dual Ring-1s-200px.svg'
+import { withRouter } from './components/utils/withRouter/withRouter';
+import { initializeApp } from './components/redux/app-reducer copy';
+
+class App extends Component {
+  componentDidMount() {
+    this.props.initializeApp()
+ }
+  render() {
+    if (!this.props.initialized) {
+    return <img src={preloader} alt="" />
+    
+    }
+    return (
+      <div className="App">
+      
+      <HeaderContainer />
         <SideMenu />
 
         <div className="container">
 
           <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<HomeContainer/>} />
 
-            <Route path="/profile" element={<Profile
-              profilePage={props.appState.profilePage}
-              dispatch={props.dispatch}
+            <Route path="/profile/:profileId?" element={<ProfileContainer />} />
+            <Route path="/messages" element={<MessagesContainer />} />
 
-            />} />
-            <Route path="/chats" element={<Chats
-              chatsPage={props.appState.chatsPage}
-              dispatch={props.dispatch}
-            />}
-            />
-            {/* <Route path="/explore" element={<Chats />} />
-            <Route path="/friends" element={<Chats />} />
-            <Route path="/settings" element={<Chats />} /> */}
+            {/* <Route path="/chats" element={<Chats
+              store={props.store}
+            />} */}
+            
+            {/* <Route path="/explore" element={<Chats />} />*/}
+            <Route path="/friends" element= {<UsersContainer />} />
+            {/*<Route path="/settings" element={<Chats />} /> */}
+            <Route path="/login" element={<Login />} /> 
           </Routes>
 
         </div>
         <Footer />
-      </Router>
+      
     </div>
-  );
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
+
+export default compose(	
+  withRouter,
+  connect(mapStateToProps, { initializeApp }))(App);

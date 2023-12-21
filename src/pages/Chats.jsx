@@ -1,43 +1,43 @@
-import FriendsList from "../components/friendsList/FriendsList/FriendsList"
-import SearchFriends from "../components/friendsList/searchFrends/SearchFriends";
-import Chat from "../components/chat/Chat";
-import SentBar from "../components/chat/SentBar/input"
+import FriendsList from "../components/FriendsList/FriendsList/FriendsList"
+import SearchFriends from "../components/FriendsList/searchFrends/SearchFriends";
 
-import m from "../styles/main.module.css";
-
+import style from "../styles/main.module.css";
+import ChatComponent from "../components/Chat/ChatComponent";
+import SentBar from "../components/Chat/SentBar/SentBar";
 
 const Chats = (props) => {
 
-    const contactsElements = props.chatsPage.contacts
-        .map(c => <FriendsList name={c.name} firstName={c.firstName} photos={c.photos} />);
+    const { dispatch, chatsPage } = props.store;
+    const { messages, contacts, myNewMessage } = chatsPage;
 
-    const myMessagesElements = props.chatsPage.messages
-        .map((m, index) => <Chat isMy={m.isMy} message={m.message} key={index} />);
+    const contactsElements = contacts.map(c =>
+        <FriendsList name={c.name} firstName={c.firstName} photos={c.photos} />);
+    const myMessagesElements = messages.map((m, index) =>
+        <ChatComponent isMy={style.isMy} message={style.message} key={index} />);
 
     return (
-        <div className={m.container}>
-            <div className={m.contacts}>
-                <div className={m.contacts__wrapper}>
-                    <div className={m.contacts__title}>
+        <div className={style.container}>
+            <div className={style.contacts}>
+                <div className={style.contacts__wrapper}>
+                    <div className={style.contacts__title}>
                         Messages
                     </div>
                     <SearchFriends />
 
-
                     {/* line switches */}
-                    <div className={m.switches}>
-                        <button className={m.switches__button}>
+                    <div className={style.switches}>
+                        <button className={style.switches__button}>
                             Primary
                         </button>
 
-                        <button className={m.switches__button}>
+                        <button className={style.switches__button}>
                             General
                         </button>
 
-                        <button className={m.switches__requests}>
+                        <button className={style.switches__requests}>
                             Requests
                         </button>
-                        <div className={m.line}></div>
+                        <div className={style.line}></div>
                     </div>
 
                     {contactsElements}
@@ -46,24 +46,24 @@ const Chats = (props) => {
 
 
             {/* chat */}
-            <div className={m.chat}>
-                <div className={m.chat__wraper}>
-                    <div className={m.chat__interlockBar}>
-                        <div className={m.chat__interlok}>
+            <div className={style.chat}>
+                <div className={style.chat__wraper}>
+                    <div className={style.chat__interlockBar}>
+                        <div className={style.chat__interlok}>
 
                         </div>
-                        <div className={m.chat__interactionButtons}>
+                        <div className={style.chat__interactionButtons}>
 
                         </div>
                     </div>
-                    <div className={m.chat__messages}>
+                    <div className={style.chat__messages}>
                         {myMessagesElements}
                     </div>
-                    <div className={m.chat__addMessage}>
+                    <div className={style.chat__addMessage}>
                         <SentBar
-                            myNewMessage={props.chatsPage.myNewMessage} /* (nu se duce prin disptchi mai departe si am chemat-o aici) */
-                            dispatch={props.dispatch}
-                            />
+                            myNewMessage={myNewMessage} 
+                            dispatch={dispatch}
+                        />
                     </div>
                 </div>
             </div>
