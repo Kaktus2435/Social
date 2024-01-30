@@ -38,7 +38,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-      {/* KC */}
+      {/* iar */}
       <HeaderContainer />
         <SideMenu />
 
