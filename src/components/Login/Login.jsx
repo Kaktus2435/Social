@@ -1,25 +1,29 @@
 import React from "react";
-import { Field, reduxForm } from 'redux-form'
-import { Input } from '../utils/forms/FormsControls'
+import { reduxForm } from 'redux-form'
+import { Input, createField } from '../common/forms/FormsControls.js'
 import { required, maxLengthCreator } from '../utils/validators/validators'
 import { connect } from "react-redux";
 import { login } from './../redux/auth-reducer.js';
 import { Navigate } from "react-router-dom";
-import style from './../utils/forms/FormsControls.module.css';
+import style from './../common/forms/FormsControls.module.css';
 
 
 
 const maxLength50 = maxLengthCreator(50)
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
 
     return (
         <>
 
-            <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field component={Input} placeholder='Email' name='email'
-                        validate={[required, maxLength50]} />
+            <form onSubmit={handleSubmit}>
+                
+                {createField("Email", "email", [required, maxLength50], Input, )}
+                {createField("Password", "password", [required, maxLength50], Input,{type: "password"} )}
+                {createField(null, 'rememberMe', null, Input, {type: "checkbox"}, "remember me")}
+                {/* <div>                
+                     <Field component={Input} placeholder='Email' name='email'
+                        validate={[required, maxLength50]} /> 
                 </div>
                 <div>
                     <Field component={Input} name='password' placeholder="Password" type="password"
@@ -27,10 +31,10 @@ const LoginForm = (props) => {
                 </div>
                 <div>
                     <Field component={Input} name='rememberMe' type="checkbox" /> Remember me
-                </div>
+                </div> */}
 
-                {props.error && <div className={style.formSummmaryError}>
-                    {props.error}
+                {error && <div className={style.formSummmaryError}>
+                    {error}
                 </div>
                 }
                 <div>

@@ -1,24 +1,19 @@
-import store from "./components/redux/redux.store";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom"
+import AppMain from './App';
+import store from './components/redux/redux.store';
+
+
+// setInterval(() => {
+//   store.dispatch({type:"FAKE"})
+// }, 1000);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export const rerenderEntireTree = (state) => {
-  root.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </React.StrictMode>
-  );
+  root.render(<AppMain />);
 
   reportWebVitals();
 
@@ -29,4 +24,4 @@ store.subscribe(() => {
   const state = store.getState();
   rerenderEntireTree(state);
 });
-window.store = store;
+

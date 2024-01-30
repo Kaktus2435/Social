@@ -6,22 +6,25 @@ import Users from "./Users";
 import React from "react";
 import preloader from "../img/Dual Ring-1s-200px.svg";
 import { compose } from "redux";
-import { withRouter } from "../utils/withRouter/withRouter";
-import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../redux/users-selectors";
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUserSuperSelector } from "../redux/users-selectors";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage,pageSize} = this.props
+        this.props.requestUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        const {pageSize} =this.props
+        this.props.requestUsers(pageNumber, pageSize)
     }
 
     render() {
+        console.log("render");
         return <>
             {this.props.isFetching ? <img src={preloader} alt="preloader" /> : null}
             <Users currentPage={this.props.currentPage}
@@ -49,8 +52,10 @@ class UsersContainer extends React.Component {
 //     }
 // }
 const mapStateToProps = (state) => {
+    console.log("mapStateToProps")
     return {
-        users: getUsers(state),
+        users: getUserSuperSelector(state),
+        // users: getUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
@@ -63,7 +68,7 @@ const mapStateToProps = (state) => {
 // let AuthRedirectComponent = withAuthRedirect(UsersContainer)
 
 export default compose(
-    withRouter,
+    withAuthRedirect,
     connect(mapStateToProps,
         { follow, unfollow, requestUsers })
 )(UsersContainer);

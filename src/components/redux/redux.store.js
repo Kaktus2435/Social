@@ -4,10 +4,10 @@ import messagesPageReducer from "./messagesPageReducer"
 import usersPageReducer from "./usersPageReducer";
 import homePageReducer from "./homeReducer";
 import authReducer from "./auth-reducer";
-import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer} from 'redux-form'
 import appReducer from './app-reducer copy';
-
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
     profilePage: profilePageReducer,
@@ -19,9 +19,8 @@ const reducers = combineReducers({
     form: formReducer
     
 });
+//composeEnhancers works only with chrome
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
 
-
-
-const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export default store;

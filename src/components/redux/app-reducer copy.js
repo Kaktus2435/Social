@@ -23,7 +23,7 @@ const appReducer = (state = initialState, action) => {
 export const initializingSuccessed = () => ( { type: INITIALIZING_SUCCESSED })
 //thunk creators
 export const initializeApp = () => async dispatch => {
-debugger
+
 	let promise = []
 	promise.push(dispatch(getUserData()))
 	await Promise.all(promise)

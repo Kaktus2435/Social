@@ -5,6 +5,7 @@ const ADD_POST = 'ADD_POST';
 const SET_USERS_PROFILE ='SET_USERS_PROFILE';
 const SET_USERS_ID ='SET_USERS_ID';
 const SET_STATUS ='SET_STATUS';
+const DELETE_POST ='DELETE_POST';
 
 const initialState = {
     posts: [
@@ -12,7 +13,7 @@ const initialState = {
             id: 1,
             name: "Ion",
             post: "Iuhu"
-        },
+        }
     ],
     profile: null,
     status: ""
@@ -28,6 +29,9 @@ const profilePageReducer = (state = initialState, action) => {
                 myNewPost: '',
                 posts: [...state.posts, { id: 2, name: 'Incognito', post: post }]
             }
+        case DELETE_POST:
+            return {...state, posts: state.posts.filter(p => p.id !== action.userId)}    
+
         case SET_USERS_PROFILE:
             return {
                 ...state, profile: action.profile
@@ -47,6 +51,7 @@ const profilePageReducer = (state = initialState, action) => {
     }
 }
 export const addPost = (myNewPost) => ({type: ADD_POST, myNewPost })
+export const deletePost = (userId) => ({type: DELETE_POST, userId })
 
 export const setUsersProfile = (profile) => ({type: SET_USERS_PROFILE, profile});
 export const setUsersId = (userId) => ({type: SET_USERS_ID, userId});

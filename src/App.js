@@ -22,8 +22,13 @@ import preloader from './components/img/Dual Ring-1s-200px.svg'
 import { withRouter } from './components/utils/withRouter/withRouter';
 import { initializeApp } from './components/redux/app-reducer copy';
 
+import store from "./components/redux/redux.store";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom"
+
 class App extends Component {
   componentDidMount() {
+    
     this.props.initializeApp()
  }
   render() {
@@ -63,10 +68,22 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) =>{ 
+    return {
   initialized: state.app.initialized
-})
+}}
 
-export default compose(	
+
+let AppContainer = compose(	
   withRouter,
   connect(mapStateToProps, { initializeApp }))(App);
+
+let AppMain = (props) => {
+  return <BrowserRouter>
+  <Provider store={store}>
+    <AppContainer />
+</Provider>
+  </BrowserRouter>
+}
+
+export default AppMain;

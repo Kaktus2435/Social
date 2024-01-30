@@ -1,10 +1,11 @@
 import React from "react";
 import Post from "././post/Post";
 import preloader from '../img/Dual Ring-1s-200px.svg'
-import ProfileStatus from "./profileStatus/ProfileStatus";
 import { Field, reduxForm } from 'redux-form'
 import { required, maxLengthCreator } from '../utils/validators/validators'
-import { Textarea } from "../utils/forms/FormsControls";
+import { Textarea } from "../common/forms/FormsControls.js";
+import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks.jsx';
+
 
 
 const Profile = (props) => {
@@ -38,8 +39,7 @@ const Profile = (props) => {
                 {postsElements}
                 <div>
                 <ProfileReduxForm onSubmit={onPostChange}/>
-                    <ProfileStatus
-
+                    <ProfileStatusWithHooks
                         status={props.status}
                         updateStatus={props.updateStatus} />
 
