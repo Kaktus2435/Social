@@ -1,5 +1,5 @@
 import React from "react";
-import Paginator from "../common/paginator/Paginator";
+import Paginator from "../common/paginator/Pagination";
 import User from "./User";
 
 

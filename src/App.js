@@ -1,21 +1,21 @@
 import './App.css';
+import { Routes, Route } from "react-router-dom"
+import { connect } from 'react-redux'
+import { compose } from 'redux';
+import React, { Component, lazy } from 'react'
+
 // import Chats from "./pages/Chats";
 import SideMenu from './components/side-menu-bar/Side-menu';
 import Footer from './components/Footer/Footer';
 
-import ProfileContainer from './components/Profile/ProfileContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import Login from './components/Login/Login';
 
-import { Routes, Route } from "react-router-dom"
-import HeaderContainer from './components/Header/HeaderContainer';
 import HomeContainer from './components/Home/HomeContainer';
+import ProfileContainer from'./components/Profile/ProfileContainer';
+
+import HeaderContainer from './components/Header/HeaderContainer';
 import MessagesContainer from './components/Messages/MessagesContainer';
 
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
-import { compose } from 'redux';
 
 
 import preloader from './components/img/Dual Ring-1s-200px.svg'
@@ -25,6 +25,15 @@ import { initializeApp } from './components/redux/app-reducer copy';
 import store from "./components/redux/redux.store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom"
+import { withSuspense } from './hoc/withSuspense';
+
+
+
+const Login = lazy(() => import ('./components/Login/Login'));
+const UsersContainer = lazy(() => import ('./components/Users/UsersContainer'));
+
+const LoginWithSuspense = withSuspense(Login)
+const UsersContainerWithSuspense = withSuspense(UsersContainer);
 
 class App extends Component {
   componentDidMount() {
@@ -44,9 +53,9 @@ class App extends Component {
         <div className="container">
 
           <Routes>
-            <Route path="/" element={<HomeContainer/>} />
-
-            <Route path="/profile/:profileId?" element={<ProfileContainer />} />
+            <Route path="/" element={<HomeContainer />} />
+            
+            <Route path="/profile/:profileId?" element={<ProfileContainer/>} />
             <Route path="/messages" element={<MessagesContainer />} />
 
             {/* <Route path="/chats" element={<Chats
@@ -54,9 +63,11 @@ class App extends Component {
             />} */}
             
             {/* <Route path="/explore" element={<Chats />} />*/}
-            <Route path="/friends" element= {<UsersContainer />} />
+            
+            <Route path="/friends" element={ <UsersContainerWithSuspense /> }/>
             {/*<Route path="/settings" element={<Chats />} /> */}
-            <Route path="/login" element={<Login />} /> 
+            <Route path="/login" element={ <LoginWithSuspense />}/>
+
           </Routes>
 
         </div>

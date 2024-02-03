@@ -33,6 +33,9 @@ class UsersContainer extends React.Component {
                 follow={this.props.follow}
                 users={this.props.users}
                 followingInProgress={this.props.followingInProgress}
+                pageSize={this.props.pageSize}
+                totalUsersCount={this.props.totalUsersCount}
+               
 
             />
         </>
