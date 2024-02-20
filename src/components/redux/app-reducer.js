@@ -19,11 +19,11 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
-//action creators
-export const initializingSuccessed = () => ( { type: INITIALIZING_SUCCESSED })
-//thunk creators
-export const initializeApp = () => async dispatch => {
 
+export const initializingSuccessed = () => ( { type: INITIALIZING_SUCCESSED })
+
+
+export const initializeApp = () => async dispatch => {
 	let promise = []
 	promise.push(dispatch(getUserData()))
 	await Promise.all(promise)

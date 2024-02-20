@@ -16,11 +16,9 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import MessagesContainer from './components/Messages/MessagesContainer';
 
 
-
-
 import preloader from './components/img/Dual Ring-1s-200px.svg'
 import { withRouter } from './components/utils/withRouter/withRouter';
-import { initializeApp } from './components/redux/app-reducer copy';
+import { initializeApp } from './components/redux/app-reducer';
 
 import store from "./components/redux/redux.store";
 import { Provider } from "react-redux";
@@ -43,7 +41,7 @@ class App extends Component {
   render() {
     if (!this.props.initialized) {
     return <img src={preloader} alt="" />
-    
+   
     }
     return (
       <div className="App">

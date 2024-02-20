@@ -1,5 +1,6 @@
 import { reduxForm } from "redux-form";
 import { Input, Textarea, createField } from "../common/forms/FormsControls";
+import styles from './Profile.module.css';
 
  const ProfileDataForm = ( {handleSubmit, profile} ) => {
     return (
@@ -16,18 +17,18 @@ import { Input, Textarea, createField } from "../common/forms/FormsControls";
       
           <div> 
             <b>My professional skills</b>: {profile.lookingForAJobDescription} 
-            {createField("My professional skills", "lookingForAJob", [], Textarea, )}
+            {createField("My professional skills", "lookingForAJobDescription", [], Textarea, )}
             </div>
       
       <div> 
             <b>About me</b>: {profile.aboutMe } 
             {createField("About me", "aboutMe", [], Textarea, )}
             </div>
-      <div>{profile.aboutMe}</div>
-      <div> <b>User ID</b>: {profile.userId}.</div>
-      {/* <div> <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-          return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
-      })}.</div> */}
+      
+      <div> <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+          return <div className={styles.contact}>
+             {key}: {createField(key, 'contacts.' + key, [], Input)} </div>
+      })}.</div>
 
   </form>
     )

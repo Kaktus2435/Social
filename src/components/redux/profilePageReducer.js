@@ -46,11 +46,12 @@ const profilePageReducer = (state = initialState, action) => {
             return {
                 ...state, status: action.status
             }
-            case SET_PHOTO_SUCCESS:
-                return {
-                    ...state, profile: {...state.profile, photos: action.photos}
-                }
-                
+        case SET_PHOTO_SUCCESS:
+            return {
+                ...state, profile: { ...state.profile, photos: action.photos }
+            }
+    
+
 
         default:
             return state;
@@ -62,14 +63,11 @@ export const deletePost = (userId) => ({ type: DELETE_POST, userId })
 export const setUsersProfile = (profile) => ({ type: SET_USERS_PROFILE, profile });
 export const setUsersId = (userId) => ({ type: SET_USERS_ID, userId });
 export const setStatus = (status) => ({ type: SET_STATUS, status })
-export const savePhotoSucces =(photos) => ({ type: SET_PHOTO_SUCCESS, photos })
+export const savePhotoSucces = (photos) => ({ type: SET_PHOTO_SUCCESS, photos })
 
-export const getUsersProfile = (userId) => (dispatch) => {
-    usersAPI.getProfile(userId)
-        .then(response => {
-
-            dispatch(setUsersProfile(response.data));
-        });
+export const getUsersProfile = (userId) => async (dispatch) => {
+  const response = await usersAPI.getProfile(userId);
+  dispatch(setUsersProfile(response.data));
 }
 
 export const getStatus = (userId) => (dispatch) => {
@@ -97,6 +95,14 @@ export const savePhoto = (file) => (dispatch) => {
             }
         }
         )
+}
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.id;
+    const response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === 0) {
+        dispatch(getUsersProfile(userId));
+    }
 }
 
 // export const savePhoto = (file) => {

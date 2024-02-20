@@ -1,0 +1,48 @@
+{
+    "configurations": [
+        {
+            "type": "node",
+            "name": "vscode-jest-tests.v2.social_network-1707909712989",
+            "request": "launch",
+            "args": [
+                "test",
+                "--",
+                "test",
+                "--runInBand",
+                "--watchAll=false",
+                "--testNamePattern",
+                "${jest.testNamePattern}",
+                "--runTestsByPath",
+                "${jest.testFile}"
+            ],
+            "cwd": "d:\\Proiecte\\social_network",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+            "runtimeExecutable": "npm",
+            "protocol": "inspector"
+        },
+        {
+            "type": "node",
+            "name": "vscode-jest-tests.v2.social_network",
+            "request": "launch",
+            "args": [
+                "test",
+                "--",
+                "test",
+                "--runInBand",
+                "--watchAll=false",
+                "--testNamePattern",
+                "${jest.testNamePattern}",
+                "--runTestsByPath",
+                "${jest.testFile}"
+            ],
+            "cwd": "d:\\Proiecte\\social_network",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+            "runtimeExecutable": "npm",
+            "protocol": "inspector"
+        }
+    ]
+}

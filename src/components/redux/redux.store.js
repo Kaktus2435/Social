@@ -5,7 +5,7 @@ import usersPageReducer from "./usersPageReducer";
 import homePageReducer from "./homeReducer";
 import authReducer from "./auth-reducer";
 import { reducer as formReducer} from 'redux-form'
-import appReducer from './app-reducer copy';
+import appReducer from './app-reducer';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 

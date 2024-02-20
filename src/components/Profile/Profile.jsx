@@ -16,7 +16,9 @@ const Profile = (props) => {
     const goToEditMode = () => { setEditMode(true) };
     const profile = props.profile;
     const state = props.profilePage;
-    const isOwner = props.isOwner
+    const isOwner = props.isOwner;
+    const saveProfile = props.saveProfile;
+
 
 
     if (!props.profile) {
@@ -37,7 +39,8 @@ const Profile = (props) => {
     }
 
     const onSubmit = (FormData) => {
-        console.log(FormData);
+        saveProfile(FormData);
+        setEditMode(false);
     }
 
     return (
@@ -50,6 +53,7 @@ const Profile = (props) => {
                     goToEditMode={goToEditMode}
                     isOwner={isOwner}
                     onSubmit={onSubmit}
+                    initialValues={profile}
 
                 />
                 : <ProfileData profile={profile}
@@ -85,15 +89,16 @@ const ProfileData = ({ profile, goToEditMode, isOwner }) => {
         <div>
             <div> {isOwner && <button onClick={goToEditMode}>Edit</button>}</div>
             <div><b>Full name</b>: {profile.fullName}.</div>
-            <div> <b>Looking for a job lookingForAJob</b>: {profile.lookingForAJob ? 'Yes' : 'No'}. </div>
+            <div> <b>Looking for a job</b>: {profile.lookingForAJob ? 'Yes' : 'No'}. </div>
             {profile.lookingForAJob &&
                 <div> <b>My professional skills</b>: {profile.lookingForAJobDescription} </div>
             }
             <div>{profile.aboutMe}</div>
             <div> <b>User ID</b>: {profile.userId}.</div>
-            <div> <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
-            })}.</div>
+            <div> <b>Contacts</b>:  {Object.keys(profile.contacts || {}).map(key => {
+          return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+        })
+        }</div>
 
         </div>
     )
