@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import AppMain from './App';
-import store from './components/redux/redux.store';
+import store from './components/redux/redux.store.ts';
 
 
 // setInterval(() => {

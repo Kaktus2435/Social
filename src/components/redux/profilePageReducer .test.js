@@ -1,6 +1,6 @@
 import React from "react";
-import profilePageReducer, { deletePost } from "./profilePageReducer";
-import {addPost} from './profilePageReducer';
+import profilePageReducer, { deletePost } from "./profilePageReducer.ts";
+import {addPost} from './profilePageReduce/ts';
 
 const state = {
     posts: [

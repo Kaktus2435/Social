@@ -1,4 +1,4 @@
-import { homeAPI } from "../../api/api";
+import { homeAPI } from "../../api/homeAPI.ts";
 
 const SET_USERS = "SET_USERS";
 

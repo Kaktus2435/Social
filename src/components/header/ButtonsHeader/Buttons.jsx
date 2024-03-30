@@ -16,7 +16,7 @@ const Buttons = (props) => {
                 </button>
                 <button className={css.button}>
                     {props.isAuth ?
-                        <div>
+                        <div className={css.login__container}>
                             <img className={css.button__img_profile} src={profile_img} alt="profile" />
                             <button onClick={props.logout}>Log out</button>
                         </div>

@@ -1,5 +1,5 @@
 import photo from "../img/photo-1554080353-a576cf803bda.avif"
-import profilePageReducer from './profilePageReducer';
+import profilePageReducer from './profilePageReducer.ts';
 import chatPageReducer from './chatPageReducer';
 
 let store = {

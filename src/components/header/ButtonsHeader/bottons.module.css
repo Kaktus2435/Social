@@ -35,3 +35,8 @@ min-width: 189px;
     height: 100%;
 }
 
+.login__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
