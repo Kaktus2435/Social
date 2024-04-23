@@ -31,7 +31,7 @@ export type ProfileType = {
     aboutMe: string
 }
 
-export type UsersType = {
+export type UserType = {
     id: number
     name: string
     status: string

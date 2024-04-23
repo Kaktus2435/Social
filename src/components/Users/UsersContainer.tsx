@@ -4,11 +4,15 @@ import {
 } from "../redux/usersPageReducer.ts";
 import Users from "./Users.tsx";
 import React from "react";
+//@ts-ignore
 import preloader from "../img/Dual Ring-1s-200px.svg";
 import { compose } from "redux";
-import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUserSuperSelector } from "../redux/users-selectors.js";
+import { 
+    getCurrentPage, getFollowingInProgress, getIsFetching, 
+    getPageSize, getTotalUsersCount, getUserSuperSelector 
+ } from "../redux/users-selectors.js";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect.js";
-import { UsersType } from "../../types/types.ts";
+import { UserType } from "../../types/types.ts";
 
 type PropsType = {
     currentPage: number
@@ -17,7 +21,7 @@ type PropsType = {
     isFetching: boolean
     unfollow: (id: number) => void
     follow: (id: number) => void
-    users: Array<UsersType>
+    users: Array<UserType>
     followingInProgress: Array<number>
     totalUsersCount: number
 } 

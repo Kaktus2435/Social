@@ -14,9 +14,6 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    // addPost:
-    //     getUsersProfile, getStatus, updateStatus, savePhoto, saveProfile 
- 
        getUsersProfile: (profileId: number) => void
        getStatus: (profileId: number) => void
        router: any

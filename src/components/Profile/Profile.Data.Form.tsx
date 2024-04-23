@@ -4,12 +4,14 @@ import styles from './Profile.module.css';
 import React from "react";
 import { ProfileType } from "../../types/types";
 
-type PropsType = {
-  handleSubmit: any
+type ProfileFormPropsType = {
+  handleSubmit: () => void
   profile: ProfileType
 }
 
- const ProfileDataForm: React.FC<PropsType> = (props) => {
+type ProfilePropsType = (params: ProfileFormPropsType) => React.ReactNode
+
+ const ProfileDataForm: React.FC<ProfileFormPropsType> = (props) => {
     return (
       <form onSubmit={props.handleSubmit}> 
       <div>
@@ -35,12 +37,12 @@ type PropsType = {
       <div> <b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
           return <div className={styles.contact}>
              {key}: {createField(key, 'contacts.' + key, [], Input)} </div>
-      })}.</div>
+      })}</div>
 
   </form>
     )
 }
 
-const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm)
+const ProfileDataFormReduxForm = reduxForm<ProfilePropsType, ProfileFormPropsType>({form: 'edit-profile'})(ProfileDataForm)
 
 export default ProfileDataFormReduxForm;
