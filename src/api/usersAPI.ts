@@ -1,7 +1,4 @@
 import { GetItemsType, instance } from './api.ts';
-import { profileAPI } from './profileAPI.ts';
-
-
 
 export const usersAPI = {
     requestUsers(currentPage: number, pageSize: number) {
@@ -19,10 +16,5 @@ export const usersAPI = {
     },
     unfollow(userId: number) {
         return instance.delete<ResponseType>(`follow/${userId}`).then(res => res.data) as Promise<ResponseType>;
-    },
-    
-    getProfile(userId: number) {
-        console.warn('Obsolete method. Please profileAPI object. ');
-        return profileAPI.getProfile(userId);
     }
 };

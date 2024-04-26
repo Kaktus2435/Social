@@ -1,9 +1,3 @@
-// import photo from '../img/photo-1554080353-a576cf803bda.avif';
-
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_NEW_MESSAGE = 'UPDATE_NEW_MESSAGE';
-const GET_CONTACTS = 'GET_CONTACTS';
-const GET_MESSAGES = 'GET_MESSAGES';
 
 export type ContactsType = {
     name: string,
@@ -60,23 +54,23 @@ export type InitialStateType = typeof initialState
 
 const chatPageReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case 'messages/ADD_MESSAGE':
             let message = state.myNewMessage;
             return {
                 ...state,
                 myNewMessage: "",
                 messages: [...state.messages, { isMy: true, message: message }]
             }
-        case UPDATE_NEW_MESSAGE:
+        case 'messages/UPDATE_NEW_MESSAGE':
             return {
                 ...state,
                 myNewMessage: action.newMessage
             }
-        case GET_CONTACTS:
+        case 'messages/GET_CONTACTS':
             return {
                 ...state, contacts: state.contacts
             }
-        case GET_MESSAGES:
+        case 'messages/GET_MESSAGES':
             return {
                 ...state, messages: state.messages
             }
@@ -86,30 +80,11 @@ const chatPageReducer = (state = initialState, action: any): InitialStateType =>
     }
 }
 
-type GetContactsActionType = {
-    type: typeof GET_CONTACTS
+export const actions = {
+    addMessage: ()=> ({ type: 'messages/ADD_MESSAGE' } as const ),
+    updateNewMessageText: (message: string) => ({ type: 'messages/UPDATE_NEW_MESSAGE', newMessage: message } as const ),
+    getContacts: ()=> ({ type: 'messages/GET_CONTACTS' } as const ),
+    getMessages: ()=> ({ type: 'messages/GET_MESSAGES' } as const )
 }
-
-export const getContacts = (): GetContactsActionType => ({ type: GET_CONTACTS })
-
-type GetMessagesActionType = {
-    type: typeof GET_MESSAGES
-}
-
-export const getMessages = (): GetMessagesActionType => ({ type: GET_MESSAGES })
-
-type AddMessageActionType = {
-    type: typeof ADD_MESSAGE
-}
-
-export const addMessage = (): AddMessageActionType => ({ type: ADD_MESSAGE })
-
-type UpdateNewMessageTextActionType = {
-    type: typeof UPDATE_NEW_MESSAGE,
-    newMessage: string
-
-}
-
-export const updateNewMessageText = (message: string): UpdateNewMessageTextActionType => ({ type: UPDATE_NEW_MESSAGE, newMessage: message })
 
 export default chatPageReducer;

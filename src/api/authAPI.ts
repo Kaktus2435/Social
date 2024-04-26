@@ -1,6 +1,6 @@
 import { ResponseType } from "./api.ts";
 import { instance } from "./api.ts";
-
+ 
 export type MeResponseDataType = {
     id: number, 
     email: string, 
