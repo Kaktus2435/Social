@@ -11,6 +11,7 @@ import ProfileDataForm from './Profile.Data.Form.tsx';
 import Preloader from "../utils/preloader/Preloader.jsx";
 import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.js";
 
+
 type PropsType = {
     profile: ProfileType
     profilePage: ProfilePageType
@@ -24,8 +25,7 @@ type PropsType = {
     savePhoto: (files: PhotosType) => void
 }
 
-
-const Profile: React.FC<PropsType> = ({ profile, profilePage, isOwner, saveProfile, addPost, savePhoto, status, updateStatus }) => {
+const Profile: React.FC<PropsType> = ({ profile, addPost, isOwner, profilePage, savePhoto, saveProfile, status, updateStatus }) => {
     const [editMode, setEditMode] = useState(false);
     const goToEditMode = () => { setEditMode(true) };
 
@@ -58,14 +58,10 @@ const Profile: React.FC<PropsType> = ({ profile, profilePage, isOwner, saveProfi
             {isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}
 
             {editMode
-                ? <ProfileDataForm 
-                    // @ts-ignore
+                ? <ProfileDataForm
                     profile={profile}
-                    goToEditMode={goToEditMode}
-                    isOwner={isOwner}
                     onSubmit={onSubmit}
                     initialValues={profile}
-
                 />
                 : <ProfileData profile={profile}
                     goToEditMode={goToEditMode}

@@ -15,7 +15,7 @@ let initialState = {
 }
 
 
-const usersPageReducer = (state = initialState, action: ActionTypes, userId: number): InitialStateType => {
+const usersPageReducer = (state = initialState, action: ActionTypes): InitialStateType => {
 
     switch (action.type) {
         case 'network/users/FOLLOW':
@@ -29,6 +29,7 @@ const usersPageReducer = (state = initialState, action: ActionTypes, userId: num
                 //     return u;
                 // })
             }
+            
         case 'network/users/UNFOLLOW':
             return {
                 ...state,
@@ -41,13 +42,14 @@ const usersPageReducer = (state = initialState, action: ActionTypes, userId: num
                 //     })
             }
         case 'network/users/SET_USERS':
+           
             return {
-                ...state, users: [...action.users]
+                ...state, users: action.users
             }
-
         case 'network/users/SET_CURRENT_PAGE':
             return {
                 ...state, currentPage: action.currentPage
+                
             }
 
         case 'network/users/SET_TOTAL_USERS_COUNT':
@@ -107,13 +109,13 @@ const followUnfollowFlow = async (dispatch: Dispatch<ActionTypes>, userId: numbe
 }
 
 export const follow = (userId: number): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess)
     }
 }
 
 export const unfollow = (userId: number): ThunkType  => {
-    return async (dispatch: Dispatch<ActionTypes>) => {
+    return async (dispatch) => {
         followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess)
     }
 }

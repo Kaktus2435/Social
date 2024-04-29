@@ -2,16 +2,12 @@ import Profile from "./Profile.tsx";
 import { addPost, getUsersProfile, getStatus, updateStatus, savePhoto, saveProfile } from "../redux/profilePageReducer.ts";
 import { connect } from "react-redux";
 import React from "react";
-import { withAuthRedirect } from '../../hoc/withAuthRedirect.js';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect.tsx';
 import { withRouter } from '../utils/withRouter/withRouter.js';
 import { compose } from "redux";
 import { AppStateType } from "../redux/redux.store.ts";
 import { getAuthorizedUserId, getProfile, getProfilePage, getStatusSelector, getUpdateStatus, getisAuth } from "../redux/profile-selectors.ts";
-
-
-type MapStatePropsType = {
-       
-}
+import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.ts";
 
 type MapDispatchPropsType = {
        getUsersProfile: (profileId: number) => void
@@ -19,10 +15,22 @@ type MapDispatchPropsType = {
        router: any
        history: any
        authorizedUserId: (profileId: number) => void
+
+    
     }
 
+    type ProfilePropsType = {
+        profilePage: ProfilePageType
+        profileId: number
+        savePhoto: (files: PhotosType) => void
+        addPost: (myNewPost: string) => void
+        profile: ProfileType
+        status: string
+        updateStatus: string
+        saveProfile: ProfileType
+    }
 
-type PropsType = MapStatePropsType & MapDispatchPropsType
+type PropsType = MapDispatchPropsType & ProfilePropsType
 
 
 
@@ -70,7 +78,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
 }
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
+let mapStateToProps = (state: AppStateType) => {
 
     return {
         profilePage: getProfilePage(state),

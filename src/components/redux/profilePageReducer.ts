@@ -18,9 +18,12 @@ const initialState = {
     updateStatus: null as string | null
 };
 
+type AddPostAction = {
+    readonly type: "profile/ADD_POST";
+    readonly myNewPost: string;
+} 
 
-
-const profilePageReducer = (state = initialState, action: ActionType): InitialStateType => {
+const profilePageReducer = (state = initialState, action: ActionType | AddPostAction): InitialStateType => {
     switch (action.type) {
 
         case "profile/ADD_POST":
@@ -54,7 +57,6 @@ const profilePageReducer = (state = initialState, action: ActionType): InitialSt
             return state;
     }
 }
-export const addPost = (myNewPost: string) => ({ type: "profile/ADD_POST", myNewPost })
 
 export const actions = {
     deletePost: (userId: number) => ({ type: "profile/DELETE_POST", userId } as const),
@@ -62,6 +64,8 @@ export const actions = {
     setStatus: (status: string) => ({ type: "profile/SET_STATUS", status } as const),
     savePhotoSucces: (photos: PhotosType) => ({ type: "profile/SET_PHOTO_SUCCESS", photos } as const)
 }
+
+export const  addPost = (myNewPost: string) => ({ type: "profile/ADD_POST", myNewPost }) 
 
 export const getUsersProfile = (userId: number): ThunkType => async (dispatch) => {
     const data = await profileAPI.getProfile(userId);

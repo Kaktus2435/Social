@@ -10,8 +10,8 @@ import { compose } from "redux";
 import { 
     getCurrentPage, getFollowingInProgress, getIsFetching, 
     getPageSize, getTotalUsersCount, getUserSuperSelector 
- } from "../redux/users-selectors.js";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect.js";
+ } from "../redux/users-selectors.ts";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect.tsx";
 import { UserType } from "../../types/types.ts";
 
 type PropsType = {

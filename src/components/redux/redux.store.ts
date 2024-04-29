@@ -24,8 +24,8 @@ type RootReducersType = typeof rootReducers
 
 export type AppStateType = ReturnType<RootReducersType>
 
-type PropertiesTypes<T> = T extends {[key: string]: infer U} ? U : never
-export type InferActionTypes<T extends {[key: string]: (...arg: any[]) => any}> = ReturnType<PropertiesTypes<T>>
+export type InferActionTypes<T> = T extends {[key: string]: (...arg: any[]) => infer U} ? U : never
+
 //composeEnhancers works only with chrome
 export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction <R, AppStateType, unknown, A>
 

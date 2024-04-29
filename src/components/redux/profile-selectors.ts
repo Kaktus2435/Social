@@ -17,11 +17,11 @@ export const getUpdateStatus = (state: AppStateType) => {
 }
 
 
-export const getAuthorizedUserId= (state: AppStateType) => {
+export const getAuthorizedUserId = (state: AppStateType) => {
     return state.auth.id
 }
 
-export const getisAuth= (state: AppStateType) => {
+export const getisAuth = (state: AppStateType) => {
     return state.auth.isAuth
 }
-      
+

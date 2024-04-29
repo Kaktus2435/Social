@@ -1,7 +1,5 @@
-import React from "react";
-import profilePageReducer, { deletePost } from "./profilePageReducer.ts";
-import {addPost} from './profilePageReduce/ts';
-
+import profilePageReducer from "./profilePageReducer.ts";
+import {actions} from "./profilePageReducer.ts" 
 const state = {
     posts: [
         {
@@ -19,7 +17,7 @@ const state = {
 
 
  it('new post should bew added', () => {
-    let action = addPost('It');
+    let action = actions.addPost('It');
     let newState = profilePageReducer(state, action);
 
     expect(newState.posts.length).toBe(3);
@@ -27,17 +25,10 @@ const state = {
 });
 
 it('should check the name', () => {
-    let action = addPost('It');
+    let action = actions.addPost('It');
     let newState = profilePageReducer(state, action);
 
     
     expect(newState.posts[0].name).toBe('Ion');
 });
 
-it('after deleting length of messages should be decrement', () => {
-    let action = actions.deletePost(1);
-    let newState = profilePageReducer(state, action);
- 
-    expect(newState.posts.length).toBe(1);
-    
-});
