@@ -8,13 +8,7 @@ import { Navigate } from "react-router-dom";
 import style from './../common/forms/FormsControls.module.css';
 import { AppStateType } from "../redux/redux.store.ts";
 
-
-
 const maxLength50 = maxLengthCreator(50)
-
-type LoginFormOwnProps = {
-    captchaUrl: string | null
-}
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, error, captchaUrl}) => {
 
@@ -53,22 +47,6 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
     );
 }
 
-
-type MapStateToPropsType = {
-    captchaUrl: string | null
-    isAuth: boolean
-}
-type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
-}
-
-export type LoginFormValuesType = {
-    email: string, password: string, rememberMe: boolean, captcha: string
-}
-
-type LoginFormPropertiesTypeKeys = Extract <keyof LoginFormValuesType, string>
-
-
 const Login: React.FC<MapStateToPropsType & MapDispatchToPropsType> = (props) => {
     const onSubmit = (formData: LoginFormValuesType) => {
         const { email, password, rememberMe, captcha } = formData
@@ -85,7 +63,6 @@ const Login: React.FC<MapStateToPropsType & MapDispatchToPropsType> = (props) =>
     );
 }
 
-
 const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({ form: 'login' })(LoginForm)
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
@@ -95,3 +72,20 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 export default connect(mapStateToProps, { login })(Login);
 
+type LoginFormOwnProps = {
+    captchaUrl: string | null
+}
+
+type MapStateToPropsType = {
+    captchaUrl: string | null
+    isAuth: boolean
+}
+type MapDispatchToPropsType = {
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+}
+
+type LoginFormPropertiesTypeKeys = Extract <keyof LoginFormValuesType, string>
+
+export type LoginFormValuesType = {
+    email: string, password: string, rememberMe: boolean, captcha: string
+}

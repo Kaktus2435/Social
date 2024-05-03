@@ -1,10 +1,22 @@
+import React from "react";
 import {
+    NavigateFunction,
     useLocation,
     useNavigate,
     useParams,
 } from "react-router-dom"
 
-export function withRouter(Component) {
+
+type withRouterProps = {
+    router: {
+        location: Location;
+        navigate: NavigateFunction;
+        params: Record<"userId", string | undefined> 
+    };
+}
+
+
+export function withRouter (Component): React.FC<withRouterProps> {
     function ComponentWithRouterProp(props) {
         let location = useLocation();
         let navigate = useNavigate();

@@ -59,13 +59,13 @@ const profilePageReducer = (state = initialState, action: ActionType | AddPostAc
 }
 
 export const actions = {
+    addPostActionCreator: (myNewPost: string) => ({ type: "profile/ADD_POST", myNewPost } as const ), 
     deletePost: (userId: number) => ({ type: "profile/DELETE_POST", userId } as const),
     setUsersProfile: (profile: ProfileType) => ({ type: "profile/SET_USERS_PROFILE", profile } as const),
     setStatus: (status: string) => ({ type: "profile/SET_STATUS", status } as const),
     savePhotoSucces: (photos: PhotosType) => ({ type: "profile/SET_PHOTO_SUCCESS", photos } as const)
 }
 
-export const  addPost = (myNewPost: string) => ({ type: "profile/ADD_POST", myNewPost }) 
 
 export const getUsersProfile = (userId: number): ThunkType => async (dispatch) => {
     const data = await profileAPI.getProfile(userId);

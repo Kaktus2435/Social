@@ -16,7 +16,7 @@ import HeaderContainer from './components/Header/HeaderContainer.jsx';
 
 
 
-import { withRouter } from './components/utils/withRouter/withRouter.js';
+import { withRouter } from './components/utils/withRouter/withRouter.tsx';
 import { initializeApp } from './components/redux/app-reducer.ts';
 
 import store, { AppStateType } from "./components/redux/redux.store.ts";
@@ -58,7 +58,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
           <Routes>
        
             
-            <Route path="/profile/:profileId?" element={<ProfileContainer/>} />
+            <Route path="/profile/:userId?" element={<ProfileContainer/>} />
             
 
             {/* <Route path="/chats" element={<Chats

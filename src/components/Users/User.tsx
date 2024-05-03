@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Users.module.css"
-// @ts-ignore
 import initialPhoto from '../img/Basic_Ui_(186).jpg'
 import { NavLink } from "react-router-dom";
 import { UserType } from "../../types/types";

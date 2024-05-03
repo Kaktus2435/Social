@@ -6,7 +6,7 @@ import { AppStateType } from "../components/redux/redux.store";
 let mapStateToPropsForRedirect = (state: AppStateType) => ({
 	isAuth: state.auth.isAuth
 })
-type mapStatePropsType = ReturnType<typeof mapStateToPropsForRedirect> & routerPropsType
+export type mapStatePropsType = ReturnType<typeof mapStateToPropsForRedirect> & routerPropsType
 type routerPropsType = {
 	router: {
 		params: {
