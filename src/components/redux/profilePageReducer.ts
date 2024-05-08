@@ -14,7 +14,6 @@ const initialState = {
     ] as Array<PostsType>,
     profile: null as ProfileType | null,
     status: null as string | null,
-    myNewPost: null as string | null,
     updateStatus: null as string | null
 };
 
@@ -30,7 +29,6 @@ const profilePageReducer = (state = initialState, action: ActionType | AddPostAc
             let post = action.myNewPost;
             return {
                 ...state,
-                myNewPost: '',
                 posts: [...state.posts, { id: 2, name: 'Incognito', post: post, updateStatus }]
             }
         case "profile/DELETE_POST":

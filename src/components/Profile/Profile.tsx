@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // @ts-ignore
 import defaultAvatar from '../img/Basic_Ui_(186).jpg'
-import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks.jsx';
+import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks.tsx';
 import styles from './Profile.module.css';
 import ProfileDataForm from './ProfileInfo/Profile.Data.Form.tsx';
 import Preloader from "../utils/preloader/Preloader.jsx";
@@ -17,7 +17,7 @@ type PropsType = {
     saveProfile: any
 
     status: string
-    updateStatus: string
+    updateStatus: (status: string) => void
 
     savePhoto: (files: PhotosType) => void
 }

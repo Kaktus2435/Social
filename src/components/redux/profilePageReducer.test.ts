@@ -1,4 +1,4 @@
-import profilePageReducer from "./profilePageReducer.ts";
+import profilePageReducer, { InitialStateType } from "./profilePageReducer.ts";
 import {actions} from "./profilePageReducer.ts" 
 const state = {
     posts: [
@@ -17,7 +17,7 @@ const state = {
 
 
  it('new post should bew added', () => {
-    let action = actions.addPost('It');
+    let action = actions.addPostActionCreator('It');
     let newState = profilePageReducer(state, action);
 
     expect(newState.posts.length).toBe(3);
@@ -25,7 +25,7 @@ const state = {
 });
 
 it('should check the name', () => {
-    let action = actions.addPost('It');
+    let action = actions.addPostActionCreator('It');
     let newState = profilePageReducer(state, action);
 
     

@@ -11,7 +11,7 @@ import Footer from './components/Footer/Footer.jsx';
 
 import ProfileContainer from'./components/Profile/ProfileContainer.tsx';
 
-import HeaderContainer from './components/Header/HeaderContainer.jsx';
+import HeaderContainer from './components/Header/HeaderContainer.tsx';
 
 
 

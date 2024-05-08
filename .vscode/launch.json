@@ -1,6 +1,13 @@
 {
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             "type": "node",
             "name": "vscode-jest-tests.v2.social_network-1707909712989",
             "request": "launch",

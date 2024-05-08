@@ -1,4 +1,4 @@
-import { GetItemsType, instance } from './api.ts';
+import { GetItemsType, APIResponseType, instance } from './api.ts';
 
 export const usersAPI = {
     requestUsers(currentPage: number, pageSize: number) {
@@ -12,9 +12,9 @@ export const usersAPI = {
     },
 
     follow(userId: number) {
-        return instance.post<ResponseType>(`follow/${userId}`).then(res => res.data);
+        return instance.post<APIResponseType>(`follow/${userId}`).then(res => res.data);
     },
     unfollow(userId: number) {
-        return instance.delete<ResponseType>(`follow/${userId}`).then(res => res.data) as Promise<ResponseType>;
+        return instance.delete<APIResponseType>(`follow/${userId}`).then(res => res.data) as Promise<APIResponseType>;
     }
 };
