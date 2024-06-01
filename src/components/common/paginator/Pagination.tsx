@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 
 type PropsType = {
-	totalUsersCount: number 
+	totalUsersCount:  number
 	pageSize: number 
 	currentPage: number 
 	onPageChanged: (pages: number) => void 

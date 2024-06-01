@@ -64,5 +64,3 @@ test ('unfollow success', async () => {
     expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.toggleIsFollowingInProgress(false, 1))
 
 })
-
-

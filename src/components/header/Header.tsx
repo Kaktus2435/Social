@@ -1,7 +1,6 @@
 import React from "react";
 import Buttons from "./ButtonsHeader/Buttons";
 import styles from "./header.module.css";
-import Search from "./search/Search";
 import { ProfileType } from "../../types/types";
 
 export type MapPropsType = {
@@ -22,7 +21,6 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
                 <div className={styles.header__logo}>
                     JassBee.in
                 </div>
-                <Search />
                 <Buttons 
                 isAuth={props.isAuth} 
                 login={props.login} 

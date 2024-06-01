@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route } from "react-router-dom"
 import { connect } from 'react-redux'
 import { compose } from 'redux';
-import React, { Component, ComponentType, lazy } from 'react'
+import React, { Component, ComponentType } from 'react'
 
 // import Chats from "./pages/Chats";
 import SideMenu from './components/side-menu-bar/Side-menu.jsx';
@@ -14,8 +14,6 @@ import ProfileContainer from'./components/Profile/ProfileContainer.tsx';
 import HeaderContainer from './components/Header/HeaderContainer.tsx';
 
 
-
-
 import { withRouter } from './components/utils/withRouter/withRouter.tsx';
 import { initializeApp } from './components/redux/app-reducer.ts';
 
@@ -25,13 +23,16 @@ import { BrowserRouter } from "react-router-dom"
 import { withSuspense } from './hoc/withSuspense.tsx';
 import Preloader from './components/utils/preloader/Preloader.jsx';
 
+const Login = React.lazy(
+  () => import('./components/Login/Login.tsx').then(module => ({ default: module.Login }))
+);
 
-
-const Login = lazy(() => import ('./components/Login/Login.tsx'));
-const UsersContainer = lazy(() => import ('./components/Users/UsersContainer.tsx'));
+const UsersPage = React.lazy(
+  () => import('./components/Users/UsersContainer.tsx').then(module => ({ default: module.UsersPage }))
+);
 
 const LoginWithSuspense = withSuspense(Login)
-const UsersContainerWithSuspense = withSuspense(UsersContainer);
+const UsersContainerWithSuspense = withSuspense(UsersPage);
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -67,7 +68,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
             
             {/* <Route path="/explore" element={<Chats />} />*/}
             
-            <Route path="/friends" element={ <UsersContainerWithSuspense pageTitle={'ABC'} /> }/>
+            <Route path="/friends" element={ <UsersContainerWithSuspense /> }/>
             {/*<Route path="/settings" element={<Chats />} /> */}
             <Route path="/login" element={ <LoginWithSuspense />}/>
 

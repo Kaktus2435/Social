@@ -1,13 +1,15 @@
 import { GetItemsType, APIResponseType, instance } from './api.ts';
 
 export const usersAPI = {
-    requestUsers(currentPage: number, pageSize: number) {
+    
+    getUsers(currentPage: number, pageSize: number, term: string = '', friend: null | boolean = null) {
 
-        return instance.get<GetItemsType>(`users`,
+        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`)
+        /* ,
             {
                 withCredentials: true,
-                params: { page: currentPage, count: pageSize }
-            })
+                params: { page: currentPage, count: pageSize } 
+            } */)
             .then(res => res.data);
     },
 
