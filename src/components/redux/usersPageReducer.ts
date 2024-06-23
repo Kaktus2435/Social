@@ -12,6 +12,9 @@ let initialState = {
     currentPage: 1 as number | null,
     isFetching: true as boolean,
     followingInProgress: [] as Array<number>,
+    filter: {
+        term: '' as string
+    }
 }
 
 
@@ -49,9 +52,12 @@ const usersPageReducer = (state = initialState, action: ActionTypes): InitialSta
         case 'network/users/SET_CURRENT_PAGE':
             return {
                 ...state, currentPage: action.currentPage
-                
-            }
-
+            }    
+        case 'network/users/SET_FILTER_TERM':
+                return {
+                    ...state , filter: action.payload
+                }
+            
         case 'network/users/SET_TOTAL_USERS_COUNT':
             return {
                 ...state, totalUsersCount: action.count
@@ -81,18 +87,20 @@ export const actions = {
     unfollowSuccess: (userId: number) => ({ type: "network/users/UNFOLLOW", userId } as const),
     setUsers: (users: Array<UserType>) => ({ type: "network/users/SET_USERS", users } as const),
     setCurrentPage: (currentPage: number) => ({ type: "network/users/SET_CURRENT_PAGE", currentPage } as const),
+    setFilterTerm: (term: string) => ({ type: "network/users/SET_FILTER_TERM", payload: {term} } as const),
     setTotalUsersCount: (totalUsersCount: number) => ({ type: "network/users/SET_TOTAL_USERS_COUNT", count: totalUsersCount } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: "network/users/TOGGLE_IS_FETCHING", isFetching } as const),
     toggleIsFollowingInProgress: (isFetching: boolean, userId: number) => ({ type: "network/users/TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId } as const)
 }
 
-export const requestUsers = (currentPage: number, pageSize: number): ThunkType => {
+export const requestUsers = (currentPage: number, pageSize: number, term: string): ThunkType => {
     return async (dispatch: Dispatch<ActionTypes>, getState: () => AppStateType) => {
         dispatch(actions.toggleIsFetching(true));
         dispatch(actions.setCurrentPage(currentPage));
+        dispatch(actions.setFilterTerm(term));
 
 
-        let data = await usersAPI.requestUsers(currentPage, pageSize)
+        let data = await usersAPI.requestUsers(currentPage, pageSize, term)
         dispatch(actions.toggleIsFetching(false));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setTotalUsersCount(data.totalCount));
@@ -125,5 +133,7 @@ export default usersPageReducer;
 
 type ThunkType = BaseThunkType<ActionTypes>
 export type InitialStateType = typeof initialState;
+export type FilterType = typeof initialState.filter;
+
 type ActionTypes = InferActionTypes<typeof actions>
 // type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>

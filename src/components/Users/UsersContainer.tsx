@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import {
-    follow, unfollow, requestUsers
+    follow, unfollow, requestUsers,
+    FilterType
 } from "../redux/usersPageReducer.ts";
 import Users from "./Users.tsx";
 import React from "react";
@@ -17,25 +18,31 @@ import { UserType } from "../../types/types.ts";
 type PropsType = {
     currentPage: number
     pageSize: number
-    requestUsers: (currentPage: number, pageSize: number) => void
+    getUsers: (currentPage: number, pageSize: number, term: string) => void
     isFetching: boolean
     unfollow: (id: number) => void
     follow: (id: number) => void
     users: Array<UserType>
     followingInProgress: Array<number>
     totalUsersCount: number
+    
 } 
 
 class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         const {currentPage, pageSize} = this.props
-        this.props.requestUsers(currentPage, pageSize)
+        this.props.getUsers(currentPage, pageSize, '')
     }
 
     onPageChanged = (pageNumber) => {
         const {pageSize} =this.props
-        this.props.requestUsers(pageNumber, pageSize)
+        this.props.getUsers(pageNumber, pageSize, '')
+    }
+ 
+    onFilterChanged = (filter: FilterType) => {
+        const {pageSize, currentPage} = this.props
+        this.props.getUsers(currentPage, pageSize, filter.term)
     }
 
     render() {
@@ -50,7 +57,7 @@ class UsersContainer extends React.Component<PropsType> {
                 followingInProgress={this.props.followingInProgress}
                 pageSize={this.props.pageSize}
                 totalUsersCount={this.props.totalUsersCount}
-               
+                onFilterChanged={this.onFilterChanged}
 
             />
         </>
@@ -84,7 +91,7 @@ const mapStateToProps = (state) => {
 export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(mapStateToProps,
-        { follow, unfollow, requestUsers })
+        { follow, unfollow, getUsers: requestUsers })
 )(UsersContainer);
 
 
