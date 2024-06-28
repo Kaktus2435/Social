@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Paginator from "../common/paginator/Pagination.tsx";
 import User from "./User.tsx";
 import SearchForm from "../header/search/UsersSearchForm.tsx";
-import { FilterType, requestUsers } from "../redux/usersPageReducer.ts";
+import { FilterType, requestUsers, follow, unfollow } from "../redux/usersPageReducer.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUserSuperSelector, getUsersFilter } from "../redux/users-selectors.ts";
 
@@ -22,7 +22,7 @@ export const Users: React.FC<PropsType> = (props) => {
     const dispatch = useDispatch<any>()
     /* useDispatch - intoarce o functie pe care o putem apela.Apoi acestei functii 
     putem sa-i dam thunk sau action si ea se va expedia unde e nevoie. */
-
+    
     useEffect(() => {
         dispatch(requestUsers(currentPage, pageSize, filter))
     }, [])
@@ -42,11 +42,11 @@ export const Users: React.FC<PropsType> = (props) => {
     }
 
 
-    const follow = (id: number) => {
-        dispatch(follow(id))
+    const handleFollow  = (userId: number) => {
+        dispatch(follow(userId));
     }
 
-    const unfollow = (id: number) => {
+    const handleUnfollow  = (id: number) => {
         dispatch(unfollow(id))
     }
 
@@ -62,8 +62,8 @@ export const Users: React.FC<PropsType> = (props) => {
             {
                 users.map(u => <User user={u}
                     followingInProgress={followingInProgress}
-                    unfollow={unfollow}
-                    follow={follow}
+                    unfollow={handleUnfollow }
+                    follow={handleFollow}
                     key={u.id}
                 />)
             }

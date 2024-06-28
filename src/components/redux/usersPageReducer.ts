@@ -3,7 +3,7 @@ import { AppStateType, BaseThunkType, InferActionTypes } from './redux.store';
 import { usersAPI } from "../../api/usersAPI.ts";
 import { UserType } from "../../types/types";
 import { updateObjectInArray } from "../utils/object-helpers";
-import { APIResponseType, ResultCodeEnum } from '../../api/api.ts';
+import { APIResponseType } from '../../api/api.ts';
 
 let initialState = {
     users: [] as Array<UserType>,
@@ -108,26 +108,28 @@ export const requestUsers = (currentPage: number, pageSize: number, filter: Filt
     }
 }
 
-const followUnfollowFlow = async (dispatch: Dispatch<ActionTypes>, userId: number, 
-    apiMethod: (userId: number) => Promise<APIResponseType>, actionCreator: (userId: number) => ActionTypes) => {
-    dispatch(actions.toggleIsFollowingInProgress(true, userId));
-    let data = await apiMethod(userId)
+const _followUnfollowFlow = async (dispatch: Dispatch<ActionTypes>,
+    userId: number,
+    apiMethod: (userId: number) => Promise<APIResponseType>,
+    actionCreator: (userId: number) => ActionTypes) => {
+dispatch(actions.toggleIsFollowingInProgress(true, userId))
+let response = await apiMethod(userId)
 
-    if (data.resultCode === ResultCodeEnum.Success) {
-        dispatch(actionCreator(userId));
-    }
-    dispatch(actions.toggleIsFollowingInProgress(false, userId));
+if (response.resultCode === 0) {
+dispatch(actionCreator(userId))
+}
+dispatch(actions.toggleIsFollowingInProgress(false, userId))
 }
 
 export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess)
+        await _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess)
     }
 }
 
 export const unfollow = (userId: number): ThunkType  => {
     return async (dispatch) => {
-        followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess)
+        _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess)
     }
 }
 export default usersPageReducer;

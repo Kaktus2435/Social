@@ -18,7 +18,7 @@ export const UsersPage: React.FC<UsersPagePropsType> = (props) => {
     return <>
         {isFetching ? <img src={preloader} alt="preloader" /> : null}
 
-        <Users />
+        <Users  />
     </>
 }
 
