@@ -6,12 +6,12 @@ import React, { Component, ComponentType } from 'react'
 
 // import Chats from "./pages/Chats";
 import SideMenu from './components/side-menu-bar/Side-menu.jsx';
-import Footer from './components/Footer/Footer.jsx';
+import Footer from './components/footer/Footer.jsx';
 
 
 import ProfileContainer from'./components/Profile/ProfileContainer.tsx';
 
-import HeaderContainer from './components/Header/HeaderContainer.tsx';
+import HeaderContainer from './components/header/HeaderContainer.tsx';
 
 
 import { withRouter } from './components/utils/withRouter/withRouter.tsx';

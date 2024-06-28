@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Paginator from "../common/paginator/Pagination.tsx";
 import User from "./User.tsx";
-import SearchForm from "../Header/search/UsersSearchForm.tsx";
+import SearchForm from "../header/search/UsersSearchForm.tsx";
 import { FilterType, requestUsers } from "../redux/usersPageReducer.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUserSuperSelector, getUsersFilter } from "../redux/users-selectors.ts";
