@@ -68,7 +68,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
             
             {/* <Route path="/explore" element={<Chats />} />*/}
             
-            <Route path="/friends" element={ <UsersContainerWithSuspense /> }/>
+            <Route path="/users" element={ <UsersContainerWithSuspense /> }/>
             {/*<Route path="/settings" element={<Chats />} /> */}
             <Route path="/login" element={ <LoginWithSuspense />}/>
 

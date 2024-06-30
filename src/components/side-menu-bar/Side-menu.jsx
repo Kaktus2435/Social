@@ -37,8 +37,8 @@ const SideMenu = () => {
                     </li>
                 <li>
                     <NavLink className={setActive}
-                    to="/friends">
-                        <img src={img_friends} alt="friends" className={styles.menu__listImg} />
+                    to="/users">
+                        <img src={img_friends} alt="users" className={styles.menu__listImg} />
                         </NavLink>
                     </li>
                 <li>

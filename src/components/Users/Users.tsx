@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import Paginator from "../common/paginator/Pagination.tsx";
-import User from "./User.tsx";
-import SearchForm from "../header/search/UsersSearchForm.tsx";
-import { FilterType, requestUsers, follow, unfollow } from "../redux/usersPageReducer.ts";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Paginator from "../common/paginator/Pagination.tsx";
+import SearchForm from "../header/search/UsersSearchForm.tsx";
 import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUserSuperSelector, getUsersFilter } from "../redux/users-selectors.ts";
+import { FilterType, follow, requestUsers, unfollow } from "../redux/usersPageReducer.ts";
+import User from "./User.tsx";
 
 type PropsType = {}
 
 export const Users: React.FC<PropsType> = (props) => {
-
+debugger
     const users = useSelector(getUserSuperSelector)
     const totalUsersCount = useSelector(getTotalUsersCount)
     const currentPage = useSelector(getCurrentPage)
@@ -23,9 +24,18 @@ export const Users: React.FC<PropsType> = (props) => {
     /* useDispatch - intoarce o functie pe care o putem apela.Apoi acestei functii 
     putem sa-i dam thunk sau action si ea se va expedia unde e nevoie. */
     
+    const navigate = useNavigate()
+    useEffect(() => {
+        navigate({
+            pathname: '/users',
+            search: `?term=${filter.term}&friend=${filter.friend}&currentPage=${currentPage}`
+        })
+    }, [filter, currentPage])// eslint-disable-line react-hooks/exhaustive-deps
+
     useEffect(() => {
         dispatch(requestUsers(currentPage, pageSize, filter))
-    }, [])
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
+    
     /* avem nevoie ca sa montam userii si nu putem folosi componentDidMount
     in schim folosim useEffect - useEffect un pic e diferit de componentDidMount mai degraba 
     se aseamana cu sincronizare si actualizarea a datelor decat cu montare */
@@ -51,6 +61,7 @@ export const Users: React.FC<PropsType> = (props) => {
     }
 
     return <div>
+        
         <SearchForm onFilterChanged={onFilterChanged} />
 
         <Paginator currentPage={currentPage}
