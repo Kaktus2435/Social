@@ -1,26 +1,41 @@
 import React from "react";
-import { Field, Form, Formik, FormikHelpers } from "formik";
-import { FilterType } from "../../redux/usersPageReducer";
+import { Field, Form, Formik } from "formik";
+import { useSelector } from "react-redux";
+import { getUsersFilter } from "../../redux/users-selectors.ts";
 
 type PropsType = {
-    onFilterChanged: (filter: FilterType) => void
+    onFilterChanged: (filter: FormType) => void
 
 }
 
-const searchFormValidate = (values: FilterType) => {
+const searchFormValidate = (values: any) => {
     const errors = {};
     return errors;
 }
 
-const SearchForm: React.FC<PropsType> = React.memo((props) => {
-    const submit = (values: FilterType, { setSubmitting }: FormikHelpers<FilterType>) => {
+
+type FriendFormType = 'true' | 'false' | 'null'
+
+
+type FormType = {
+    term: string,
+    friend: 'true' | 'false' | 'null'
+}
+
+export const SearchForm: React.FC<PropsType> = React.memo((props) => {
+
+    const filter = useSelector(getUsersFilter)
+
+    const submit = (values: FormType,  {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
         props.onFilterChanged(values)
         setSubmitting(false)
     }
 
     return <div>
         <Formik
-            initialValues={{ term: "", friend: null }}
+        enableReinitialize /* face ca initialValues care este montat aceasta expresie de fapt se scrie astfel enableReinitialize={true} insa felul in care am scris-o eu si asa inseamna ca e true*/
+        
+            initialValues={{ term: filter.term, friend: filter.friend as FriendFormType }}
             validate={searchFormValidate}
             onSubmit={submit}
         >
@@ -40,5 +55,3 @@ const SearchForm: React.FC<PropsType> = React.memo((props) => {
         </Formik>
     </div>
 })
-
-export default SearchForm;
