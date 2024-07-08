@@ -19,7 +19,7 @@ type FriendFormType = 'true' | 'false' | 'null'
 
 type FormType = {
     term: string,
-    friend: 'true' | 'false' | 'null'
+    friend: FriendFormType
 }
 
 export const SearchForm: React.FC<PropsType> = React.memo((props) => {
@@ -35,7 +35,7 @@ export const SearchForm: React.FC<PropsType> = React.memo((props) => {
         <Formik
         enableReinitialize /* face ca initialValues care este montat aceasta expresie de fapt se scrie astfel enableReinitialize={true} insa felul in care am scris-o eu si asa inseamna ca e true*/
         
-            initialValues={{ term: filter.term, friend: filter.friend as FriendFormType }}
+            initialValues={{ term: filter.term, friend: filter.friend}}
             validate={searchFormValidate}
             onSubmit={submit}
         >
