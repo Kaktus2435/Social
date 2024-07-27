@@ -25,8 +25,8 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
             setStatus(e.currentTarget.value);
         }
-        console.log("asd")
-    return (
+
+        return (
         <div>
             {!editMode &&
                 <div>

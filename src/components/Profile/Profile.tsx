@@ -8,6 +8,7 @@ import Preloader from "../utils/preloader/Preloader.jsx";
 import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.js";
 import ProfileData from "./ProfileInfo/ProfileInfo.tsx";
 import MyPostsContainer from "./MyPosts/MyPostsContainer.tsx";
+import Chat from "../../pages/Messages/Messages.tsx";
 
 
 type PropsType = {
@@ -23,8 +24,11 @@ type PropsType = {
 }
 
 const Profile: React.FC<PropsType> = ({ profile, isOwner, profilePage, savePhoto, saveProfile, status, updateStatus }) => {
+
+   
     const [editMode, setEditMode] = useState(false);
     const goToEditMode = () => { setEditMode(true) };
+
 
 
     if (!profile) {
@@ -67,7 +71,8 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, profilePage, savePhoto
                         status={status}
                         updateStatus={updateStatus} />
 
-                      <MyPostsContainer />
+                    <MyPostsContainer />
+
                 </div>
             </div>
         </>

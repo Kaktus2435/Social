@@ -10,8 +10,6 @@ import Footer from './components/footer/Footer.jsx';
 
 import ProfileContainer from './components/Profile/ProfileContainer.tsx';
 
-import HeaderContainer from './components/header/HeaderContainer.tsx';
-
 
 import { withRouter } from './components/utils/withRouter/withRouter.tsx';
 import { initializeApp } from './components/redux/app-reducer.ts';
@@ -26,9 +24,10 @@ import Preloader from './components/utils/preloader/Preloader.jsx';
 
 import { Layout, Menu, Breadcrumb, Avatar, Row, Col } from 'antd';
 import { DesktopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import Header from "./components/header/Header.tsx";
 
 const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 // -------- ant design
 
@@ -41,8 +40,14 @@ const UsersPage = React.lazy(
   () => import('./components/Users/UsersContainer.tsx').then(module => ({ default: module.UsersPage }))
 );
 
+const ChatPage = React.lazy(
+  () => import ('./pages/Chat/ChatPage.tsx').then(module => ({default:module.ChatPage}))
+)
+
 const LoginWithSuspense = withSuspense(Login)
 const UsersContainerWithSuspense = withSuspense(UsersPage);
+const ChatWithSuspense = withSuspense(ChatPage)
+
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -64,7 +69,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
 
       // -------- ant design
       <Layout>
-        <HeaderContainer />
+        <Header />
         <Layout>
           <Sider width={200} style={{ background: '#fff' }}>
             <Menu
@@ -75,7 +80,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
             >
               <SubMenu key="sub1" title={<span><UserOutlined />My Profile</span>}>
                 <Menu.Item key="1"><NavLink to="/profile">Profile</NavLink></Menu.Item>
-                <Menu.Item key="2"><NavLink to="/messages">Messages</NavLink></Menu.Item>
+                <Menu.Item key="2"><NavLink to="/chat">Chat</NavLink></Menu.Item>
 
 
               </SubMenu>
@@ -111,7 +116,9 @@ class App extends Component<MapPropsType & DispatchPropsType> {
                 <Route path="/users" element={<UsersContainerWithSuspense />} />
                 {/*<Route path="/settings" element={<Chats />} /> */}
                 <Route path="/login" element={<LoginWithSuspense />} />
+                <Route path="/chat" element={<ChatWithSuspense />} />
 
+                
               </Routes>
             </Content>
 

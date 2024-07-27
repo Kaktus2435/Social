@@ -34,7 +34,7 @@ const authReducer = (state = initialState, action: ActionTypes): InitialStateTyp
 
 
 export const actions = {
-    setUserData: (id: number | null, email: string | null, login: string | null, isAuth: boolean) =>
+    setUserData: (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
         ({ type: "network/app/SET_USER_DATA", payload: { id, email, login, isAuth } } as const),
     getCaptchaUrlSucces: (captchaUrl: string) =>
         ({ type: "network/app/GET_CAPTCHA_URL_SUCCES", payload: { captchaUrl } } as const)
