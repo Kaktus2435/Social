@@ -40,9 +40,9 @@ const UsersPage = React.lazy(
   () => import('./components/Users/UsersContainer.tsx').then(module => ({ default: module.UsersPage }))
 );
 
-const ChatPage = React.lazy(
-  () => import ('./pages/Chat/ChatPage.tsx').then(module => ({default:module.ChatPage}))
-)
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage.tsx'));
+
+
 
 const LoginWithSuspense = withSuspense(Login)
 const UsersContainerWithSuspense = withSuspense(UsersPage);

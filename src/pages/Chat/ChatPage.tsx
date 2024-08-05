@@ -1,46 +1,58 @@
-import { Flex, message } from "antd";
-import classNames from "classnames";
 import React, { useEffect, useState } from "react";
+import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
 
-const wsChannel = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx');
 
-
-export const ChatPage: React.FC = () => {
+const ChatPage: React.FC = () => {
     return <>
         <Chat />
     </>
 }
 
 const Chat: React.FC = () => {
+    const [wsChannel, setWsChannel] = useState<WebSocket | null>(null)
 
+    useEffect(() => {
+        let ws: WebSocket
+        const closeHandler = () => {
+            console.log('CLOSE WS')
+            setTimeout(createChannel, 3000)
+        }
+        function createChannel() {
+            ws?.removeEventListener('close', closeHandler)
+            ws?.close()
+            ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+            ws.addEventListener('close', closeHandler)
+            setWsChannel(ws)
+        }
+        createChannel()
+        return() => {
+            ws.removeEventListener('close', closeHandler)
+            ws.close()
+        }
+    }, [])
+    
     return <>
-        <Messages />
-        <AddMessageForm />
+        <Messages wsChannel={wsChannel} />
+        <AddMessageForm wsChannel={wsChannel} />
     </>
 }
 
-const Messages: React.FC = () => {
-
+const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({wsChannel}) => {
     const [messages, setMessages] = useState<ChatMessagesType[]>([])
 
     useEffect(() => {
-        // Chat componenta poate sa se randeze de mai multe ori noi trebuie sa urmarim schimbarile 
-        // cu toate ca avem aici mesajele pentru a le randa noi trebu sa le avem in state
+        let messageHandler = (e: MessageEvent) => {
+            let newMessages = JSON.parse(e.data)
+            setMessages((prevMessages) => [...prevMessages, ...newMessages])
+            
+        }
+        wsChannel?.addEventListener('message', messageHandler) 
         
-        /* wsChannel.addEventListener('message', (e) => {
-            setMessages([...messages, ...JSON.parse(e.data)])
-        })
-            aici mereu o sa randam masivul gol de cate ori va veni mesajul si la sfarsitul lui se va adauga mesajul nou! 
-            pentru a evita asta scrim in felul urmator
- */
+        return () => {
+            wsChannel?.removeEventListener('message', messageHandler)
+        }
+}, [wsChannel])
 
-            wsChannel.addEventListener('message', (e) => {
-                let newMessages = JSON.parse(e.data)
-                setMessages((prevMessages) => [...prevMessages, ...newMessages])
-                // aici nu am trimis datele concrete dar am explicat logica schimbarii state
-            })
-
-    })
 
     return <div style={{ height: '500px', overflow: "auto" }} >
         {messages.map((m: any, index) => <Message key={index} message={m} />)}
@@ -51,7 +63,7 @@ const Messages: React.FC = () => {
 const Message: React.FC<{ message: ChatMessagesType }> = ({ message }) => {
     return <>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }} >
-            <img style={{width: '50px', height: '50px' }} src={message.photo} /> <b>{message.userName}</b>
+            <img style={{ width: '50px', height: '50px' }} src={message.photo} /> <b>{message.userName}</b>
         </div>
         <br />
         {message.message}
@@ -59,25 +71,32 @@ const Message: React.FC<{ message: ChatMessagesType }> = ({ message }) => {
     </>
 }
 
-const AddMessageForm: React.FC = () => {
+const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
     const [message, setMessage] = useState('')
+    const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
+    useEffect(() => {
+        wsChannel?.addEventListener('open', () => {
+            setReadyStatus('ready')
+        })
+    }, [wsChannel])
 
     const sendMessage = () => {
         if (!message) {
             return
         }
-        wsChannel.send(message)
+        wsChannel?.send(message)
         setMessage('')
     }
     return <>
         <div>
-            <textarea onChange={(e)=> setMessage(e.currentTarget.value)} value={message} ></textarea>
+            <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message} ></textarea>
         </div>
-        <button onClick={sendMessage}>Send</button>
+        <button disabled={wsChannel ===null || readyStatus !== "ready"} onClick={sendMessage}>Send</button>
     </>
 
 }
 
+export default withRouter(ChatPage);
 
 export type ChatMessagesType = {
     message: string,
