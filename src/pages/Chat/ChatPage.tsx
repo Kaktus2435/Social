@@ -28,6 +28,7 @@ const Chat: React.FC = () => {
         return() => {
             ws.removeEventListener('close', closeHandler)
             ws.close()
+/* chear daca noi mai sus am scris logica ca din caz ca se stinge internetul, canalul sa se reinprospeteze. Ar fi bine ca dupa ce componenta ar executa totul, sa se stinga canalul */
         }
     }, [])
     
@@ -74,10 +75,16 @@ const Message: React.FC<{ message: ChatMessagesType }> = ({ message }) => {
 const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
     const [message, setMessage] = useState('')
     const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
+   
+    let openHandler = () => {
+        setReadyStatus('ready')
+    }
+
     useEffect(() => {
-        wsChannel?.addEventListener('open', () => {
-            setReadyStatus('ready')
-        })
+        wsChannel?.addEventListener('open', openHandler )
+        return () => {
+            wsChannel?.removeEventListener('open', openHandler)
+        }
     }, [wsChannel])
 
     const sendMessage = () => {
@@ -91,7 +98,7 @@ const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }
         <div>
             <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message} ></textarea>
         </div>
-        <button disabled={wsChannel ===null || readyStatus !== "ready"} onClick={sendMessage}>Send</button>
+        <button disabled={wsChannel === null || readyStatus !== "ready"} onClick={sendMessage}>Send</button>
     </>
 
 }
