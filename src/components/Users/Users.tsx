@@ -6,6 +6,7 @@ import {SearchForm} from "../header/search/UsersSearchForm.tsx";
 import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUserSuperSelector, getUsersFilter } from "../redux/users-selectors.ts";
 import { FilterType, follow, requestUsers, unfollow } from "../redux/usersPageReducer.ts";
 import User from "./User.tsx";
+import { AppDispatch } from "../redux/redux.store.ts";
 
 type PropsType = {}
 
@@ -20,7 +21,7 @@ export const Users: React.FC<PropsType> = (props) => {
 
     /* daca nu avem selectorul pregatit putem scri direct
     const pageSize = useSelector((state) => state.usersPage.pageSize)*/
-    const dispatch = useDispatch<any>()
+    const dispatch: AppDispatch = useDispatch()
     /* useDispatch - intoarce o functie pe care o putem apela.Apoi acestei functii 
     putem sa-i dam thunk sau action si ea se va expedia unde e nevoie. */
 

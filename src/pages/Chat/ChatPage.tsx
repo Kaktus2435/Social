@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
+import { ChatMessagesType } from "../../api/chatAPI.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { sendMessage, startMessagesListening, stopMessagesListening } from "../../components/redux/chatPage-reducer.ts";
+import { AppDispatch, AppStateType } from "../../components/redux/redux.store.ts";
+
 
 
 const ChatPage: React.FC = () => {
@@ -9,52 +14,25 @@ const ChatPage: React.FC = () => {
 }
 
 const Chat: React.FC = () => {
-    const [wsChannel, setWsChannel] = useState<WebSocket | null>(null)
 
+    const dispatch: AppDispatch = useDispatch()
+
+    
     useEffect(() => {
-        let ws: WebSocket
-        const closeHandler = () => {
-            console.log('CLOSE WS')
-            setTimeout(createChannel, 3000)
-        }
-        function createChannel() {
-            ws?.removeEventListener('close', closeHandler)
-            ws?.close()
-            ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-            ws.addEventListener('close', closeHandler)
-            setWsChannel(ws)
-        }
-        createChannel()
-        return() => {
-            ws.removeEventListener('close', closeHandler)
-            ws.close()
-/* chear daca noi mai sus am scris logica ca din caz ca se stinge internetul, canalul sa se reinprospeteze. Ar fi bine ca dupa ce componenta ar executa totul, sa se stinga canalul */
+        dispatch(startMessagesListening())
+        return () => {
+            dispatch(stopMessagesListening())
         }
     }, [])
-    
+
     return <>
-        <Messages wsChannel={wsChannel} />
-        <AddMessageForm wsChannel={wsChannel} />
+        <Messages />
+        <AddMessageForm  />
     </>
 }
 
-const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({wsChannel}) => {
-    const [messages, setMessages] = useState<ChatMessagesType[]>([])
-
-    useEffect(() => {
-        let messageHandler = (e: MessageEvent) => {
-            let newMessages = JSON.parse(e.data)
-            setMessages((prevMessages) => [...prevMessages, ...newMessages])
-            
-        }
-        wsChannel?.addEventListener('message', messageHandler) 
-        
-        return () => {
-            wsChannel?.removeEventListener('message', messageHandler)
-        }
-}, [wsChannel])
-
-
+const Messages: React.FC<{}> = ({}) => {
+const messages = useSelector((state: AppStateType) => state.chatPage.messages)
     return <div style={{ height: '500px', overflow: "auto" }} >
         {messages.map((m: any, index) => <Message key={index} message={m} />)}
 
@@ -72,45 +50,28 @@ const Message: React.FC<{ message: ChatMessagesType }> = ({ message }) => {
     </>
 }
 
-const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
+const AddMessageForm: React.FC<{  }> = () => {
     const [message, setMessage] = useState('')
-    const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
-   
-    let openHandler = () => {
-        setReadyStatus('ready')
-    }
+    const dispatch: AppDispatch = useDispatch()
 
-    useEffect(() => {
-        wsChannel?.addEventListener('open', openHandler )
-        return () => {
-            wsChannel?.removeEventListener('open', openHandler)
-        }
-    }, [wsChannel])
 
-    const sendMessage = () => {
+    const sendMessageHandler = () => {
         if (!message) {
             return
         }
-        wsChannel?.send(message)
+        dispatch(sendMessage(message))
         setMessage('')
     }
     return <>
         <div>
             <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message} ></textarea>
         </div>
-        <button disabled={wsChannel === null || readyStatus !== "ready"} onClick={sendMessage}>Send</button>
+        <button disabled={false} onClick={sendMessageHandler}>Send</button>
     </>
 
 }
 
 export default withRouter(ChatPage);
-
-export type ChatMessagesType = {
-    message: string,
-    photo: string,
-    userId: number,
-    userName: string
-};
 
 type PropsType = {
     isOpen: boolean,

@@ -8,7 +8,8 @@ import { reducer as formReducer} from 'redux-form'
 import appReducer from './app-reducer.ts';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk, { ThunkAction } from 'redux-thunk'
-import chatReducer from './chat-reducer.ts';
+import chatPageReducer from "./chatPage-reducer.ts";
+
 
 const rootReducers = combineReducers({
     profilePage: profilePageReducer,
@@ -17,7 +18,7 @@ const rootReducers = combineReducers({
     homePage: homePageReducer,
     auth: authReducer,
     app: appReducer,
-    chatPage: chatReducer,
+    chatPage: chatPageReducer,
     form: formReducer
     
 });
@@ -33,5 +34,6 @@ export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction <R,
 
 const store = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunk)))
 
+export type AppDispatch = typeof store.dispatch
 
 export default store;

@@ -19,7 +19,7 @@ const authReducer = (state = initialState, action: ActionTypes): InitialStateTyp
 
     switch (action.type) {
         case 'network/app/SET_USER_DATA':
-        case 'network/app/GET_CAPTCHA_URL_SUCCES':
+        case 'network/app/GET_CAPTCHA_URL_SUCCESS':
             return {
 
                 ...state,
@@ -37,7 +37,7 @@ export const actions = {
     setUserData: (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
         ({ type: "network/app/SET_USER_DATA", payload: { id, email, login, isAuth } } as const),
     getCaptchaUrlSucces: (captchaUrl: string) =>
-        ({ type: "network/app/GET_CAPTCHA_URL_SUCCES", payload: { captchaUrl } } as const)
+        ({ type: "network/app/GET_CAPTCHA_URL_SUCCESS", payload: { captchaUrl } } as const)
 }
 
 export const getUserData = ():ThunkType => async (dispatch) => {
