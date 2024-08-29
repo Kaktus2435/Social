@@ -1,14 +1,16 @@
 import { FormAction } from "redux-form";
-import { chatAPI, ChatMessagesType } from "../../api/chatAPI.ts";
+import { chatAPI, ChatMessageAPIType, StatusType } from "../../api/chatAPI.ts";
 import { getUserData } from "./auth-reducer.ts";
 import { BaseThunkType, InferActionTypes } from "./redux.store.ts";
 import { Dispatch } from "redux";
 
+
 let initialState = {
-    messages: [] as ChatMessagesType[]
+    messages: [] as ChatMessageAPIType[],
+    status: 'pending' as StatusType
 };
 
-let _newMessageHandler: ((messages: ChatMessagesType[]) => void) | null = null
+let _newMessageHandler: ((messages: ChatMessageAPIType[]) => void) | null = null
 
 const newMessageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMessageHandler === null) {
@@ -20,31 +22,56 @@ const newMessageHandlerCreator = (dispatch: Dispatch) => {
     return _newMessageHandler
 }
 
+let _newStatusHandler: ((status: StatusType) => void) | null = null
+
+const newStatusHandlerCreator = (dispatch: Dispatch) => {
+    if (_newStatusHandler === null) {
+        _newStatusHandler = (status) => {
+            dispatch(actions.statusChanged(status))
+        }
+    }
+
+    return _newStatusHandler
+}
+
 const chatPageReducer = (state = initialState, action: ActionsType): InitialStateType => {
 
     switch (action.type) {
         case "network/chatPage/MESSAGES_RECEIVED":
             return {
+                ...state,
                 messages: [...state.messages, ...action.payload.messages]
 
             }
+
+            case "network/chatPage/STATUS_CHANGED":
+                return {
+                    ...state,
+                    status: action.payload.status
+    
+                } 
         default:
             return state;
     }
 }
 
 export const actions = {
-    messagesReceived: (messages: ChatMessagesType[]) =>
-        ({ type: "network/chatPage/MESSAGES_RECEIVED", payload: { messages } }) as const
+    messagesReceived: (messages: ChatMessageAPIType []) =>
+        ({ type: "network/chatPage/MESSAGES_RECEIVED", payload: { messages } }) as const,
+    
+    statusChanged: (status: StatusType) =>
+        ({ type: "network/chatPage/STATUS_CHANGED", payload: { status } }) as const
 }
 
 
 export const startMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.start()
-    chatAPI.subscribe(newMessageHandlerCreator(dispatch))
+    chatAPI.subscribe('messages-received', newMessageHandlerCreator(dispatch))
+    chatAPI.subscribe('status-changed',  newStatusHandlerCreator(dispatch))
 }
 export const stopMessagesListening = (): ThunkType => async (dispatch) => {
-    chatAPI.unsubscribe(newMessageHandlerCreator(dispatch))
+    chatAPI.unsubscribe('messages-received',newMessageHandlerCreator(dispatch))
+    chatAPI.unsubscribe('status-changed',  newStatusHandlerCreator(dispatch))
     chatAPI.stop()
     
 }

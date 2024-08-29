@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
 import { ChatMessagesType } from "../../api/chatAPI.ts";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,30 +16,47 @@ const ChatPage: React.FC = () => {
 const Chat: React.FC = () => {
 
     const dispatch: AppDispatch = useDispatch()
+    const status = useSelector((state: AppStateType) => state.chatPage.status)
 
-    
+
     useEffect(() => {
         dispatch(startMessagesListening())
         return () => {
             dispatch(stopMessagesListening())
+
         }
     }, [])
 
     return <>
-        <Messages />
-        <AddMessageForm  />
+        {status === 'error' ? <div>Some error occurred. Please refresh the page.</div> :
+            <>   <Messages />
+                <AddMessageForm />
+            </>
+        }
     </>
 }
 
-const Messages: React.FC<{}> = ({}) => {
-const messages = useSelector((state: AppStateType) => state.chatPage.messages)
-    return <div style={{ height: '500px', overflow: "auto" }} >
-        {messages.map((m: any, index) => <Message key={index} message={m} />)}
 
-    </div>
+const Messages: React.FC<{}> = ({ }) => {
+    const messages = useSelector((state: AppStateType) => state.chatPage.messages)
+    const messagesEndRef = useRef<HTMLDivElement | null>(null)
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages]);
+    return (
+        <div style={{ height: '500px', overflow: 'auto' }}>
+            {messages.map((m: ChatMessagesType, index) => (
+                <Message key={index} message={m} />
+            ))}
+            <div ref={messagesEndRef} />
+        </div>
+    );
 }
 
 const Message: React.FC<{ message: ChatMessagesType }> = ({ message }) => {
+
     return <>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }} >
             <img style={{ width: '50px', height: '50px' }} src={message.photo} /> <b>{message.userName}</b>
@@ -50,10 +67,11 @@ const Message: React.FC<{ message: ChatMessagesType }> = ({ message }) => {
     </>
 }
 
-const AddMessageForm: React.FC<{  }> = () => {
+
+const AddMessageForm: React.FC<{}> = () => {
     const [message, setMessage] = useState('')
     const dispatch: AppDispatch = useDispatch()
-
+    const status = useSelector((state: AppStateType) => state.chatPage.status)
 
     const sendMessageHandler = () => {
         if (!message) {
@@ -66,7 +84,7 @@ const AddMessageForm: React.FC<{  }> = () => {
         <div>
             <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message} ></textarea>
         </div>
-        <button disabled={false} onClick={sendMessageHandler}>Send</button>
+        <button disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</button>
     </>
 
 }
