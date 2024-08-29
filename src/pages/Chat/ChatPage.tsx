@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
-import { ChatMessagesType } from "../../api/chatAPI.ts";
+import { ChatMessageAPIType } from "../../api/chatAPI.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { sendMessage, startMessagesListening, stopMessagesListening } from "../../components/redux/chatPage-reducer.ts";
 import { AppDispatch, AppStateType } from "../../components/redux/redux.store.ts";
@@ -47,7 +47,7 @@ const Messages: React.FC<{}> = ({ }) => {
     }, [messages]);
     return (
         <div style={{ height: '500px', overflow: 'auto' }}>
-            {messages.map((m: ChatMessagesType, index) => (
+            {messages.map((m: ChatMessageAPIType, index) => (
                 <Message key={index} message={m} />
             ))}
             <div ref={messagesEndRef} />
@@ -55,7 +55,7 @@ const Messages: React.FC<{}> = ({ }) => {
     );
 }
 
-const Message: React.FC<{ message: ChatMessagesType }> = ({ message }) => {
+const Message: React.FC<{ message: ChatMessageAPIType }> = ({ message }) => {
 
     return <>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }} >
