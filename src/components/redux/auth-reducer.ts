@@ -36,7 +36,7 @@ const authReducer = (state = initialState, action: ActionTypes): InitialStateTyp
 export const actions = {
     setUserData: (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
         ({ type: "network/app/SET_USER_DATA", payload: { id, email, login, isAuth } } as const),
-    getCaptchaUrlSucces: (captchaUrl: string) =>
+    getCaptchaUrlSuccess: (captchaUrl: string) =>
         ({ type: "network/app/GET_CAPTCHA_URL_SUCCESS", payload: { captchaUrl } } as const)
 }
 
@@ -82,7 +82,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 export const getCaptchaUrl = (): ThunkType => async (dispatch: Dispatch<ActionTypes>) => {
     const data = await securityAPI.getCaptchaUrl();
     const captchaUrl = data.url;
-    dispatch(actions.getCaptchaUrlSucces(captchaUrl));
+    dispatch(actions.getCaptchaUrlSuccess(captchaUrl));
 }
 
 

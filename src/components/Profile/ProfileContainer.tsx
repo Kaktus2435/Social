@@ -2,11 +2,11 @@ import Profile from "./Profile.tsx";
 import { getUsersProfile, getStatus, updateStatus, savePhoto, saveProfile } from "../redux/profilePageReducer.ts";
 import { connect } from "react-redux";
 import React from "react";
-import { mapStatePropsType, withAuthRedirect } from '../../hoc/withAuthRedirect.tsx';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect.tsx';
 import { withRouter } from '../utils/withRouter/withRouter.tsx';
 import { compose } from "redux";
 import { AppStateType } from "../redux/redux.store.ts";
-import { getAuthorizedUserId, getProfile, getProfilePage, getStatusSelector, getUpdateStatus, getisAuth } from "../redux/profile-selectors.ts";
+import { getAuthorizedUserId, getProfile, getProfilePage, getStatusSelector, getUpdateStatus, getIsAuth } from "../redux/profile-selectors.ts";
 import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.ts";
 
 
@@ -34,7 +34,7 @@ type PathParamsType = {
     
 }
 
-type PropsType = MapPropsType & DispatchPropsType & mapStatePropsType & PathParamsType & ProfilePropsType ;
+type PropsType = MapPropsType & DispatchPropsType & PathParamsType & ProfilePropsType ;
 
 
 class ProfileContainer extends React.Component<PropsType> {
@@ -94,12 +94,12 @@ let mapStateToProps = (state: AppStateType) => {
         status: getStatusSelector(state),
         updateStatus: getUpdateStatus(state),
         authorizedUserId: getAuthorizedUserId(state),
-        isAuth: getisAuth(state)
+        isAuth: getIsAuth(state)
     }
 }
 
 export default compose<React.ComponentType>(
-    withAuthRedirect, withRouter,
+    withAuthRedirect, withRouter,  
     connect(mapStateToProps,
         { getUsersProfile, getStatus, updateStatus, savePhoto, saveProfile })
 )(ProfileContainer);

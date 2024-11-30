@@ -6,12 +6,14 @@ import {
     getIsFetching
     } from "../redux/users-selectors.ts";
 import { Users } from "./Users.tsx";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect.tsx";
+import { withRouter } from "../utils/withRouter/withRouter.tsx";
 
 type UsersPagePropsType = {
   
 }
-
-export const UsersPage: React.FC<UsersPagePropsType> = (props) => {
+const UsersPage: React.FC<UsersPagePropsType> = (props) => {
 
     const isFetching = useSelector(getIsFetching)
 
@@ -21,6 +23,8 @@ export const UsersPage: React.FC<UsersPagePropsType> = (props) => {
         <Users  />
     </>
 }
+
+export default compose(withAuthRedirect, withRouter)(UsersPage);
 
 
 /* import { connect } from "react-redux";

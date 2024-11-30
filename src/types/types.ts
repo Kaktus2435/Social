@@ -22,7 +22,7 @@ export type PhotosType = {
 }
 
 export type ProfileType = {
-    userId: number 
+    userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
@@ -45,4 +45,13 @@ export type ProfilePageType = {
     status: string;
     myNewPost: string;
     updateStatus: any
+}
+
+export type DialogsType = {
+    dialogs: DialogType[]
+}
+export type DialogType = {
+    dialog: {
+        userId: number,
+    }
 }

@@ -1,0 +1,18 @@
+@import url(../../color.module.css);
+
+.dialog_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--color-blue);
+  
+}
+
+.dialog_photo {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dialogUsers {
+
+}

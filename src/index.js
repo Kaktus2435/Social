@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import AppMain from './App.tsx';
+import App from './App.tsx';
 import store from './components/redux/redux.store.ts';
 
 
@@ -13,7 +13,8 @@ import store from './components/redux/redux.store.ts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export const rerenderEntireTree = (state) => {
-  root.render(<AppMain />);
+ 
+  root.render(<App />);
 
   reportWebVitals();
 

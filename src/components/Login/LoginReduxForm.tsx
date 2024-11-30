@@ -30,7 +30,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
                 <Field component={Input} name='rememberMe' type="checkbox" /> Remember me
             </div> */}
 
-                {error && <div className={style.formSummmaryError}>
+                {error && <div className={style.formSummaryError}>
                     {error}
                 </div>}
                 <div>

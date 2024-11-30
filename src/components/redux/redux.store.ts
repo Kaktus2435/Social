@@ -9,6 +9,7 @@ import appReducer from './app-reducer.ts';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk, { ThunkAction } from 'redux-thunk'
 import chatPageReducer from "./chatPage-reducer.ts";
+import {dialogsPageReducer} from "./dialogsPageReducer.ts";
 
 
 const rootReducers = combineReducers({
@@ -18,6 +19,7 @@ const rootReducers = combineReducers({
     homePage: homePageReducer,
     auth: authReducer,
     app: appReducer,
+    dialogsPage: dialogsPageReducer,
     chatPage: chatPageReducer,
     form: formReducer
     

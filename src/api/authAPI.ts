@@ -1,14 +1,14 @@
 import { APIResponseType } from "./api.ts";
 import { instance } from "./api.ts";
  
-export type MeResponseDataType = {
+type MeResponseDataType = {
     id: number, 
     email: string, 
     login: string
     
 }
 
-export type LoginResponseDataType = {
+type LoginResponseDataType = {
     userId: number
 }
 

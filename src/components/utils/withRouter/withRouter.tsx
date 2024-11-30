@@ -1,34 +1,32 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import {
     NavigateFunction,
     useLocation,
     useNavigate,
     useParams,
-} from "react-router-dom"
-
+} from "react-router-dom";
 
 type withRouterProps = {
     router: {
         location: Location;
         navigate: NavigateFunction;
-        params: Record<"userId", string | undefined> 
+        params: Record<string, string | undefined>; // Tipul e acum mai generic
     };
-}
+};
 
+export function withRouter<P extends object>(Component: ComponentType<P>) {
+    const ComponentWithRouterProp: React.FC<P> = (props) => {
+        const location = useLocation();
+        const navigate = useNavigate();
+        const params = useParams();
 
-export function withRouter (Component): React.FC<withRouterProps> {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
         return (
             <Component
-                {...props}
+                {...props as P} // Aici asigurăm că props-urile originale sunt păstrate
                 router={{ location, navigate, params }}
             />
         );
-    }
+    };
 
     return ComponentWithRouterProp;
 }
-

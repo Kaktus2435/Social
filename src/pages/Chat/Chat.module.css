@@ -1,0 +1,30 @@
+@import url("../../color.module.css");
+
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    bottom: 20px; 
+    right: 20px; 
+    width: 100%;
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+  }
+
+.modal_content {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+  }
+
+  .button__chat {
+      color: rgba(153, 233, 255, 1);
+      background: linear-gradient(-45deg, var(--color-blue-white-opacity25) 0%, var(--color-violet-opacity40) 100%);
+      box-shadow: 2px 2px 10px var(--color-violet-opacity50);
+      border-radius: 5px;
+      cursor: pointer; 
+      padding: 5px;
+  }

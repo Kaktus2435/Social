@@ -21,7 +21,7 @@ export const getAuthorizedUserId = (state: AppStateType) => {
     return state.auth.id
 }
 
-export const getisAuth = (state: AppStateType) => {
+export const getIsAuth = (state: AppStateType) => {
     return state.auth.isAuth
 }
 

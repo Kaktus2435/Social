@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styles from "./header.module.css";
-import { ProfileType } from "../../types/types";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Row, Col, Menu, Layout, Avatar, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { AppStateType } from "../redux/redux.store";
 import { getIsAuth, getLogin } from "../redux/auth-selectors.ts";
 import { logout } from "../redux/auth-reducer.ts";
-import logo from "../img/LOGO1.png"
-import {ChatPage} from "../../pages/Messages/Messages.tsx";
-import { WechatOutlined } from "@ant-design/icons";
+import { PhotosType } from "../../types/types.ts";
+import { OpenModal } from "../../pages/Chat/ModalChat.tsx";
+import switchTheme from "../img/line-md_switch.jpg"
 
 export type MapPropsType = {
     isAuth: boolean
     login: string | null
     logout: string
+    smallPhoto: PhotosType
 
 }
 
@@ -45,48 +44,28 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
     return (
 
 
-        <Header className="header">
+        <Header className={styles.header}>
 
-            <Row>
-                <div className={styles.header__logo} > <img className={styles.logo} src={logo} alt="logo" /> </div>
+          
+                <div className={styles.header__logo_wrapper} > <h1 className={styles.header__logo}>ANDREACT</h1></div>
 
-                <Col span={20}>
-                    <Menu
-                        theme="dark"
-                        mode="horizontal"
-                        defaultSelectedKeys={['1']}
-                        style={{ lineHeight: '64px' }}>
-                    </Menu>
-                </Col>
                 {isAuth ?
-                    <div>
-                        <div>
-                            <Row>
-                            <Col span={20} >
-                            <button className={styles.logout} onClick={logoutCallback}>Logout</button>
-                            </Col>
-                            </Row>
-                        </div>
-                        
+                    <div className={styles.header__buttons_wrapper}>
+                                    <OpenModal />
+                                    <img src={switchTheme} />
+                                    <button className={styles.button__logout} onClick={logoutCallback}>Logout</button>       
+
                     </div>
                     : <NavLink to={'/login'}> <button onClick={login}>
                         Login
                     </button> </NavLink>}
-                
-                    {props.isAuth ? <Avatar style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>U</Avatar>
-                        : null}
 
-            </Row>
+                        
+                {props.isAuth ? <Avatar style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>U</Avatar>
+                    : null}
+
+           
         </Header>
-
-
-
-
-
-        /*  <header className={styles.header}>
-              
-            
-         </header> */
     );
 }
 

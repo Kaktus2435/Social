@@ -1,0 +1,16 @@
+@import url(./color.module.css);
+
+.container{
+  height: 100vh;
+}
+
+.sideMenu_wrapper {
+  background: var(--color-violet-black); 
+  height: 100%; 
+  padding: 20px;
+  color: var(--color-blue-white);
+}
+
+.content {
+background-color: lightslategrey;
+}

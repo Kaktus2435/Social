@@ -1,182 +1,120 @@
-import { Routes, Route, NavLink, Link } from "react-router-dom"
-import { connect } from 'react-redux'
+import React, { ComponentType, useEffect } from 'react'
+import { Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import React, { Component, ComponentType } from 'react'
-
-// import Chats from "./pages/Chats";
-import SideMenu from './components/side-menu-bar/Side-menu.jsx';
-import Footer from './components/footer/Footer.jsx';
-
 
 import ProfileContainer from './components/Profile/ProfileContainer.tsx';
-
-
 import { withRouter } from './components/utils/withRouter/withRouter.tsx';
 import { initializeApp } from './components/redux/app-reducer.ts';
 
-import store, { AppStateType } from "./components/redux/redux.store.ts";
+import store from "./components/redux/redux.store.ts";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter } from "react-router-dom";
 import { withSuspense } from './hoc/withSuspense.tsx';
-import Preloader from './components/utils/preloader/Preloader.jsx';
-
-// -------- ant design
-
-import { Layout, Menu, Breadcrumb, Avatar, Row, Col } from 'antd';
-import { DesktopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
 import Header from "./components/header/Header.tsx";
+import { chatAPI } from "./api/chatAPI.ts";
+import UsersPage from './components/Users/UsersContainer.tsx';
+import DialogsPage from './components/dialogs/DialogsContainer.tsx'
+import { getIsAuth } from "./components/redux/profile-selectors.ts";
+
+import styles from "./App.module.css"
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
-// -------- ant design
-
-
 const Login = React.lazy(
   () => import('./components/Login/Login.tsx').then(module => ({ default: module.Login }))
 );
-
-const UsersPage = React.lazy(
-  () => import('./components/Users/UsersContainer.tsx').then(module => ({ default: module.UsersPage }))
-);
-
 const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage.tsx'));
 
+const ModalChat = React.lazy(
+  () => import('./pages/Chat/ModalChat.tsx').then(module => ({ default: module.ModalChat }))
+);
 
-
-const LoginWithSuspense = withSuspense(Login)
+const LoginWithSuspense = withSuspense(Login);
 const UsersContainerWithSuspense = withSuspense(UsersPage);
-const ChatWithSuspense = withSuspense(ChatPage)
+const ChatWithSuspense = withSuspense(ChatPage);
+const DialogsWithSuspense = withSuspense(DialogsPage)
 
+const App: React.FC = React.memo(() => {
+  const isAuth = useSelector(getIsAuth);
+  const dispatch = useDispatch();
 
-type MapPropsType = ReturnType<typeof mapStateToProps>
-type DispatchPropsType = {
-  initializeApp: () => void
-}
+  // Obținem ruta curentă folosind useLocation
+  const location = useLocation();
+  
+  useEffect(() => {
+    dispatch(initializeApp());
+    chatAPI.start();
+    return () => {
+      chatAPI.stop();
+    };
+  }, [dispatch]);
 
+  // Definim cheile active în funcție de ruta curentă
+  const getMenuKey = (path: string) => {
+    if (path.startsWith('/profile')) return '1';
+    if (path.startsWith('/chat')) return '2';
+    if (path.startsWith('/users')) return '3';
+    if (path.startsWith('/dialogs')) return '4'
+    return '';
+  };
 
-class App extends Component<MapPropsType & DispatchPropsType> {
-  componentDidMount() {
+  const selectedKey = getMenuKey(location.pathname);
 
-    this.props.initializeApp()
-  }
-  render() {
-    if (!this.props.initialized) {
-      return <Preloader />
-
-    }
-    return (
-
-      // -------- ant design
+  return (
+    <Layout className={styles.container}>
+      <Header />
       <Layout>
-        <Header />
-        <Layout>
+        {isAuth ? (
           <Sider width={200} style={{ background: '#fff' }}>
             <Menu
+              className={styles.sideMenu_wrapper}
               mode="inline"
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
-              style={{ height: '100%', borderRight: 0 }}
-            >
-              <SubMenu key="sub1" title={<span><UserOutlined />My Profile</span>}>
-                <Menu.Item key="1"><NavLink to="/profile">Profile</NavLink></Menu.Item>
-                <Menu.Item key="2"><NavLink to="/chat">Chat</NavLink></Menu.Item>
+              selectedKeys={[selectedKey]}
+              defaultOpenKeys={['sub1']}>
 
-
-              </SubMenu>
-              <SubMenu key="sub2" title={<span><DesktopOutlined />Developers</span>}>
-                <Menu.Item key="3"><NavLink to="/users">Users</NavLink></Menu.Item>
-              </SubMenu>
-              <SubMenu key="sub3" title={<span><NotificationOutlined />subnav 3</span>}>
-                <Menu.Item key="9">option9</Menu.Item>
-                <Menu.Item key="10">option10</Menu.Item>
-                <Menu.Item key="11">option11</Menu.Item>
-                <Menu.Item key="12">option12</Menu.Item>
-              </SubMenu>
+                <Menu.Item  key="1"><NavLink to="/profile">Profile</NavLink></Menu.Item>
+                <Menu.Item  key="2"><NavLink to="/chat">Chat</NavLink></Menu.Item>
+                <Menu.Item  key="3"><NavLink to="/users">Users</NavLink></Menu.Item>
+                <Menu.Item  key="4"><NavLink to="/dialogs">Dialogs</NavLink></Menu.Item>
+              
             </Menu>
           </Sider>
-          <Layout style={{ padding: '0 24px 24px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb>
+        ) : null}
+        <Layout>
+          <Content className={styles.content} >
+            <Routes>
+              <Route path="/" element={<ProfileContainer />} />
+              <Route path="/profile/:userId?" element={<ProfileContainer />} />
+              <Route path="/users" element={<UsersContainerWithSuspense />} />
+              <Route path="/login" element={<LoginWithSuspense />} />
+              <Route path="/chat" element={<ChatWithSuspense />} />
+              <Route path="/dialogs" element={<DialogsWithSuspense />} />
 
-            <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-              <Routes>
-                <Route path="/profile/:userId?" element={<ProfileContainer />} />
 
-
-                {/* <Route path="/chats" element={<Chats
-           store={props.store}
-        />} */}
-
-                {/* <Route path="/explore" element={<Chats />} />*/}
-
-                <Route path="/users" element={<UsersContainerWithSuspense />} />
-                {/*<Route path="/settings" element={<Chats />} /> */}
-                <Route path="/login" element={<LoginWithSuspense />} />
-                <Route path="/chat" element={<ChatWithSuspense />} />
-
-                
-              </Routes>
-            </Content>
-
-          </Layout>
+            </Routes>
+          </Content>
         </Layout>
       </Layout>
-      // -------- ant design
-
-      //   <div className="App">
-      //   <HeaderContainer />
-      //     <SideMenu />
-
-      //     <div className="container">
-
-      //       <Routes>
-
-
-      //         <Route path="/profile/:userId?" element={<ProfileContainer/>} />
-
-
-      //         {/* <Route path="/chats" element={<Chats
-      //           store={props.store}
-      //         />} */}
-
-      //         {/* <Route path="/explore" element={<Chats />} />*/}
-
-      //         <Route path="/users" element={ <UsersContainerWithSuspense /> }/>
-      //         {/*<Route path="/settings" element={<Chats />} /> */}
-      //         <Route path="/login" element={ <LoginWithSuspense />}/>
-
-      //       </Routes>
-
-      //     </div>
-      //     <Footer />
-
-      // </div>
-    )
-  }
-}
-
-const mapStateToProps = (state: AppStateType) => {
-  return {
-    initialized: state.app.initialized
-  }
-}
-
+    </Layout>
+  );
+});
 
 let AppContainer = compose<ComponentType>(
   withRouter,
-  connect(mapStateToProps, { initializeApp }))(App);
+  connect(null, { initializeApp })
+)(App);
 
 let AppMain: React.FC = (props) => {
-  return <BrowserRouter>
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
-  </BrowserRouter>
-}
-
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  );
+};
 
 export default AppMain;

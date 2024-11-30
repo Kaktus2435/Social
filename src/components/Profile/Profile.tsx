@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// @ts-ignore
+
 import defaultAvatar from '../img/Basic_Ui_(186).jpg'
 import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks.tsx';
 import styles from './Profile.module.css';
@@ -7,8 +7,7 @@ import ProfileDataForm from './ProfileInfo/Profile.Data.Form.tsx';
 import Preloader from "../utils/preloader/Preloader.jsx";
 import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.js";
 import ProfileData from "./ProfileInfo/ProfileInfo.tsx";
-import MyPostsContainer from "./MyPosts/MyPostsContainer.tsx";
-import Chat from "../../pages/Messages/Messages.tsx";
+import { CameraOutlined } from '@ant-design/icons';
 
 
 type PropsType = {
@@ -23,7 +22,7 @@ type PropsType = {
     savePhoto: (files: PhotosType) => void
 }
 
-const Profile: React.FC<PropsType> = ({ profile, isOwner, profilePage, savePhoto, saveProfile, status, updateStatus }) => {
+const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile, status, updateStatus }) => {
 
    
     const [editMode, setEditMode] = useState(false);
@@ -47,9 +46,32 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, profilePage, savePhoto
     }
 
     return (
-        <>
-            <img className={styles.defaultAvatar} src={profile.photos.large == null ? defaultAvatar : profile.photos.large} alt="photos" />
-            {isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}
+        <div className={styles.container_profile}>
+           
+           <div className={styles.profile_avatar}>
+            <img
+                className={styles.defaultAvatar}
+                src={profile.photos.large == null ? defaultAvatar : profile.photos.large}
+                alt="photos"
+            />
+
+            {isOwner && (
+                <div className={styles.uploadWrapper}>
+                    <input
+                        className={styles.change_photo_input}
+                        type="file"
+                        id="fileInput"
+                        style={{ display: 'none' }}
+                        onChange={onMainPhotoSelected}
+                    />
+
+                    <label htmlFor="fileInput" className={styles.uploadButton}>
+                        <CameraOutlined /> 
+                    </label>
+                </div>
+            )}
+        </div>
+
 
             {editMode
                 ? <ProfileDataForm
@@ -67,24 +89,13 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, profilePage, savePhoto
                 <div>
 
                     <ProfileStatusWithHooks
-                        // @ts-ignore
                         status={status}
                         updateStatus={updateStatus} />
 
-                    <MyPostsContainer />
-
                 </div>
             </div>
-        </>
+        </div>
     );
 }
-
-// const ProfileDataForm = ( {isOwner, goToEditMode} ) => {
-//     return (
-//         <div>
-//           <div> {isOwner && <button onClick={goToEditMode}> Stop editing</button>}</div>
-//         </div>
-//     )
-// }
 
 export default Profile;

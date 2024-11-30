@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
-import { ChatMessageAPIType } from "../../api/chatAPI.ts";
+import { ChatMessagesAPIType } from "../../api/chatAPI.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { sendMessage, startMessagesListening, stopMessagesListening } from "../../components/redux/chatPage-reducer.ts";
 import { AppDispatch, AppStateType } from "../../components/redux/redux.store.ts";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect.tsx";
 
-
-
-const ChatPage: React.FC = () => {
+const ChatPage: React.FC = () => {   
     return <>
         <Chat />
     </>
@@ -29,25 +29,37 @@ const Chat: React.FC = () => {
 
     return <>
         {status === 'error' ? <div>Some error occurred. Please refresh the page.</div> :
-            <>   <Messages />
+            <>   
+                <Messages />
                 <AddMessageForm />
             </>
         }
     </>
 }
 
-
-const Messages: React.FC<{}> = ({ }) => {
+const Messages: React.FC<{}> =  ({}) => {
     const messages = useSelector((state: AppStateType) => state.chatPage.messages)
     const messagesEndRef = useRef<HTMLDivElement | null>(null)
+    const [isAutoScroll, setIsAutoScroll] = useState(true)
+    
+    const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent> ) => {
+        const element = e.currentTarget
+        if(Math.abs( (element.scrollHeight - element.scrollTop) - element.clientHeight) <300 )
+        {
+            !isAutoScroll && setIsAutoScroll(true)
+        } else {
+            isAutoScroll && setIsAutoScroll(false)
+        }
+    }
+
     useEffect(() => {
-        if (messagesEndRef.current) {
+        if (isAutoScroll && messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [messages]);
     return (
-        <div style={{ height: '500px', overflow: 'auto' }}>
-            {messages.map((m: ChatMessageAPIType, index) => (
+        <div onScroll={scrollHandler} style={{ height: '500px', overflow: 'auto' }}>
+            {messages.map((m: ChatMessagesAPIType, index) => (
                 <Message key={index} message={m} />
             ))}
             <div ref={messagesEndRef} />
@@ -55,7 +67,8 @@ const Messages: React.FC<{}> = ({ }) => {
     );
 }
 
-const Message: React.FC<{ message: ChatMessageAPIType }> = ({ message }) => {
+const Message: React.FC<{ message: ChatMessagesAPIType }> = React.memo( ({ message }) => {
+console.log('>>>>Message');
 
     return <>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }} >
@@ -65,8 +78,7 @@ const Message: React.FC<{ message: ChatMessageAPIType }> = ({ message }) => {
         {message.message}
         <hr />
     </>
-}
-
+})
 
 const AddMessageForm: React.FC<{}> = () => {
     const [message, setMessage] = useState('')
@@ -89,9 +101,4 @@ const AddMessageForm: React.FC<{}> = () => {
 
 }
 
-export default withRouter(ChatPage);
-
-type PropsType = {
-    isOpen: boolean,
-    onClose: () => void
-};
+export default compose(withAuthRedirect, withRouter)(ChatPage);
