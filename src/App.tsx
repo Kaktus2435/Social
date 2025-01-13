@@ -16,7 +16,7 @@ import Header from "./components/header/Header.tsx";
 import { chatAPI } from "./api/chatAPI.ts";
 import UsersPage from './components/Users/UsersContainer.tsx';
 import DialogsPage from './components/dialogs/DialogsContainer.tsx'
-import { getIsAuth } from "./components/redux/profile-selectors.ts";
+import { getIsAuth, getProfile } from "./components/redux/profile-selectors.ts";
 
 import styles from "./App.module.css"
 
@@ -40,6 +40,8 @@ const DialogsWithSuspense = withSuspense(DialogsPage)
 const App: React.FC = React.memo(() => {
   const isAuth = useSelector(getIsAuth);
   const dispatch = useDispatch();
+
+  const profile = useSelector(getProfile)
 
   // Obținem ruta curentă folosind useLocation
   const location = useLocation();
@@ -66,25 +68,25 @@ const App: React.FC = React.memo(() => {
   return (
     <Layout className={styles.container}>
       <Header />
-      <Layout>
+      <Layout >
         {isAuth ? (
-          <Sider width={200} style={{ background: '#fff' }}>
+          <Sider width={200} >
             <Menu
               className={styles.sideMenu_wrapper}
               mode="inline"
               selectedKeys={[selectedKey]}
               defaultOpenKeys={['sub1']}>
-
-                <Menu.Item  key="1"><NavLink to="/profile">Profile</NavLink></Menu.Item>
-                <Menu.Item  key="2"><NavLink to="/chat">Chat</NavLink></Menu.Item>
-                <Menu.Item  key="3"><NavLink to="/users">Users</NavLink></Menu.Item>
-                <Menu.Item  key="4"><NavLink to="/dialogs">Dialogs</NavLink></Menu.Item>
+                  
+                <Menu.Item className={styles.link} key="1"><NavLink to="/profile">Profile</NavLink></Menu.Item>
+                <Menu.Item className={styles.link} key="2"><NavLink to="/chat">Chat</NavLink></Menu.Item>
+                <Menu.Item className={styles.link} key="3"><NavLink to="/users">Users</NavLink></Menu.Item>
+                <Menu.Item className={styles.link} key="4"><NavLink to="/dialogs">Dialogs</NavLink></Menu.Item>
               
             </Menu>
           </Sider>
         ) : null}
         <Layout>
-          <Content className={styles.content} >
+          <Content  className={styles.content} >
             <Routes>
               <Route path="/" element={<ProfileContainer />} />
               <Route path="/profile/:userId?" element={<ProfileContainer />} />
@@ -92,8 +94,6 @@ const App: React.FC = React.memo(() => {
               <Route path="/login" element={<LoginWithSuspense />} />
               <Route path="/chat" element={<ChatWithSuspense />} />
               <Route path="/dialogs" element={<DialogsWithSuspense />} />
-
-
             </Routes>
           </Content>
         </Layout>

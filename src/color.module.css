@@ -1,4 +1,13 @@
 :root {
+    --color-gray: rgb(240, 240, 240, 1);
+    --color-dark-gray: rgb(153, 153, 153, 1);
+    
+    
+    --color-green: rgba(20,71,30, 1);
+    --color-light-green: rgba(104,144,77, 1);
+    --color-orange: rgba(218, 106, 0, 1);
+    --color-light-orange: rgba(238, 155, 1, 1);
+
     --color-white: rgba(255, 255, 255, 1);
     --color-black: rgba(0, 0, 0, 1);
     

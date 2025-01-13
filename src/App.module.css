@@ -5,12 +5,37 @@
 }
 
 .sideMenu_wrapper {
-  background: var(--color-violet-black); 
+  background: var(--color-gray); 
   height: 100%; 
   padding: 20px;
-  color: var(--color-blue-white);
+
 }
 
 .content {
-background-color: lightslategrey;
+background-color: var(--color-gray);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.active {
+  background-color: var(--color-dark-gray);
+  color: black;
+}
+
+.link:hover {
+  background-color: var(--color-dark-gray);
+
+}
+
+
+.link:visited {
+  background-color: var(--color-dark-gray);
+
+}
+
+
+.a {
+    border: solid, 2px;
+
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import defaultAvatar from '../img/Basic_Ui_(186).jpg'
 import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks.tsx';
 import styles from './Profile.module.css';
@@ -24,7 +23,7 @@ type PropsType = {
 
 const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile, status, updateStatus }) => {
 
-   
+
     const [editMode, setEditMode] = useState(false);
     const goToEditMode = () => { setEditMode(true) };
 
@@ -47,30 +46,29 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
 
     return (
         <div className={styles.container_profile}>
-           
-           <div className={styles.profile_avatar}>
-            <img
-                className={styles.defaultAvatar}
-                src={profile.photos.large == null ? defaultAvatar : profile.photos.large}
-                alt="photos"
-            />
+            <div className={styles.profile_avatar}>
+                <img
+                    className={styles.defaultAvatar}
+                    src={profile.photos.large == null ? defaultAvatar : profile.photos.large}
+                    alt="photos"
+                />
 
-            {isOwner && (
-                <div className={styles.uploadWrapper}>
-                    <input
-                        className={styles.change_photo_input}
-                        type="file"
-                        id="fileInput"
-                        style={{ display: 'none' }}
-                        onChange={onMainPhotoSelected}
-                    />
+                {isOwner && (
+                    <div className={styles.uploadWrapper}>
+                        <input
+                            className={styles.change_photo_input}
+                            type="file"
+                            id="fileInput"
+                            style={{ display: 'none' }}
+                            onChange={onMainPhotoSelected}
+                        />
 
-                    <label htmlFor="fileInput" className={styles.uploadButton}>
-                        <CameraOutlined /> 
-                    </label>
-                </div>
-            )}
-        </div>
+                        <label htmlFor="fileInput" className={styles.uploadButton}>
+                            <CameraOutlined />
+                        </label>
+                    </div>
+                )}
+            </div>
 
 
             {editMode

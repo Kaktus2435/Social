@@ -1,9 +1,10 @@
     @import url("../../color.module.css");
 
     .header {
-        background-color: var(--color-black);
+        background-color: white;
         display: flex;
         justify-content: space-between;
+        height: 40px;
     }
 
     .container {
@@ -25,14 +26,13 @@
 
     .header__logo {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 32px;
-        font-weight: 400;
+        font-size: 40px;
+        font-weight: 600;
         line-height: 48px;
         letter-spacing: 0em;
         text-align: left;
         margin: 0px;
-        color: var(--color-blue);
-        text-shadow: -4px 4px rgba(161, 89, 170, 0.5);
+        color: orange;
         display: flex;
         align-items: center;
     }
@@ -58,10 +58,10 @@
         justify-content: space-between;
     }
 
-    .button__logout {
-        color: var(--color-violet-white);
-        background: linear-gradient(-45deg, var(--color-blue-white-opacity25) 0%, var(--color-violet-opacity40) 100%);
-        box-shadow: 2px 2px 10px var(--color-violet-opacity50);
+    .button__authentication {
+        color: var(--color-dark-gray);
+        background-color: var(--color-gray);
+        border-color: var(--color-gray);      
         border-radius: 5px;
         cursor: pointer; 
         padding: 5px;
