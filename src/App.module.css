@@ -1,7 +1,11 @@
 @import url(./color.module.css);
 
 .container{
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+  box-sizing: border-box; 
 }
 
 .sideMenu_wrapper {
@@ -16,6 +20,7 @@ background-color: var(--color-gray);
 display: flex;
 align-items: center;
 justify-content: center;
+min-height: 82vh;
 }
 
 .active {

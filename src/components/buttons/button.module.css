@@ -1,0 +1,9 @@
+.customButton {
+    color: var(--color-dark-gray);
+    background-color: var(--color-gray);
+    border-color: var(--color-gray);      
+    border-radius: 5px;
+    cursor: pointer; 
+    padding: 5px;
+    height: 30px;
+}

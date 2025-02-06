@@ -1,10 +1,8 @@
     @import url("../../color.module.css");
 
     .header {
-        background-color: white;
-        display: flex;
-        justify-content: space-between;
-        height: 40px;
+        /* background-color: white; */
+        width: 100%;
     }
 
     .container {
@@ -15,23 +13,31 @@
         align-items: center;
         width: 100%;
         justify-content: space-between;
-        
+
     }
-    .header__logo_wrapper {
+
+    .containerLogo {
         display: flex;
         align-items: center;
         flex-direction: row;
         max-width: 163px;
     }
 
-    .header__logo {
+    .containerLinks {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .logo {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-size: 40px;
         font-weight: 600;
         line-height: 48px;
         letter-spacing: 0em;
         text-align: left;
-        margin: 0px;
+        margin-right: 40px;
         color: orange;
         display: flex;
         align-items: center;
@@ -42,12 +48,12 @@
         height: 100%;
     }
 
-    .header__buttons_wrapper{
+    .header__buttons_wrapper {
         display: flex;
         max-width: 305px;
         width: 22vw;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-evenly;
 
     }
 
@@ -61,14 +67,14 @@
     .button__authentication {
         color: var(--color-dark-gray);
         background-color: var(--color-gray);
-        border-color: var(--color-gray);      
+        border-color: var(--color-gray);
         border-radius: 5px;
-        cursor: pointer; 
+        cursor: pointer;
         padding: 5px;
     }
 
     .open_chat__button {
-        background-color:var();
+        background-color: var();
         border-color: aliceblue;
     }
 
@@ -78,7 +84,7 @@
     }
 
     .close_chat__button {
-        background-color:#2e4c68;
+        background-color: #2e4c68;
         border-color: aliceblue;
     }
 
@@ -87,3 +93,5 @@
         /* alte stiluri pentru hover */
 
     }
+
+    .sideMenu_wrapper {}

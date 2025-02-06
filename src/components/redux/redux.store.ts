@@ -12,6 +12,7 @@ import chatPageReducer from "./chatPage-reducer.ts";
 import {dialogsPageReducer} from "./dialogsPageReducer.ts";
 
 
+
 const rootReducers = combineReducers({
     profilePage: profilePageReducer,
     messagesPage: messagesPageReducer,
@@ -34,7 +35,7 @@ export type InferActionTypes<T> = T extends {[key: string]: (...arg: any[]) => i
 //composeEnhancers works only with chrome
 export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction <R, AppStateType, unknown, A>
 
-const store = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunk)))
+const store = createStore(rootReducers, applyMiddleware(thunk));
 
 export type AppDispatch = typeof store.dispatch
 
