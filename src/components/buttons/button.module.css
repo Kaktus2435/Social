@@ -1,9 +1,18 @@
 .customButton {
-    color: var(--color-dark-gray);
-    background-color: var(--color-gray);
-    border-color: var(--color-gray);      
+    background-color: white; 
+    color: #f35304;
+    padding: 10px 20px;
+    margin: 10px;
+    border: solid  1px #ff9818;
     border-radius: 5px;
-    cursor: pointer; 
-    padding: 5px;
-    height: 30px;
+    cursor: pointer;
+    min-width: 70px;
+    font-size: 15px;
+    font-weight: 600;
 }
+  
+  .customButton:hover {
+    background-color: #fc7907;
+    color: white;
+  }
+  

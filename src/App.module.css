@@ -15,12 +15,12 @@
 
 }
 
-.content {
-background-color: var(--color-gray);
+.content {  
 display: flex;
 align-items: center;
 justify-content: center;
-min-height: 82vh;
+min-height: 90vh;
+
 }
 
 .active {

@@ -42,13 +42,12 @@ const App: React.FC = React.memo(() => {
   return (
     <Layout className={styles.container}>
       <Header />
-        <Layout >
+        <Layout  >
           <Content className={styles.content} >
             <AppRoutes />
           </Content>
         </Layout>
         <Footer />
-        
     </Layout>
   );
 });

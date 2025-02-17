@@ -8,6 +8,8 @@ import { PhotosType } from "../../types/types.ts";
 import { OpenModal } from "../../pages/ChatPage/ModalChat.tsx";
 import Logout from "../Logout/Logout.tsx";
 import { NavLink, useLocation } from "react-router-dom";
+//@ts-ignore
+import logo from "../../img/LogoA.svg"
 
 
 export type MapPropsType = {
@@ -52,13 +54,12 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
 
   return (
-    <Layout>
+    <Layout style={{height: "63px"}} >
       <Header style={{ backgroundColor:"#fff", display: "flex", alignItems: "center", width: "100%" }}>
 
         <div className={styles.containerLogo} >
-          <h1 className={styles.logo}>A</h1>
+          <img src={logo} className={styles.logo} alt="A" />
         </div>
-
 
         {isAuth ?
           <div className={styles.containerLinks} >
@@ -75,7 +76,7 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
                 <Menu.Item className={styles.link} key="4"><NavLink to="/dialogs">Dialogs</NavLink></Menu.Item>
               </Menu>
             </div>
-            <div className={styles.header__buttons_wrapper}>
+            <div className={styles.buttonsWrapper}>
               <OpenModal />
               <Logout />
             </div>

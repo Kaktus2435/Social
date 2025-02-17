@@ -8,6 +8,12 @@
 
 .status {
     font-family: cursive;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    padding: 20px;
+    max-width: 20vw;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 body {
@@ -25,7 +31,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Negru transparent */
+    background-color: rgba(0, 0, 0, 0.5); 
   }
   
   .modalContent {
@@ -33,26 +39,27 @@ body {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888; /* Sur */
-    width: auto;
+    width: 20vw;
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
   }
-  
-  .close,
-  .save {
-    background-color: #f39c12; /* Oranj */
-    color: white;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .close:hover,
-  .save:hover {
-    background-color: #e67e22; /* Oranj mai închis */
-  }
+
+  .inputModalContent {
+    height: 30px;
+    border-radius: 10px;
+    padding: 5px;
+    width: 16vw;
+    
+    }
+  .inputModalContent:focus {
+      border: 2px solid #fc7907;
+      outline: none;
+    }
+  .inputModalContent:not(:placeholder-shown) {
+    border-color: #fc7907;
+}
+    
   

@@ -2,16 +2,13 @@
 
 .profile {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
     width: 80vw;
     height: 70vh;
-    display: flex;
-    justify-content: space-around;
     margin-right: 1.25vw;
+    margin-top: 20vh;
     border-radius: 50px;
-    cursor: pointer; 
-   
 }
 
 .container {
@@ -23,21 +20,14 @@
 
 .leftContainer {
     flex-direction: column;
-    padding: 18px 18px 0px 18px;
+    padding: 20px 20px 0px 20px;
     position: relative;
     width: auto;
 }
 
-.rightContainer {
-
-}
-
-.wrapperProfileData{
-}
-
 .photoWrapper{
-    width: 200px;
-    height: 200px;
+    width: 20vw;
+    height: 40vh;
     overflow: hidden;
 }
 
@@ -53,24 +43,55 @@
     right: 0%;
 }
 
-.photoUpload {
+.cameraOutlander {
+    color: #f35304;
 }
 
-.statusContainer {
+.cameraOutlander:hover {
     
+    color: gray;
 }
 
-.button_profileData {
-    color: var(--color-dark-gray);
-    background-color: var(--color-gray);
-    border-color: var(--color-gray);      
-    border-radius: 5px;
-    cursor: pointer; 
-    padding: 5px;
+/* rightContainer */
+
+.notebookPage {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    background: var(--color-gray);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.6;
+    padding: 10px;
 }
 
-/* --contact */
-.contact {
+
+.containerEditMode {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text {
+    font-size: 30px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+.textKey{
+ 
+}
+
+.textValue {
+    margin-left: 5px;
+}
+
+p{
+    margin: 0px;
+}
+
+@media only screen and (min-width: 1600px) {
+    
 }

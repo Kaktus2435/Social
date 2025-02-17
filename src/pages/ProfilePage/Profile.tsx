@@ -63,7 +63,7 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                         onChange={onMainPhotoSelected}
                     />
                     <label htmlFor="fileInput" className={styles.uploadLabel}>
-                        <CameraOutlined style={{ color: "gray" }} />
+                        <CameraOutlined className={styles.cameraOutlander} />
                     </label>
                 </div>
                 <div className={styles.statusContainer} >
@@ -72,7 +72,7 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                         updateStatus={updateStatus} />
                 </div>
             </div>
-        <div className={`${styles.rightContainer} ${styles.container}`}>
+        <div className={styles.rightContainer}>
                 {editMode
                     ? <ProfileDataForm
                         profile={profile}
@@ -83,7 +83,6 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                         goToEditMode={goToEditMode}
                         isOwner={isOwner}
                     />}
-                    
             </div>
             
         </div>

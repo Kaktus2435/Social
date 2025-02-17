@@ -1,24 +1,26 @@
 import React from "react";
-import { FacebookOutlined, GithubOutlined, InstagramOutlined, LinkOutlined, XOutlined, YoutubeOutlined } from "@ant-design/icons";
-import styles from "../Profile.module.css"
+import { FacebookOutlined, GithubOutlined, GlobalOutlined, InstagramOutlined, LinkOutlined, XOutlined, YoutubeOutlined } from "@ant-design/icons";
+import styles from "./Contact.module.css"
 
 
 const Contact = ({ contactTitle, contactValue }) => {
 
     const contactIcons = {
-        facebook: <FacebookOutlined style={{ fontSize: "20px", color: "#3b5998" }} />,
-        twitter: <XOutlined style={{ fontSize: "20px", color: "#000000" }} />,
-        instagram: <InstagramOutlined style={{ fontSize: "20px", color: "#E4405F" }} />,
-        youtube: <YoutubeOutlined style={{ fontSize: "20px", color: "#FF0033" }} />,
-        github: <GithubOutlined style={{ fontSize: "20px", color: "#010409" }} />,
-        mainlink: <LinkOutlined style={{ fontSize: "20px", color: "#555555" }} />
+        facebook: <FacebookOutlined className={styles.contactIcon} style={{color: "#3b5998" }} />,
+        website: <GlobalOutlined className={styles.contactIcon} style={{color: "#000000" }} />,
+        vk: <img className={styles.contactImgIcon} style={{margin: "2px"}} src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="" />,
+        twitter: <XOutlined className={styles.contactIcon} style={{color: "#000000" }} />,
+        instagram: <InstagramOutlined className={styles.contactIcon} style={{color: "#E4405F" }} />,
+        youtube: <YoutubeOutlined className={styles.contactIcon} style={{color: "#FF0033" }} />,
+        github: <GithubOutlined className={styles.contactIcon} style={{color: "#010409" }} />,
+        mainlink: <LinkOutlined className={styles.contactIcon} style={{color: "#555555" }} />
     };
 
     const contactIcon = contactIcons[contactTitle.toLowerCase()] || null;
 
     return (
-        <div >
-          <a href={contactValue} target="_blank" rel="noopener noreferrer">
+        <div className={styles.contact} >
+          <a className={styles.links} href={contactValue} target="_blank" rel="noopener noreferrer">
             {contactIcon}
           </a>
         </div>
