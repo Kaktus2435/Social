@@ -32,6 +32,15 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
         setStatus(e.currentTarget.value);
     }
 
+    const deleteText = () => {
+        setStatus("")
+    }
+
+    const calculateHeight = () => {
+        const lineHeight = 20;  
+        const rows = status.split('\n').length;  
+        return `${Math.max(rows * lineHeight, 40)}px`;  
+      };
 
     return (
         <div className={styles.container} >
@@ -42,17 +51,17 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
 
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
-                        <div>
-                            <input 
+                            <textarea
                                 className={styles.inputModalContent}
-                                autoFocus={true}
-                                onChange={onStatusChange}
                                 value={status}
-                                maxLength={50}
+                                onChange={onStatusChange}
+                                autoFocus={true}
+                                maxLength={300}
+                                placeholder="Status..."
                             />
-                        </div>
-                        <h6 style={{ margin: "2px" }} >Text length is maximum 20 symbols.</h6>
+                        <h6 style={{ margin: "2px" }} >Text length is maximum 300 symbols.</h6>
                         <div>
+                            <CustomButton className={styles.delete} onClick={deleteText} text={"Delete"} />
                             <CustomButton className={styles.close} onClick={deactivateEditModeAndClose} text={"Close"} />
                             <CustomButton className={styles.save} onClick={deactivateEditModeAndSave} text={"Save"} />
                         </div>
