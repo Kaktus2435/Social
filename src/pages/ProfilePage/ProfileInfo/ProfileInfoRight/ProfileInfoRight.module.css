@@ -1,0 +1,40 @@
+.container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 50vh;
+}
+
+.editModeButton {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.infoCards { 
+    display: flex;
+    width: 64vw;
+    justify-content: space-between;
+}
+
+.firstCard {
+    width: 50%;
+    margin-right: 15px;
+}
+
+.secondCard {
+    width: 50%;
+}
+
+p{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 45px;
+}

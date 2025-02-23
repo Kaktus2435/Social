@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 15vw;
+    border: 1px solid #f0f0f0;
+}
+
+.textData {
+    cursor: default;
+}
+
+.labelText {
+    opacity: 0.5;
+    margin-bottom: 0px;
+}
+
+.valueText {
+    opacity: 0.8;
+    margin-top: 0px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.lineDesign {
+    height: 1px;
+    width: 100%;
+    background-color: var(--color-gray);
+    
+}

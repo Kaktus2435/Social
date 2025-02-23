@@ -1,9 +1,9 @@
 import { InjectedFormProps, reduxForm } from "redux-form";
-import { GetStringKeys, Input, Textarea, createField } from "../../../components/common/forms/FormsControls.tsx";
+import { GetStringKeys, Input, Textarea, createField } from "../../../../components/common/forms/FormsControls.tsx";
 import styles from './Profile.Data.Form.module.css';
 import React from "react";
-import { ProfileType } from "../../../types/types.ts";
-import CustomButton from "../../../components/buttons/CustomButton.tsx";
+import { ProfileType } from "../../../../types/types.ts";
+import CustomButton from "../../../../components/buttons/CustomButton.tsx";
 
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({ handleSubmit, profile, error }) => {
     return <form onSubmit={handleSubmit}>

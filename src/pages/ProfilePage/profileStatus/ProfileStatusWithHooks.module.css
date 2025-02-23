@@ -6,14 +6,12 @@
 }
 
 .status {
-  font-family: cursive;
   font-size: 18px;
   letter-spacing: 0.5px;
-  width: 40vw;
+  width: 100%;
   word-wrap: break-word;
   overflow-wrap: break-word;
   opacity: 0.5;
-  padding: 20px;
 }
 
 body {

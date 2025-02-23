@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import defaultAvatar from '../../img/Basic_Ui_(186).jpg'
 import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks.tsx';
 import styles from './Profile.module.css';
-import ProfileDataForm from './ProfileInfo/Profile.Data.Form.tsx';
+import ProfileDataForm from './ProfileInfo/Profile.Data.Form/Profile.Data.Form.tsx';
 import Preloader from "../../components/utils/preloader/Preloader.jsx";
 import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.js";
-import PrimaryInformation from "./ProfileInfo/PrimaryInformation.tsx";
 import { VerticalAlignBottomOutlined } from '@ant-design/icons';
-import SecondaryInformation from "./ProfileInfo/SecondaryInformation.tsx";
 import { Card } from "antd";
+import ProfileInfoRight from "./ProfileInfo/ProfileInfoRight/ProfileInfoRight.tsx";
+import ProfileInfoLeft from "./ProfileInfo/ProfileInfoLeft/ProfileInfoLeft.tsx";
 
 
 type PropsType = {
@@ -48,7 +48,7 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
 
     return (
         <div className={styles.profile}>
-            <div className={styles.topLevel} >
+            <div className={styles.firstContainer} >
                 <div className={styles.photoContainer}>
                     <div className={styles.photoWrapper} >
                         <img
@@ -72,18 +72,30 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                     </div>
                 </div>
 
-                <div style={{ width: '80%', display: "flex", justifyContent: "center" }} >
-                    <Card variant="borderless" title=<h2 style={{opacity: "0.8"}} >Status</h2> 
-                        style={{ width: "auto", fontFamily: "cursive"}}>
-                        
-                    <ProfileStatusWithHooks
+                {editMode
+                    ? <></>
+                    : <div className={styles.info} >
+
+                        <ProfileInfoLeft
+                            profile={profile}
+                            goToEditMode={goToEditMode}
+                            isOwner={isOwner}
+                        />
+                    </div>}
+            </div>
+
+
+            <div className={styles.secondContainer} >
+                <div className={styles.statusCardContainer}>
+                    <Card className={styles.statusCard}
+                        title=<h2 style={{ opacity: "0.8" }} >Status</h2>>
+                        <ProfileStatusWithHooks
                             status={status}
                             updateStatus={updateStatus} />
                     </Card>
+
                 </div>
 
-            </div>
-            <div style={{ width: "100%" }} >
                 {editMode
                     ? <ProfileDataForm
                         profile={profile}
@@ -91,13 +103,10 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                         initialValues={profile}
                     />
                     : <div className={styles.info} >
-                        <PrimaryInformation
+
+                        <ProfileInfoRight
                             profile={profile}
-                            goToEditMode={goToEditMode}
-                            isOwner={isOwner}
                         />
-                        <SecondaryInformation
-                            profile={profile} />
                     </div>}
             </div>
         </div>

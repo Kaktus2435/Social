@@ -55,7 +55,7 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
   return (
     <Layout style={{height: "63px"}} >
-      <Header style={{ backgroundColor:"#fff", display: "flex", alignItems: "center", width: "100%" }}>
+      <Header className={styles.container}>
 
         <div className={styles.containerLogo} >
           <img src={logo} className={styles.logo} alt="A" />
@@ -76,6 +76,7 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
                 <Menu.Item className={styles.link} key="4"><NavLink to="/dialogs">Dialogs</NavLink></Menu.Item>
               </Menu>
             </div>
+            
             <div className={styles.buttonsWrapper}>
               <OpenModal />
               <Logout />

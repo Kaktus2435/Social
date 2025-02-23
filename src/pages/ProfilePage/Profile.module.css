@@ -2,32 +2,24 @@
 
 .profile {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: space-around;
     width: 80vw;
-    height: 70vh;
-    margin-right: 1.25vw;
-    
     border-radius: 50px;
+    margin-top: 30px;
 }
 
-/* topLevel */
-.topLevel {
+/* firstContainer */
+.firstContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
     align-items: flex-start;
+    margin-right: 40px;
 }
 
-.container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-}
-
-/* leftContainer */
 .photoContainer {
     flex-direction: column;
     position: relative;
@@ -38,8 +30,8 @@
 .photoWrapper{
     background-color: white;
     padding: 15px;
-    width: 10vw;
-    height: 20vh;
+    width: 15vw;
+    height: 30vh;
     overflow: hidden;
 }
 
@@ -65,7 +57,11 @@
 }
 
 
-/* rightContainer */
+/* secondContainer */
+
+.secondContainer {
+    width: 80%;
+}
 
 .statusContainer{
     display: flex;
@@ -78,19 +74,21 @@
     border-radius: 20px;
 }
 
-/* status */
+.statusCardContainer {
+    display: flex;
+    justify-content: center;
+} 
+
+.statusCard {
+    width: 100%;
+}
 
 .textStatus {
     margin: 0 20px 0 20px;
     opacity: 0.7;
 }
 
-.info {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    width: 100%;
-}
+
 
 @media only screen and (min-width: 1600px) {
     

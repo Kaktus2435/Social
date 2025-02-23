@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import styles from "./ProfileStatus.module.css"
+import styles from "./ProfileStatusWithHooks.module.css"
 import CustomButton from "../../../components/buttons/CustomButton.tsx";
 
 type PropsType = {
