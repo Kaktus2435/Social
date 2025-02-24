@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Layout, Avatar, Menu, Row } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +26,7 @@ export type DispatchPropsType = {
 
 const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
+  const [isOpen, setIsOpen] = useState(false)
 
   const location = useLocation();
 
