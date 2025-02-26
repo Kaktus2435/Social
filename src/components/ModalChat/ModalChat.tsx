@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Chat.module.css';
-import Chat from './ChatPage.tsx';
+import styles from './ModalChat.module.css';
+import Chat from '../../pages/ChatPage/ChatPage.tsx';
 import { useLocation } from 'react-router-dom';
-import CustomButton from '../../components/buttons/CustomButton.tsx';
+import CustomButton from '../buttons/CustomButton.tsx';
+import { WechatOutlined } from '@ant-design/icons';
 
 export const OpenModal = () => {
   const [popUpChat, setPopUpChat] = useState(false);
@@ -22,8 +23,13 @@ export const OpenModal = () => {
     <>
       {location.pathname !== '/chat' && (
         <>
-          <CustomButton text='Chat' onClick={switchPopUpChat} />
+        <WechatOutlined className={styles.chatIcon__mobile} onClick={switchPopUpChat} />
+        <div>
+          <div className={styles.chatButton} >
+            <CustomButton text='Chat' onClick={switchPopUpChat} />
+          </div>
           {popUpChat && <ModalChat />}
+        </div>
         </>
       )}
     </>

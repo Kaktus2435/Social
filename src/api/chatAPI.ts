@@ -7,7 +7,6 @@ let ws: WebSocket | null = null
 
 const closeHandler = () => {
     notifySubscribersAboutStatus("pending")
-    console.log('CLOSE WS')
     setTimeout(createChannel, 3000)
 }
 
@@ -22,7 +21,6 @@ const openHandler = () => {
 
 const errorHandler = () => {
     notifySubscribersAboutStatus("error")
-    console.log('REFRESH PAGE')
 }
 
 const cleanUp = () => {

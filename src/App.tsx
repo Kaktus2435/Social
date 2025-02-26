@@ -25,7 +25,7 @@ const Login = React.lazy(
 const ChatPage = React.lazy(() => import('./pages/ChatPage/ChatPage.tsx'));
 
 const ModalChat = React.lazy(
-  () => import('./pages/ChatPage/ModalChat.tsx').then(module => ({ default: module.ModalChat }))
+  () => import('./components/ModalChat/ModalChat.tsx').then(module => ({ default: module.ModalChat }))
 );
 
 const App: React.FC = React.memo(() => {

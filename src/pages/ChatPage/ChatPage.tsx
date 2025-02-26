@@ -63,7 +63,6 @@ const Messages: React.FC<{}> =  ({}) => {
 }
 
 const Message: React.FC<{ message: ChatMessagesAPIType }> = React.memo( ({ message }) => {
-console.log('>>>>Message');
 
     return <>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }} >

@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import styles from "./header.module.css";
-import { Layout, Avatar, Menu, Row } from "antd";
+import styles from "./Header.module.css";
+import { Layout, Avatar, Menu, ConfigProvider, Drawer, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getIsAuth, getLogin } from "../redux/auth-selectors.ts";
+import { getIsAuth } from "../redux/auth-selectors.ts";
 import { logout } from "../redux/auth-reducer.ts";
 import { PhotosType } from "../../types/types.ts";
-import { OpenModal } from "../../pages/ChatPage/ModalChat.tsx";
+import { OpenModal } from "../ModalChat/ModalChat.tsx";
 import Logout from "../Logout/Logout.tsx";
 import { NavLink, useLocation } from "react-router-dom";
 //@ts-ignore
 import logo from "../../img/LogoA.svg"
+import { MenuOutlined } from "@ant-design/icons";
 
 
 export type MapPropsType = {
@@ -24,9 +25,15 @@ export type DispatchPropsType = {
   logout: () => void
 }
 
+const items = [
+  { key: "1", label: <NavLink to="/profile" className={styles.link}>Profile</NavLink> },
+  { key: "2", label: <NavLink to="/chat" className={styles.link}>Chat</NavLink> },
+  { key: "3", label: <NavLink to="/users" className={styles.link}>Users</NavLink> },
+  { key: "4", label: <NavLink to="/dialogs" className={styles.link}>Dialogs</NavLink> },
+]
+
 const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
-  const [isOpen, setIsOpen] = useState(false)
 
   const location = useLocation();
 
@@ -53,9 +60,15 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
     dispatch(logout());
   };
 
+  const [visible, setVisible] = useState(false);
+
+
+  const showDrawer = () => setVisible(true);
+  const closeDrawer = () => setVisible(false);
+
 
   return (
-    <Layout style={{height: "63px"}} >
+    <Layout style={{ height: "63px" }} >
       <Header className={styles.container}>
 
         <div className={styles.containerLogo} >
@@ -64,26 +77,38 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
         {isAuth ?
           <div className={styles.containerLinks} >
-            
-            <div>
+            <div className={styles.menuContainer} >
               <Menu
+                className={`${styles.menuDesktop} ${styles.desktop}`}
                 theme="light"
                 mode="horizontal"
                 selectedKeys={[selectedKey]}
-                style={{ marginLeft: "auto" }}>
-                <Menu.Item className={styles.link} key="1"><NavLink to="/profile">Profile</NavLink></Menu.Item>
-                <Menu.Item className={styles.link} key="2"><NavLink to="/chat">Chat</NavLink></Menu.Item>
-                <Menu.Item className={styles.link} key="3"><NavLink to="/users">Users</NavLink></Menu.Item>
-                <Menu.Item className={styles.link} key="4"><NavLink to="/dialogs">Dialogs</NavLink></Menu.Item>
+                items={items}
+              >
               </Menu>
             </div>
-            
             <div className={styles.buttonsWrapper}>
               <OpenModal />
-              <Logout />
+              <div className={`${styles.logoutButton} ${styles.desktop}`}>
+                <Logout />
+              </div>
+              <Button type="text" onClick={showDrawer}
+                className={`${styles.mobileMenuButton} ${styles.mobile}`}>
+                <        MenuOutlined style={{ fontSize: "2em", color: "gray" }} />
+              </Button>
+
+              <Drawer className={styles.drawer} placement="right" onClose={closeDrawer}
+                onClick={closeDrawer} open={visible}>
+                <Menu mode="vertical"
+                  items={items}>
+                </Menu>
+                <div className={`${styles.logoutButton} ${styles.mobile}`}>
+                  <Logout />
+                </div>
+              </Drawer>
+
             </div>
           </div>
-          
           : ""}
 
         {props.isAuth ? <Avatar style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>U</Avatar>

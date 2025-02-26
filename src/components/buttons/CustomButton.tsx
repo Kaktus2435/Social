@@ -8,7 +8,7 @@ type PropsType = {
   };
 
 const CustomButton: React.FC<PropsType> = ({text, className, onClick}) => {
-    console.log(text)
+    
     return (
         <button
         className={`${styles.customButton} ${className ? styles[className] : ""}`}

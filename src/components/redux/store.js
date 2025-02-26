@@ -59,7 +59,7 @@ let store = {
     },
 
     _callSubscriber() {
-        console.log("state");
+        
     },
 
     getState() {

@@ -1,6 +1,6 @@
 @import url("../../color.module.css");
 
-
+/* desktop */
 .modal {
   position: fixed;
   z-index: 1;
@@ -20,11 +20,25 @@
   padding: 10px;
 }
 
-.button__chat {
-  color: var(--color-dark-gray);
-  background-color: var(--color-gray);
-  border-color: var(--color-gray);
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px;
+
+.chatIcon__mobile {
+  display: none;
+}
+
+/* tablet */
+@media screen and (max-width: 1024px) {
+
+}
+
+/* phone */
+@media screen and (max-width: 768px) {
+  .chatIcon__mobile {
+    display: block;
+    color: var(--color-dark-gray);
+    font-size: 2em;
+  }
+
+  .chatButton {
+    display: none;
+  }
 }
