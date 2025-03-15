@@ -8,13 +8,6 @@ font-size: 40px;
   height: 40px;
 }
 
-.contact {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  
-}
 
 .links {
   width: 40px;

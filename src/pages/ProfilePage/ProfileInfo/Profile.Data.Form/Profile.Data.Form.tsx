@@ -13,29 +13,35 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & Prop
                     {error}
                 </div>
                 }
-                <div>
-                    <b>Full name</b>: {createField<ProfileTypeKeys>("Full name", "fullName", [], Input)}
-                </div>
-                <div>
-                    <b>Looking for a job</b>: {createField<ProfileTypeKeys>("", "lookingForAJob", [], Input, { type: "checkbox" })}
-                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
 
-                <div>
-                    <b>My professional skills</b>:
-                    {createField<ProfileTypeKeys>("My professional skills", "lookingForAJobDescription", [], Textarea)}
+                    <div className={styles.textBox} >
+                        <b className={styles.labelText} >Full name</b>: {createField<ProfileTypeKeys>("Full name", "fullName", [], Input, { className: styles.valueInputText })}
+                    </div>
+                    <div className={styles.textBox} >
+                        <b className={styles.labelText} >Looking for a job</b>: {createField<ProfileTypeKeys>("", "lookingForAJob", [], Input, { type: "checkbox", className: styles.checkBox })}
+                    </div>
                 </div>
 
+                <div className={styles.textBox} >
+                    <b className={styles.labelText} >My professional skills</b>: <div>If "Looking for a job" is not set then "My professional skills" will not be displayed on the main screen.</div>
+                    {createField<ProfileTypeKeys>("My professional skills", "lookingForAJobDescription", [], Textarea, { className: styles.valueTextareaText })}
 
-                <div>
-                    <b>About me</b>:
-                    {createField<ProfileTypeKeys>("About me", "aboutMe", [], Textarea)}
+                </div>
+
+
+                <div className={styles.textBox} >
+                    <b className={styles.labelText} >About me</b>:
+                    {createField<ProfileTypeKeys>("About me", "aboutMe", [], Textarea, { className: styles.valueTextareaText })}
+
                 </div>
             </div>
             <div className={styles.containerContacts} >
                 <div>
-                    <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+                    <h2>Contacts:</h2>{Object.keys(profile.contacts).map(key => {
                         return <div key={key} className={styles.contact}>
-                            <b>{key}: {createField(key, "contacts." + key, [], Input)}</b>
+                            <b>{key}: {createField(key, "contacts." + key, [], Input, { className: styles.valueInputText })}</b>
+
                         </div>
                     })}
                 </div>

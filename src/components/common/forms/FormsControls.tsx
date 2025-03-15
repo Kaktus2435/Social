@@ -31,31 +31,32 @@ export const Textarea: React.FC<WrappedFieldProps> = (props) => {
 export const Input: React.FC<WrappedFieldProps> = (props) => {
     const { input, meta, ...restProps } = props;
 
-    return <FormControl {...props}><input{...input} {...restProps} /></FormControl>
+    return <FormControl {...props}><input{...input} {...restProps} style={{fontSize: "20px"}} /></FormControl>
 }
 
 
-export function createField<FormKeysType extends string>(placeholder: string | undefined, 
-                            name: FormKeysType,     
-                            validators: Array<FieldValidatorType>,
-                            component: React.FC<WrappedFieldProps>, 
-                            props = {}, 
-                            text = "") {
+export function createField<FormKeysType extends string>(placeholder: string | undefined,
+    name: FormKeysType,
+    validators: Array<FieldValidatorType>,
+    component: React.FC<WrappedFieldProps>,
+    props = {},
+    text = "") {
 
     return (
         <div>
-            <Field placeholder={placeholder} name={name}
+            <Field placeholder={placeholder}
+                name={name}
                 validate={validators}
                 component={component}
-                {...props} /> {text}
-
+                {...props} />
+            {text}
         </div>
     )
 }
 type FormControlPropsType = {
     meta: WrappedFieldMetaProps
     children: React.ReactNode
-    
+
 }
 
 export type GetStringKeys<T> = Extract<keyof T, string>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Header.module.css";
+import styles from "./header.module.css";
 import { Layout, Avatar, Menu, ConfigProvider, Drawer, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getIsAuth } from "../redux/auth-selectors.ts";
@@ -71,9 +71,9 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
     <Layout style={{ height: "63px" }} >
       <Header className={styles.container}>
 
-        <div className={styles.containerLogo} >
+        <NavLink className={styles.containerLogo} to="/profile">
           <img src={logo} className={styles.logo} alt="A" />
-        </div>
+        </NavLink>
 
         {isAuth ?
           <div className={styles.containerLinks} >

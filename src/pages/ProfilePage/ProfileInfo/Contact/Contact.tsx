@@ -19,7 +19,7 @@ const Contact = ({ contactTitle, contactValue }) => {
     const contactIcon = contactIcons[contactTitle.toLowerCase()] || null;
 
     return (
-        <div className={styles.contact} >
+        <div>
           <a className={styles.links} href={contactValue} target="_blank" rel="noopener noreferrer">
             {contactIcon}
           </a>

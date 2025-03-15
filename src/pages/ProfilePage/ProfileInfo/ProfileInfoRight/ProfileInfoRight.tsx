@@ -1,7 +1,5 @@
 import React from "react"
 import styles from "./ProfileInfoRight.module.css"
-import CustomButton from "../../../../components/buttons/CustomButton.tsx"
-import Contact from "../Contact/Contact.tsx"
 import { Card } from "antd"
 
 const ProfileInfoRight = ({ profile }) => {
@@ -24,12 +22,6 @@ const ProfileInfoRight = ({ profile }) => {
 
             </div>
 
-
-            <div className={styles.contacts} >
-                {Object.keys(profile.contacts || {}).map(key => {
-                    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
-                })}
-            </div>
         </div>
     )
 }

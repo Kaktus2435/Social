@@ -17,10 +17,9 @@
 
 .content {  
 display: flex;
-align-items: center;
+align-items: flex-start;
 justify-content: center;
-min-height: 90vh;
-
+margin-top: 100px;
 }
 
 .active {
@@ -44,3 +43,29 @@ min-height: 90vh;
     border: solid, 2px;
 
 }
+
+/* Responsive */
+
+/* Large Laptops / Desktop */
+
+@media (max-width: 1600px) {}
+
+/* Tablets / Small Laptops */
+@media (max-width: 1200px) {
+
+}
+
+/* Large Phones / Small Tablets */
+@media (max-width: 992px) {}
+
+/* Medium phones */
+@media (max-width: 768px) {
+
+  .content {
+    margin-top: 50px;
+  }
+
+}
+
+/* Small phones */
+@media (max-width: 576px) {}

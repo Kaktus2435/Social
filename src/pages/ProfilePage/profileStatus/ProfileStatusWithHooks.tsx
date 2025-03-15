@@ -5,11 +5,14 @@ import CustomButton from "../../../components/buttons/CustomButton.tsx";
 type PropsType = {
     status: string
     updateStatus: (status: string) => void
+    isOwner: boolean
+
 }
 
 const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status)
+    
 
     useEffect(() => {
         setStatus(props.status);
@@ -45,10 +48,11 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
     return (
         <div className={styles.container} >
             {!editMode &&
-                <span className={styles.status} onDoubleClick={activateEditMode}> {props.status || "This could be your status"}</span>
+                <span className={styles.status} onDoubleClick={() => props.isOwner && activateEditMode()}> {props.status || "This could be your status"}</span>
             }
-            {editMode &&
 
+            
+            {props.isOwner && editMode &&
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
                             <textarea
@@ -59,7 +63,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
                                 maxLength={300}
                                 placeholder="Status..."
                             />
-                        <h6 style={{ margin: "2px" }} >Text length is maximum 300 symbols.</h6>
+                        <h5 style={{ margin: "2px" }} >Text length is maximum 300 symbols.</h5>
                         <div>
                             <CustomButton className={styles.delete} onClick={deleteText} text={"Delete"} />
                             <CustomButton className={styles.close} onClick={deactivateEditModeAndClose} text={"Close"} />

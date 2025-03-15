@@ -2,7 +2,8 @@ import React from "react";
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Input, createField } from '../common/forms/FormsControls.tsx';
 import { required, maxLengthCreator } from '../utils/validators/validators.ts';
-import style from './../common/forms/FormsControls.module.css';
+import styles from './../common/forms/FormsControls.module.css';
+import CustomButton from "../buttons/CustomButton.tsx";
 
 const maxLength50 = maxLengthCreator(50);
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = ({ handleSubmit, error, captchaUrl }) => {
@@ -30,11 +31,11 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
                 <Field component={Input} name='rememberMe' type="checkbox" /> Remember me
             </div> */}
 
-                {error && <div className={style.formSummaryError}>
+                {error && <div className={styles.formSummaryError}>
                     {error}
                 </div>}
                 <div>
-                    <button>Login</button>
+                    <CustomButton text="Login" className={styles.loginButton}></CustomButton>
                 </div>
             </form>
         </>

@@ -20,9 +20,9 @@ export const Login: React.FC = () => {
     if (isAuth) return <Navigate to={from} replace />;
 
     return (
-        <>
-            <h1>Login</h1>
+        <div style={{display:"flex", flexDirection: "column"}} >
+            <h1>Authentication</h1>
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
-        </>
+        </div>
     );
 }

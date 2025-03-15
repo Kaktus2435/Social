@@ -3,7 +3,7 @@ import styles from "./ProfileInfoLeft.module.css"
 import CustomButton from "../../../../components/buttons/CustomButton.tsx"
 
 const ProfileInfoLeft = ({ profile, goToEditMode, isOwner }) => {
-    
+
     return (
         <div className={styles.container} >
             <span>

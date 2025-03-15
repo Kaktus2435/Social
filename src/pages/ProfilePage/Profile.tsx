@@ -9,6 +9,7 @@ import { VerticalAlignBottomOutlined } from '@ant-design/icons';
 import { Card } from "antd";
 import ProfileInfoRight from "./ProfileInfo/ProfileInfoRight/ProfileInfoRight.tsx";
 import ProfileInfoLeft from "./ProfileInfo/ProfileInfoLeft/ProfileInfoLeft.tsx";
+import Contact from "./ProfileInfo/Contact/Contact.tsx";
 
 
 type PropsType = {
@@ -65,35 +66,39 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                             style={{ display: 'none' }}
                             onChange={onMainPhotoSelected}
                         />
-                        <label htmlFor="fileInput" className={styles.uploadLabel}>
-                            <VerticalAlignBottomOutlined className={styles.cameraOutlander} />
-                            <h6>Upload img.</h6>
-                        </label>
+                        {isOwner &&
+                            <label htmlFor="fileInput" className={styles.uploadLabel}>
+                                <VerticalAlignBottomOutlined className={styles.cameraOutlander} />
+                                <h4>Upload img.</h4>
+                            </label>
+                        }
+                        <div style={{height:"20px"}} ></div>
                     </div>
                 </div>
 
                 {editMode
                     ? <></>
-                    : <div className={styles.info} >
+                    :
 
-                        <ProfileInfoLeft
-                            profile={profile}
-                            goToEditMode={goToEditMode}
-                            isOwner={isOwner}
-                        />
-                    </div>}
+                    <ProfileInfoLeft
+                        profile={profile}
+                        goToEditMode={goToEditMode}
+                        isOwner={isOwner}
+                    />
+                }
             </div>
-
 
             <div className={styles.secondContainer} >
                 <div className={styles.statusCardContainer}>
                     <Card className={styles.statusCard}
-                        title=<h2 style={{ opacity: "0.8" }} >Status</h2>>
+                        title=<h1 style={{ opacity: "0.8" }} >Status</h1>>
                         <ProfileStatusWithHooks
                             status={status}
-                            updateStatus={updateStatus} />
-                    </Card>
+                            updateStatus={updateStatus}
+                            isOwner={isOwner}
+                        />
 
+                    </Card>
                 </div>
 
                 {editMode
@@ -103,12 +108,21 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                         initialValues={profile}
                     />
                     : <div className={styles.info} >
-
                         <ProfileInfoRight
                             profile={profile}
                         />
                     </div>}
+
             </div>
+            {editMode
+                ? <div className={styles.boxForEditMod} ></div>
+                :
+                <div className={styles.contacts} >
+                    {Object.keys(profile.contacts || {}).map(key => {
+                        return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+                    })}
+                </div>
+            }
         </div>
     );
 }

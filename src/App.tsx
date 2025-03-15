@@ -17,16 +17,9 @@ import AppRoutes from './components/Header/Routes/Routes.tsx';
 import Footer from './components/Footer/Footer.tsx';
 
 const { SubMenu } = Menu;
-const { Content, Sider } = Layout;
+const { Content } = Layout;
 
-const Login = React.lazy(
-  () => import('./components/Login/Login.tsx').then(module => ({ default: module.Login }))
-);
-const ChatPage = React.lazy(() => import('./pages/ChatPage/ChatPage.tsx'));
 
-const ModalChat = React.lazy(
-  () => import('./components/ModalChat/ModalChat.tsx').then(module => ({ default: module.ModalChat }))
-);
 
 const App: React.FC = React.memo(() => {
   const dispatch = useDispatch();
@@ -57,7 +50,7 @@ let AppContainer = compose<ComponentType>(
   connect(null, { initializeApp })
 )(App);
 
-let AppMain: React.FC = (props) => {
+let AppMain: React.FC = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
