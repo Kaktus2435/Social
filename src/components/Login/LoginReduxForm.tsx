@@ -42,7 +42,9 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
     );
 };
 
-export const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({ form: 'login' })(LoginForm); export type LoginFormPropertiesTypeKeys = Extract<keyof LoginFormValuesType, string>;
+export const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({ form: 'login' })(LoginForm); 
+
+export type LoginFormPropertiesTypeKeys = Extract<keyof LoginFormValuesType, string>;
 
 export type LoginFormValuesType = {
     email: string; password: string; rememberMe: boolean; captcha: string;
