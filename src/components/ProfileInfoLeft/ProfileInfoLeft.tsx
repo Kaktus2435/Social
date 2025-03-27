@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./ProfileInfoLeft.module.css"
-import CustomButton from "../../../../components/buttons/CustomButton.tsx"
+import CustomButton from "../buttons/CustomButton.tsx"
 
 const ProfileInfoLeft = ({ profile, goToEditMode, isOwner }) => {
 

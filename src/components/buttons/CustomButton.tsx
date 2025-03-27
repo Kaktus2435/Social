@@ -5,6 +5,7 @@ type PropsType = {
     text: string;
     className?: string;
     onClick?: () => void | null;
+    disabled?: boolean
   };
 
 const CustomButton: React.FC<PropsType> = ({text, className, onClick}) => {

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import defaultAvatar from '../../img/Basic_Ui_(186).jpg'
-import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks.tsx';
+import ProfileStatusWithHooks from '../../components/profileStatus/ProfileStatusWithHooks.tsx';
 import styles from './Profile.module.css';
-import ProfileDataForm from './ProfileInfo/Profile.Data.Form/Profile.Data.Form.tsx';
+import ProfileDataForm from '../../components/Profile.Data.Form/Profile.Data.Form.tsx';
 import Preloader from "../../components/utils/preloader/Preloader.jsx";
 import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.js";
 import { VerticalAlignBottomOutlined } from '@ant-design/icons';
 import { Card } from "antd";
-import ProfileInfoRight from "./ProfileInfo/ProfileInfoRight/ProfileInfoRight.tsx";
-import ProfileInfoLeft from "./ProfileInfo/ProfileInfoLeft/ProfileInfoLeft.tsx";
-import Contact from "./ProfileInfo/Contact/Contact.tsx";
+import ProfileInfoRight from "../../components/ProfileInfoRight/ProfileInfoRight.tsx";
+import ProfileInfoLeft from "../../components/ProfileInfoLeft/ProfileInfoLeft.tsx";
+import Contact from "../../components/Contact/Contact.tsx";
 
 
 type PropsType = {

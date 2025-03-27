@@ -39,7 +39,7 @@ let _clearMessages: (() => void) | null = null
 export const clearMessages = (dispatch: Dispatch) => {
     if (_clearMessages === null) {
         _clearMessages = () => {
-            dispatch(actions.messagesCleaner()); // Curăță mesajele din Redux
+            dispatch(actions.messagesCleaner());
         }
     }
 

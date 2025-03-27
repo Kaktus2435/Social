@@ -6,7 +6,6 @@ import homePageReducer from "./homeReducer.js";
 import authReducer from "./auth-reducer.ts";
 import { reducer as formReducer} from 'redux-form'
 import appReducer from './app-reducer.ts';
-import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk, { ThunkAction } from 'redux-thunk'
 import chatPageReducer from "./chatPage-reducer.ts";
 import {dialogsPageReducer} from "./dialogsPageReducer.ts";

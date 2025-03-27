@@ -94,6 +94,6 @@ export type StatusType = 'pending' | 'ready' | 'error'
 export type ChatMessagesAPIType = {
     message: string,
     photo: string,
-    id: number,
+    userId: number,
     userName: string
 };

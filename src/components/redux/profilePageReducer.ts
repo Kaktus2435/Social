@@ -74,10 +74,6 @@ export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     let data = await profileAPI.getStatus(userId)
     dispatch(actions.setStatus(data))
 
-    // profileAPI.getStatus(userId)
-    //     .then(data => {
-    //         dispatch(actions.setStatus(data));
-    //     });
 }
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
@@ -109,11 +105,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch,
         }
     }
 }
-// export const savePhoto = (file) => {
-//     return async (dispatch) => {
-//         savePhotoSucces(dispatch, file, )
-//     }
-// }
+
 export default profilePageReducer;
 
 type ThunkType = BaseThunkType<ActionType | FormAction>

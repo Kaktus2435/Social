@@ -14,8 +14,8 @@ const Messages: React.FC<MessagesProps> = ({ userId }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [page, setPage] = useState(1); // Pagină curentă
-  const count = 10; // Numărul de mesaje pe pagină
+  const [page, setPage] = useState(1); 
+  const count = 10;
 
   useEffect(() => {
     const fetchMessages = async () => {

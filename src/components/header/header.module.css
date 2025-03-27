@@ -30,14 +30,13 @@
 
 .containerLinks {
     display: flex;
-    width: 100%;
+    width: 93%;
     flex-direction: row;
     justify-content: space-between;
 }
 
 .buttonsWrapper {
     display: flex;
-    width: 230px;
     align-items: center;
     justify-content: space-evenly;
 

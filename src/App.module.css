@@ -48,15 +48,23 @@ margin-top: 100px;
 
 /* Large Laptops / Desktop */
 
-@media (max-width: 1600px) {}
+@media (max-width: 1600px) {
+  .content {
+    margin-top: 50px;
+  }
+}
 
 /* Tablets / Small Laptops */
 @media (max-width: 1200px) {
-
+  
 }
 
 /* Large Phones / Small Tablets */
-@media (max-width: 992px) {}
+@media (max-width: 992px) {
+  .content {
+    margin-top: 50px;
+  }
+}
 
 /* Medium phones */
 @media (max-width: 768px) {

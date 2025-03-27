@@ -19,18 +19,6 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
                 {captchaUrl && <img alt="captcha" src={captchaUrl} />}
                 {captchaUrl && createField("Symbols from img", "captcha", [required], Input, {})}
 
-                {/* <div>
-                 <Field component={Input} placeholder='Email' name='email'
-                    validate={[required, maxLength50]} />
-            </div>
-            <div>
-                <Field component={Input} name='password' placeholder="Password" type="password"
-                    validate={[required, maxLength50]} />
-            </div>
-            <div>
-                <Field component={Input} name='rememberMe' type="checkbox" /> Remember me
-            </div> */}
-
                 {error && <div className={styles.formSummaryError}>
                     {error}
                 </div>}
