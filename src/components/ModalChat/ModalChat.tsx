@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './ModalChat.module.css';
 import Chat from '../../pages/ChatPage/ChatPage.tsx';
 import { useLocation } from 'react-router-dom';
-import CustomButton from '../buttons/CustomButton.tsx';
 import { WechatOutlined } from '@ant-design/icons';
+import CustomButton from '../common/buttons/CustomButton.tsx';
 
 export const OpenModal = () => {
   const [popUpChat, setPopUpChat] = useState(false);

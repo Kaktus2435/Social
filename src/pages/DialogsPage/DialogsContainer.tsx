@@ -11,7 +11,6 @@ const DialogsPage = () => {
 
     return<>
         <Dialogs />
-        
     </>
 }
 export default compose<React.ComponentType>(withAuthRedirect, withRouter)(DialogsPage);

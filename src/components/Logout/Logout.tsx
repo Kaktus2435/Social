@@ -1,10 +1,10 @@
 import * as React from 'react';
-import CustomButton from '../buttons/CustomButton.tsx';
 import { logout } from '../redux/auth-reducer.ts';
 import { useDispatch } from 'react-redux';
 import styles from "./Logout.module.css"
 import { LogoutOutlined } from '@ant-design/icons';
 import { AppDispatch } from '../redux/redux.store.ts';
+import CustomButton from '../common/buttons/CustomButton.tsx';
 
 
 const Logout = () => {

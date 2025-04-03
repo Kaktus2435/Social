@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import styles from "./ProfileStatusWithHooks.module.css"
-import CustomButton from "../../components/buttons/CustomButton.tsx";
+import CustomButton from "../common/buttons/CustomButton.tsx";
 
 type PropsType = {
     status: string

@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.css";
-import { Layout, Avatar, Menu, ConfigProvider, Drawer, Button } from "antd";
+import { Layout, Avatar, Menu, Drawer, Button, Popover } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getIsAuth } from "../redux/auth-selectors.ts";
-import { logout } from "../redux/auth-reducer.ts";
 import { PhotosType } from "../../types/types.ts";
 import { OpenModal } from "../ModalChat/ModalChat.tsx";
 import Logout from "../Logout/Logout.tsx";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 //@ts-ignore
 import logo from "../../img/LogoA.svg"
-import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
+import { AppDispatch } from "../redux/redux.store.ts";
+import { getCurrentPage, getPageSize, getUsersFilter } from "../redux/users-selectors.ts";
+import { FilterType, requestUsers } from "../redux/usersPageReducer.ts";
+import { SearchForm } from "./search/UsersSearchForm.tsx";
 
 
 export type MapPropsType = {
@@ -34,6 +37,35 @@ const items = [
 
 const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
+  const currentPage = useSelector(getCurrentPage)
+  const pageSize = useSelector(getPageSize)
+  const filter = useSelector(getUsersFilter)
+
+
+  const dispatch: AppDispatch = useDispatch()
+
+  const [searchParams] = useSearchParams()
+
+
+  useEffect(() => {
+    const parsed = Object.fromEntries(searchParams) as { page: string, term: string, friend: string }
+
+    let actualPage = currentPage
+    let actualFilter = filter
+
+    if (!!parsed.page) actualPage = Number(parsed.page)
+    if (!!parsed.term) actualFilter = { ...actualFilter, term: parsed.term }
+    if (!!parsed.friend) actualFilter = { ...actualFilter, friend: parsed.friend === "null" ? null : parsed.friend === "true" ? true : false }
+
+
+    dispatch(requestUsers(actualPage, pageSize, actualFilter))
+  }, [])
+
+  const onFilterChanged = (filter: FilterType) => {
+    dispatch(requestUsers(1, pageSize, filter))
+  }
+
+  //
 
   const location = useLocation();
 
@@ -53,12 +85,6 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
 
   const isAuth = useSelector(getIsAuth)
 
-  const dispatch = useDispatch()
-
-
-  const logoutCallback = () => {
-    dispatch(logout());
-  };
 
   const [visible, setVisible] = useState(false);
 
@@ -87,16 +113,29 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
               >
               </Menu>
             </div>
+
             <div className={styles.buttonsWrapper}>
+
+              <Popover
+                content={
+                  <div className={styles.searchForm}>
+                    <SearchForm onFilterChanged={onFilterChanged} />
+                  </div>
+                }
+                trigger="click"
+                placement="bottomRight"
+              >
+                <SearchOutlined style={{ fontSize: "2em", color: "gray", cursor: "pointer", padding:"10px" }} />
+              </Popover>
+
               <OpenModal />
               <div className={`${styles.logoutButton} ${styles.desktop}`}>
                 <Logout />
               </div>
               <Button type="text" onClick={showDrawer}
                 className={`${styles.mobileMenuButton} ${styles.mobile}`}>
-                <        MenuOutlined style={{ fontSize: "2em", color: "gray" }} />
+                <MenuOutlined style={{ fontSize: "2em", color: "gray", padding:"10px" }} />
               </Button>
-
               <Drawer className={styles.drawer} placement="right" onClose={closeDrawer}
                 onClick={closeDrawer} open={visible}>
                 <Menu mode="vertical"
@@ -110,9 +149,6 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
             </div>
           </div>
           : ""}
-
-        {props.isAuth ? <Avatar style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>U</Avatar>
-          : null}
       </Header>
     </Layout>
   );

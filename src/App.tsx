@@ -8,15 +8,14 @@ import { initializeApp } from './components/redux/app-reducer.ts';
 import store from "./components/redux/redux.store.ts";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import Header from "./components/Header/Header.tsx";
 import { chatAPI } from "./api/chatAPI.ts";
 
 import styles from "./App.module.css"
-import AppRoutes from './components/Header/Routes/Routes.tsx';
+import AppRoutes from './components/Routes/Routes.tsx';
 import Footer from './components/Footer/Footer.tsx';
 
-const { SubMenu } = Menu;
 const { Content } = Layout;
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import s from "./Pagination.module.css";
 import cn from 'classnames';
+import CustomButton from '../buttons/CustomButton.tsx';
 
 
 type PropsType = {
@@ -28,13 +29,13 @@ const Pagination: React.FC<PropsType> = ({ totalUsersCount, pageSize, currentPag
 		{
 			currentPortion > 1
 				? <span>
-					<button onClick={() => {
+					<CustomButton text='To first' onClick={() => {
 						onPageChanged(pages[0])
 						setCurrentPortion(1)
-					}}>toFirst</button>
-					<button onClick={() => {
+					}} />
+					<CustomButton text='PREV' onClick={() => {
 						currentPortion !== 1 && setCurrentPortion(currentPortion - 1)
-					}}> PREV </button>
+					}} />
 				</span>
 				: null
 		}
@@ -42,7 +43,7 @@ const Pagination: React.FC<PropsType> = ({ totalUsersCount, pageSize, currentPag
 		{pages
 			.filter(p => currentLeftBorder <= p && p <= currentRightBorder)
 			.map(p => (
-				<span
+				<span style={{color:"#f35304", fontSize:"18px"}}
 					key={p}
 					onClick={(e) => { onPageChanged(p) }}
 					className={
@@ -55,12 +56,13 @@ const Pagination: React.FC<PropsType> = ({ totalUsersCount, pageSize, currentPag
 		{
 			currentPortion < portionCount
 				? <span>
-					<button onClick={() => {
+					<CustomButton text='NEXT' onClick={() => {
 						currentPortion !== pagesCount && setCurrentPortion(currentPortion + 1)
-					}}> NEXT </button> <button onClick={() => {
+					}} /> 
+					<CustomButton text='To last' onClick={() => {
 						onPageChanged(pages[pages.length - 1])
 						setCurrentPortion(portionCount)
-					}}>toLast</button>
+					}} />
 				</span>
 				: null
 		}

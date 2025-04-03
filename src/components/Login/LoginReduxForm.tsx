@@ -3,7 +3,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Input, createField } from '../common/forms/FormsControls.tsx';
 import { required, maxLengthCreator } from '../utils/validators/validators.ts';
 import styles from './../common/forms/FormsControls.module.css';
-import CustomButton from "../buttons/CustomButton.tsx";
+import CustomButton from "../common/buttons/CustomButton.tsx";
 
 const maxLength50 = maxLengthCreator(50);
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = ({ handleSubmit, error, captchaUrl }) => {

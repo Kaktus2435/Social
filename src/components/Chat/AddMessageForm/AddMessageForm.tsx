@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendMessage } from "../../redux/chatPage-reducer.ts";
 import { AppDispatch, AppStateType } from "../../redux/redux.store.ts";
 import styles from "./AddMessageForm.module.css";
-import CustomButton from "../../buttons/CustomButton.tsx";
+import CustomButton from "../../common/buttons/CustomButton.tsx";
 
 export const AddMessageForm: React.FC<{}> = () => {
     const [message, setMessage] = useState('');

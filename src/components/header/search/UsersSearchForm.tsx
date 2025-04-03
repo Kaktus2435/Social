@@ -2,6 +2,10 @@ import React from "react";
 import { Field, Form, Formik } from "formik";
 import { useSelector } from "react-redux";
 import { getUsersFilter } from "../../redux/users-selectors.ts";
+import CustomButton from "../../common/buttons/CustomButton.tsx";
+import { useNavigate } from "react-router-dom";
+import styles from "./search.module.css";
+
 
 type PropsType = {
     onFilterChanged: (filter: FormType) => void
@@ -24,34 +28,37 @@ type FormType = {
 
 export const SearchForm: React.FC<PropsType> = React.memo((props) => {
 
+    const navigate = useNavigate()
     const filter = useSelector(getUsersFilter)
 
-    const submit = (values: FormType,  {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
+    const submit = (values: FormType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         props.onFilterChanged(values)
         setSubmitting(false)
     }
 
-    return <div>
+    const handlerNavigation = () => {
+        navigate("/users")
+    }
+
+    return (
         <Formik
-        enableReinitialize /* face ca initialValues care este montat aceasta expresie de fapt se scrie astfel enableReinitialize={true} insa felul in care am scris-o eu si asa inseamna ca e true*/
-        
-            initialValues={{ term: filter.term, friend: filter.friend}}
+            enableReinitialize={true}
+
+            initialValues={{ term: filter.term, friend: filter.friend }}
             validate={searchFormValidate}
             onSubmit={submit}
         >
             {({ isSubmitting }) => (
-                <Form>
-                    <Field type="text" name="term" />
-                    <Field name="friend" as="select">
+                <Form className={styles.formSearch}>
+                    <Field style={{ height: "30px", fontSize: "20px"}} type="text" name="term" />
+                    <Field style={{ height: "36px", fontSize: "20px"}} name="friend" as="select">
                         <option value="null">All</option>
                         <option value="true">Only Follow</option>
                         <option value="false">Only Unfollow</option>
                     </Field>
-                    <button type="submit" disabled={isSubmitting} >
-                        Find
-                    </button>
+                    <CustomButton onClick={handlerNavigation} text="Find" disabled={isSubmitting} />
                 </Form>
             )}
         </Formik>
-    </div>
+    )
 })

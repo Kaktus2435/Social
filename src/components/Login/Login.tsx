@@ -6,6 +6,7 @@ import { AppStateType } from "../redux/redux.store.ts";
 import { LoginReduxForm } from "./LoginReduxForm.tsx";
 import { LoginFormValuesType } from "./LoginReduxForm.tsx";
 
+
 export const Login: React.FC = () => {
     const isAuth = useSelector((state: AppStateType) => state.auth.isAuth);
     const captchaUrl = useSelector((state: AppStateType) => state.auth.captchaUrl);
@@ -22,7 +23,7 @@ export const Login: React.FC = () => {
     return (
         <div style={{display:"flex", flexDirection: "column"}} >
             <h1>Authentication</h1>
-            <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+            <LoginReduxForm  onSubmit={onSubmit} captchaUrl={captchaUrl} />
         </div>
     );
 }

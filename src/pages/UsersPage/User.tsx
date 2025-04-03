@@ -5,6 +5,9 @@ import initialPhoto from '../../img/Basic_Ui_(186).jpg';
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserType } from "../../types/types.ts";
 import { } from "../../components/redux/dialogsPageReducer.ts";
+import { Card } from "antd";
+import Meta from "antd/es/card/Meta";
+import CustomButton from "../../components/common/buttons/CustomButton.tsx";
 
 type PropsType = {
     user: UserType;
@@ -18,46 +21,51 @@ const User: React.FC<PropsType> = ({ user, followingInProgress, unfollow, follow
     const navigate = useNavigate();
 
     const handleRedirect = () => {
-        navigate("/dialogs"); 
-      };
+        navigate("/dialogs");
+    };
 
-   
-    
+
+
 
     return (
-        <div>
-            <span>
-                <div>
-                    {user.followed ? (
-                        <button
-                            disabled={followingInProgress.some(id => id === user.id)}
-                            onClick={() => unfollow(user.id)}
-                        >
-                            Unfollow
-                        </button>
-                    ) : (
-                        <button
-                            disabled={followingInProgress.some(id => id === user.id)}
-                            onClick={() => follow(user.id)}
-                        >
-                            Follow
-                        </button>
-                    )}
-                    
+        <div className={styles.container} >
+            <span  >
+                <div style={{display:"flex", justifyContent:"center"}} >
+                    <Card className={styles.card}
+                        hoverable
+                        style={{ width: 260 }}
+                        cover={
+                            <NavLink to={"./../profile/" + user.id}>
+
+                                <img style={{height:"250px"}}
+                                    className={styles.photos}
+                                    src={user.photos.large == null ? initialPhoto : user.photos.large}
+
+                                    alt="photos"
+                                /> </NavLink>
+                        }>
+
+                        <div>
+                            {user.followed ? (
+                                <CustomButton text="Unfollow"
+                                    disabled={followingInProgress.some(id => id === user.id)}
+                                    onClick={() => unfollow(user.id)}
+                                />
+                            ) : (
+                                <CustomButton className={styles.followUnfollowButton} text="Follow"
+                                    disabled={followingInProgress.some(id => id === user.id)}
+                                    onClick={() => follow(user.id)}
+                                />
+                            )}
+                        </div>
+
+                        <NavLink to={"./../profile/" + user.id}>
+                            <Meta style={{height:"100px"}} title={<span style={{fontSize:"30px"}} >{user.name}</span>}
+                                  description={<span style={{ fontWeight: "bold", borderRadius: "5px", padding:"5px"}} >{user.status}</span>} />
+                        </NavLink>
+                        
+                    </Card>
                 </div>
-            </span>
-            <span>
-                <span>
-                    <div>{user.name}</div>
-                    <div>{user.status}</div>
-                    <NavLink to={"./../profile/" + user.id}>
-                        <img
-                            className={styles.photos}
-                            src={user.photos.small == null ? initialPhoto : user.photos.small}
-                            alt="photos"
-                        />
-                    </NavLink>
-                </span>
             </span>
         </div>
     );

@@ -1,15 +1,8 @@
-
-.container{
-    height: 2.9rem;
-    width: 38.252vw;    
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
+.formSearch {
+    display: flex; 
     align-items: center;
-    border-radius: 50px;
-    background-color: #F2F5F7;
-    padding: 0px 10px;
-}
+} 
+
 .search__button {
     border: 0px;
     background-color: #F2F5F7;
@@ -31,3 +24,12 @@
     margin: 0px 10px;
     
 }
+
+@media (max-width: 769px) {
+    .formSearch {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+    } 
+}
+
