@@ -17,15 +17,11 @@ type PropsType = {
 };
 
 const User: React.FC<PropsType> = ({ user, followingInProgress, unfollow, follow }) => {
-    const [selectedFriendId, setSelectedFriendId] = useState(null);
     const navigate = useNavigate();
 
     const handleRedirect = () => {
         navigate("/dialogs");
     };
-
-
-
 
     return (
         <div className={styles.container} >

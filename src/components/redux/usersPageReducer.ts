@@ -18,7 +18,6 @@ let initialState = {
     }
 }
 
-
 const usersPageReducer = (state = initialState, action: ActionTypes): InitialStateType => {
 
     switch (action.type) {

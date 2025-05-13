@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import React from "react";
 //@ts-ignore
-import preloader from "../../img/Dual Ring-1s-200px.svg";
 import {
     getIsFetching
     } from "../../components/redux/users-selectors.ts";
@@ -9,6 +8,8 @@ import { Users } from "./Users.tsx";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect.tsx";
 import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
+import Preloader from "../../components/utils/preloader/Preloader.jsx";
+
 
 type UsersPagePropsType = {
   
@@ -17,11 +18,14 @@ const UsersPage: React.FC<UsersPagePropsType> = (props) => {
 
     const isFetching = useSelector(getIsFetching)
 
-    return <>
-        {isFetching ? <img src={preloader} alt="preloader" /> : null}
+    return <div style={{ display: 'flex', flexDirection:'column',alignItems:'center' }} >
 
-        <Users  />
-    </>
+        {isFetching ? <Preloader /> : null} 
+        <div>
+            <Users />
+        </div> 
+    </div>
+
 }
 
 export default compose<React.ComponentType>(withAuthRedirect, withRouter)(UsersPage);

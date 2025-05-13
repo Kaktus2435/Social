@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Paginator from "../../components/common/paginator/Pagination.tsx";
 import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUserSuperSelector, getUsersFilter } from "../../components/redux/users-selectors.ts";
-import { FilterType, follow, requestUsers, unfollow } from "../../components/redux/usersPageReducer.ts";
+import { follow, requestUsers, unfollow } from "../../components/redux/usersPageReducer.ts";
 import User from "./User.tsx";
 import { AppDispatch } from "../../components/redux/redux.store.ts";
 import styles from "./Users.module.css"
@@ -68,7 +68,7 @@ export const Users: React.FC<PropsType> = (props) => {
         dispatch(unfollow(id))
     }
 
-    return <div style={{display:"flex", flexDirection:"column", alignItems:"center"}} >
+    return <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} >
         <Paginator currentPage={currentPage}
             onPageChanged={onPageChanged}
             totalUsersCount={totalUsersCount}

@@ -33,6 +33,7 @@
     width: 93%;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: 2vw;
 }
 
 .buttonsWrapper {

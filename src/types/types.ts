@@ -47,11 +47,13 @@ export type ProfilePageType = {
     updateStatus: any
 }
 
-export type DialogsType = {
-    dialogs: DialogType[]
-}
-export type DialogType = {
-    dialog: {
-        userId: number,
-    }
-}
+  export type DialogType = {
+    id: string,
+    body: string,
+    translatedBody: string | null,
+    addedAt: string,
+    senderId: number,
+    senderName: string,
+    recipientId: number,
+    viewed: boolean
+  }
