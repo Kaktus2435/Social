@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./header.module.css";
-import { Layout, Avatar, Menu, Drawer, Button, Popover } from "antd";
+import { Layout, Menu, Drawer, Button, Popover } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getIsAuth } from "../redux/auth-selectors.ts";
-import { PhotosType } from "../../types/types.ts";
-import { OpenModal } from "../ModalChat/ModalChat.tsx";
 import Logout from "../Logout/Logout.tsx";
 import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 //@ts-ignore
@@ -15,27 +13,13 @@ import { getCurrentPage, getPageSize, getUsersFilter } from "../redux/users-sele
 import { FilterType, requestUsers } from "../redux/usersPageReducer.ts";
 import { SearchForm } from "./search/UsersSearchForm.tsx";
 
-
-export type MapPropsType = {
-  isAuth: boolean
-  login: string | null
-  logout: string
-  smallPhoto: PhotosType
-
-}
-
-export type DispatchPropsType = {
-  logout: () => void
-}
-
 const items = [
   { key: "1", label: <NavLink to="/profile" className={styles.link}>Profile</NavLink> },
   { key: "2", label: <NavLink to="/chat" className={styles.link}>Chat</NavLink> },
   { key: "3", label: <NavLink to="/users" className={styles.link}>Users</NavLink> },
-  { key: "4", label: <NavLink to="/dialogs" className={styles.link}>Dialogs</NavLink> },
 ]
 
-const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+const Header: React.FC = (props) => {
 
   const currentPage = useSelector(getCurrentPage)
   const pageSize = useSelector(getPageSize)
@@ -73,7 +57,6 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
     if (path.startsWith('/profile')) return '1';
     if (path.startsWith('/chat')) return '2';
     if (path.startsWith('/users')) return '3';
-    if (path.startsWith('/dialogs')) return '4'
     return '';
   };
 
@@ -128,7 +111,6 @@ const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
                 <SearchOutlined style={{ fontSize: "2em", color: "gray", cursor: "pointer", padding:"10px" }} />
               </Popover>
 
-              <OpenModal />
               <div className={`${styles.logoutButton} ${styles.desktop}`}>
                 <Logout />
               </div>

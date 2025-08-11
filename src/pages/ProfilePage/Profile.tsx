@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//@ts-ignore
 import defaultAvatar from '../../img/Basic_Ui_(186).jpg'
 import ProfileStatusWithHooks from '../../components/profileStatus/ProfileStatusWithHooks.tsx';
 import styles from './Profile.module.css';
@@ -91,7 +92,7 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
             <div className={styles.secondContainer} >
                 <div className={styles.statusCardContainer}>
                     <Card className={styles.statusCard}
-                        title=<h1 style={{ opacity: "0.8" }} >Status</h1>>
+                        title={<h1 style={{ opacity: "0.8" }} >Status</h1>}>
                         <ProfileStatusWithHooks
                             status={status}
                             updateStatus={updateStatus}

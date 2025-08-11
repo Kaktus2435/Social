@@ -1,5 +1,5 @@
 import { getUserData } from "./auth-reducer.ts";
-import { InferActionTypes } from "./redux.store.ts";
+import { AppDispatch, InferActionTypes } from "./redux.store.ts";
 
 let initialState = {
     initialized: false
@@ -22,7 +22,7 @@ export const actions = {
     initializingSuccessed: () => ({ type: "network/app/INITIALIZING_SUCCESSED" }) as const
 }
 
-export const initializeApp = () => (dispatch: any) => {
+export const initializeApp = () => (dispatch: AppDispatch) => {
     let promise = dispatch(getUserData());
     Promise.all([promise])
         .then(() => {
@@ -30,12 +30,6 @@ export const initializeApp = () => (dispatch: any) => {
         })
 }
 
-// export const initializeApp = () => async dispatch => {
-// 	let promise = []
-// 	promise.push(dispatch(getUserData()))
-// 	await Promise.all(promise)
-// 	dispatch(initializingSuccessed())
-// }
 export default appReducer;
 
 type InitialStateType = typeof initialState

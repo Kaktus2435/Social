@@ -11,10 +11,8 @@ import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
 import Preloader from "../../components/utils/preloader/Preloader.jsx";
 
 
-type UsersPagePropsType = {
-  
-}
-const UsersPage: React.FC<UsersPagePropsType> = (props) => {
+
+const UsersPage: React.FC = (props) => {
 
     const isFetching = useSelector(getIsFetching)
 

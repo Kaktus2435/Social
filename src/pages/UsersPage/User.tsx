@@ -4,7 +4,6 @@ import styles from "./Users.module.css";
 import initialPhoto from '../../img/Basic_Ui_(186).jpg';
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserType } from "../../types/types.ts";
-import { } from "../../components/redux/dialogsPageReducer.ts";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import CustomButton from "../../components/common/buttons/CustomButton.tsx";
@@ -17,12 +16,7 @@ type PropsType = {
 };
 
 const User: React.FC<PropsType> = ({ user, followingInProgress, unfollow, follow }) => {
-    const navigate = useNavigate();
-
-    const handleRedirect = () => {
-        navigate("/dialogs");
-    };
-
+    
     return (
         <div className={styles.container} >
             <span  >

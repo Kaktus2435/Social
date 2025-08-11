@@ -11,6 +11,7 @@ const closeHandler = () => {
 }
 
 const messageHandler = (e: MessageEvent) => {
+    console.log("messageHandler")
     const newMessages = JSON.parse(e.data);
     subscribers['messages-received'].forEach(s => s(newMessages));
 }

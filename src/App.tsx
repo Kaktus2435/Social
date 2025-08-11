@@ -1,5 +1,5 @@
 import React, { ComponentType, useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withRouter } from './components/utils/withRouter/withRouter.tsx';
@@ -15,13 +15,14 @@ import { chatAPI } from "./api/chatAPI.ts";
 import styles from "./App.module.css"
 import AppRoutes from './components/Routes/Routes.tsx';
 import Footer from './components/Footer/Footer.tsx';
+import { useAppDispatch } from './hoc/hooks.ts';
 
 const { Content } = Layout;
 
 
 
 const App: React.FC = React.memo(() => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(initializeApp());

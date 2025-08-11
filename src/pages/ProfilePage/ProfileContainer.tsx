@@ -36,10 +36,11 @@ type PathParamsType = {
 
 type PropsType = MapPropsType & DispatchPropsType & PathParamsType & ProfilePropsType ;
 
-
+ 
 class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
+        
         let userId: number | null = this.props.router.params.userId;
         if (!userId) {
             userId = this.props.authorizedUserId;

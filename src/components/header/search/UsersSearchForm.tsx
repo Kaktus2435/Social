@@ -12,18 +12,21 @@ type PropsType = {
 
 }
 
-const searchFormValidate = (values: any) => {
-    const errors = {};
-    return errors;
-}
-
-
-type FriendFormType = 'true' | 'false' | 'null'
-
+type FriendFormType = boolean | null;
 
 type FormType = {
     term: string,
     friend: FriendFormType
+}
+
+type MyFormValues = {
+  term: string;
+  friend: boolean | null;
+};
+
+const searchFormValidate = (values: MyFormValues) => {
+    const errors = {};
+    return errors;
 }
 
 export const SearchForm: React.FC<PropsType> = React.memo((props) => {

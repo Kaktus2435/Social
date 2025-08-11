@@ -9,28 +9,22 @@ let initialState = {
 };
 
 let _newMessageHandler: ((messages: ChatMessagesAPIType[]) => void) | null = null
-
 const newMessageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages) => {
             dispatch(actions.messagesReceived(messages))
         }
     }
-
     return _newMessageHandler
 }
 
-
-
 let _newStatusHandler: ((status: StatusType) => void) | null = null
-
 const newStatusHandlerCreator = (dispatch: Dispatch) => {
     if (_newStatusHandler === null) {
         _newStatusHandler = (status) => {
             dispatch(actions.statusChanged(status))
         }
     }
-
     return _newStatusHandler
 }
 
@@ -89,17 +83,13 @@ export const actions = {
 export const startMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.start()
     chatAPI.subscribe('messages-received', newMessageHandlerCreator(dispatch))
-    chatAPI.subscribe('status-changed',  newStatusHandlerCreator(dispatch))
-    
+    chatAPI.subscribe('status-changed', newStatusHandlerCreator(dispatch))
 }
 
 export const stopMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.unsubscribe('messages-received', newMessageHandlerCreator(dispatch));
     chatAPI.unsubscribe('status-changed', newStatusHandlerCreator(dispatch));
-    chatAPI.stop(); 
-    
-    // Apelează funcția de curățare a mesajelor
-    clearMessages(dispatch)();
+    chatAPI.stop();
 }
 
 export const sendMessage = (message: string): ThunkType => async (dispatch) => {
