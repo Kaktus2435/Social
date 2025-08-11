@@ -17,6 +17,8 @@ const items = [
   { key: "1", label: <NavLink to="/profile" className={styles.link}>Profile</NavLink> },
   { key: "2", label: <NavLink to="/chat" className={styles.link}>Chat</NavLink> },
   { key: "3", label: <NavLink to="/users" className={styles.link}>Users</NavLink> },
+  { key: "4", label: <NavLink to="/dialogs" className={styles.link}>Dialogs</NavLink> },
+
 ]
 
 const Header: React.FC = (props) => {
@@ -57,6 +59,8 @@ const Header: React.FC = (props) => {
     if (path.startsWith('/profile')) return '1';
     if (path.startsWith('/chat')) return '2';
     if (path.startsWith('/users')) return '3';
+    if (path.startsWith('/dialogs')) return '4';
+    
     return '';
   };
 
