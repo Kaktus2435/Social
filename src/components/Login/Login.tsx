@@ -13,7 +13,7 @@ export const Login: React.FC = () => {
     const dispatch = useDispatch<any>();
 
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/profile'; 
+    const from = location.state?.from?.pathname || '/profile';
     const onSubmit = (formData: LoginFormValuesType) => {
         dispatch(login(formData.email, formData.password, formData.rememberMe, formData.captcha));
     }
@@ -21,11 +21,11 @@ export const Login: React.FC = () => {
     if (isAuth) return <Navigate to={from} replace />;
 
     return (
-        <div style={{display:"flex", flexDirection: "column"}} >
+        <div style={{ display: "flex", flexDirection: "column" }} >
             <h1>Authentication</h1>
-            <LoginReduxForm  onSubmit={onSubmit} captchaUrl={captchaUrl} />
-            Email: free@samuraijs.com
-            Password: free
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+            <div>Email: free@samuraijs.com</div>
+            <div>Password: free</div>
         </div>
     );
 }
