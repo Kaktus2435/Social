@@ -8,11 +8,13 @@ const Login = React.lazy(
   () => import('../Login/Login.tsx').then(module => ({ default: module.Login }))
 );
 const ChatPage = React.lazy(() => import("../../pages/ChatPage/ChatPage.tsx"));
+const DialogsPage = React.lazy(() => import("../../pages/DialogsPages/DialogsPages.tsx"));
 
 
 const LoginWithSuspense = withSuspense(Login);
 const UsersContainerWithSuspense = withSuspense(UsersPage);
 const ChatWithSuspense = withSuspense(ChatPage);
+const DialogsWithSuspense = withSuspense(DialogsPage);
 
 
 const AppRoutes = () => {
@@ -24,6 +26,8 @@ const AppRoutes = () => {
                 <Route path="/users" element={<UsersContainerWithSuspense />} />
                 <Route path="/login" element={<LoginWithSuspense />} />
                 <Route path="/chat" element={<ChatWithSuspense />} />
+                <Route path="/dialogs" element={<DialogsWithSuspense />} />
+
             </Routes>
         </>
 

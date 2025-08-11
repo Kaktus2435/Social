@@ -24,6 +24,8 @@ export const Login: React.FC = () => {
         <div style={{display:"flex", flexDirection: "column"}} >
             <h1>Authentication</h1>
             <LoginReduxForm  onSubmit={onSubmit} captchaUrl={captchaUrl} />
+            Email: free@samuraijs.com
+            Password: free
         </div>
     );
 }
