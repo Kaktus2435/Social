@@ -90,6 +90,8 @@ export const stopMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.unsubscribe('messages-received', newMessageHandlerCreator(dispatch));
     chatAPI.unsubscribe('status-changed', newStatusHandlerCreator(dispatch));
     chatAPI.stop();
+
+    clearMessages(dispatch)();
 }
 
 export const sendMessage = (message: string): ThunkType => async (dispatch) => {
