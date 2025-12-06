@@ -1,0 +1,19 @@
+{
+"uploadImg": "Încarcă imagine",
+"fullName": "Numele complet",
+"lookingForJob": "Caut un loc de muncă",
+"yes": "Da",
+"no": "Nu",
+"setLookingForJob": "Dacă nu este setat „Caut un loc de muncă”, atunci „Competențele mele profesionale” nu vor fi afișate pe ecranul principal.",
+"userID": "ID utilizator",
+"editProfile": "Editează profilul",
+"status": "Statusul tău",
+"withoutStatus": "Acesta ar putea fi statusul tău",
+"contacts": "Contacte",
+"delete": "Șterge",
+"close": "Închide",
+"save": "Salvează",
+"textLength": "Textul poate avea maximum 300 de simboluri",
+"aboutMe": "Despre mine",
+"professionalSkills": "Abilitățile mele profesionale"
+}

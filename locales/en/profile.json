@@ -1,0 +1,19 @@
+{
+"uploadImg": "Upload image",
+"fullName": "Full name",
+"lookingForJob": "Looking for a job",
+"yes": "Yes",
+"no": "No",
+"setLookingForJob": "If 'Looking for a job' is not set then 'My professional skills' will not be displayed on the main screen.",
+"userID": "User ID",
+"editProfile": "Edit profile",
+"status": "Status",
+"withoutStatus": "This could be your status",
+"contacts": "Contacts",
+"delete": "Delete",
+"close": "Close",
+"save": "Save",
+"textLength": "Text length is maximum 300 symbols",
+"aboutMe": "About me",
+"professionalSkills": "My professional skills"
+}
