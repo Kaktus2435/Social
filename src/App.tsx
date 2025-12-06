@@ -7,7 +7,7 @@ import { initializeApp } from './components/redux/app-reducer.ts';
 
 import store from "./components/redux/redux.store.ts";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import { Layout } from 'antd';
 import Header from "./components/header/Header.tsx";
 import { chatAPI } from "./api/chatAPI.ts";
@@ -54,11 +54,11 @@ let AppContainer = compose<ComponentType>(
 let AppMain: React.FC = () => {
   return (
     <Suspense fallback="...is loading">
-      <BrowserRouter>
+      <HashRouter>
         <Provider store={store}>
           <AppContainer />
         </Provider>
-      </BrowserRouter>
+      </HashRouter>
     </Suspense>
   );
 };
