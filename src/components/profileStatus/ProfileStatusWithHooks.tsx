@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import styles from "./ProfileStatusWithHooks.module.css"
 import CustomButton from "../common/buttons/CustomButton.tsx";
+import { useTranslation } from "react-i18next";
 
 type PropsType = {
     status: string
@@ -38,17 +39,21 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
     const deleteText = () => {
         setStatus("")
     }
+    
+    const { t, i18n } = useTranslation('profile');
+    
 
-    const calculateHeight = () => {
+    /* const calculateHeight = () => {
         const lineHeight = 20;  
         const rows = status.split('\n').length;  
         return `${Math.max(rows * lineHeight, 40)}px`;  
       };
-
+ */
     return (
         <div className={styles.container} >
             {!editMode &&
-                <span className={styles.status} onDoubleClick={() => props.isOwner && activateEditMode()}> {props.status || "This could be your status"}</span>
+                <span className={styles.status} onDoubleClick={() => props.isOwner && activateEditMode()}> 
+                {props.status || t('withoutStatus')}</span>
             }
 
             
@@ -63,11 +68,11 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
                                 maxLength={300}
                                 placeholder="Status..."
                             />
-                        <h5 style={{ margin: "2px" }} >Text length is maximum 300 symbols.</h5>
+                        <h5 style={{ margin: "2px" }} >{t("textLength")}</h5>
                         <div>
-                            <CustomButton className={styles.delete} onClick={deleteText} text={"Delete"} />
-                            <CustomButton className={styles.close} onClick={deactivateEditModeAndClose} text={"Close"} />
-                            <CustomButton className={styles.save} onClick={deactivateEditModeAndSave} text={"Save"} />
+                            <CustomButton className={styles.delete} onClick={deleteText} text={t("delete")} />
+                            <CustomButton className={styles.close} onClick={deactivateEditModeAndClose} text={t("close")} />
+                            <CustomButton className={styles.save} onClick={deactivateEditModeAndSave} text={t("save")} />
                         </div>
                     </div>
                 </div>

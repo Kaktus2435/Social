@@ -7,6 +7,7 @@ import { UserType } from "../../types/types.ts";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import CustomButton from "../../components/common/buttons/CustomButton.tsx";
+import { useTranslation } from "react-i18next";
 
 type PropsType = {
     user: UserType;
@@ -16,7 +17,8 @@ type PropsType = {
 };
 
 const User: React.FC<PropsType> = ({ user, followingInProgress, unfollow, follow }) => {
-    
+    const {t, i18n} = useTranslation('users');
+
     return (
         <div className={styles.container} >
             <span  >
@@ -37,12 +39,12 @@ const User: React.FC<PropsType> = ({ user, followingInProgress, unfollow, follow
 
                         <div>
                             {user.followed ? (
-                                <CustomButton text="Unfollow"
+                                <CustomButton text={t('unfollow')}
                                     disabled={followingInProgress.some(id => id === user.id)}
                                     onClick={() => unfollow(user.id)}
                                 />
                             ) : (
-                                <CustomButton className={styles.followUnfollowButton} text="Follow"
+                                <CustomButton className={styles.followUnfollowButton} text={t('follow')}
                                     disabled={followingInProgress.some(id => id === user.id)}
                                     onClick={() => follow(user.id)}
                                 />

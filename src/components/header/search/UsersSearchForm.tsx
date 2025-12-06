@@ -5,6 +5,7 @@ import { getUsersFilter } from "../../redux/users-selectors.ts";
 import CustomButton from "../../common/buttons/CustomButton.tsx";
 import { useNavigate } from "react-router-dom";
 import styles from "./search.module.css";
+import { useTranslation } from "react-i18next";
 
 
 type PropsType = {
@@ -30,9 +31,11 @@ const searchFormValidate = (values: MyFormValues) => {
 }
 
 export const SearchForm: React.FC<PropsType> = React.memo((props) => {
-
+    
     const navigate = useNavigate()
     const filter = useSelector(getUsersFilter)
+    
+    const { t, i18n } = useTranslation('usersSearchForm');
 
     const submit = (values: FormType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         props.onFilterChanged(values)
@@ -55,11 +58,11 @@ export const SearchForm: React.FC<PropsType> = React.memo((props) => {
                 <Form className={styles.formSearch}>
                     <Field style={{ height: "30px", fontSize: "20px"}} type="text" name="term" />
                     <Field style={{ height: "36px", fontSize: "20px"}} name="friend" as="select">
-                        <option value="null">All</option>
-                        <option value="true">Only Follow</option>
-                        <option value="false">Only Unfollow</option>
+                        <option value="null">{t('all')}</option>
+                        <option value="true">{t('onlyFollow')}</option>
+                        <option value="false">{t('onlyUnfollow')}</option>
                     </Field>
-                    <CustomButton onClick={handlerNavigation} text="Find" disabled={isSubmitting} />
+                    <CustomButton onClick={handlerNavigation} text={t('find')} disabled={isSubmitting} />
                 </Form>
             )}
         </Formik>

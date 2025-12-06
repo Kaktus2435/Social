@@ -43,15 +43,15 @@ export const Users: React.FC<PropsType> = (props) => {
 
     useEffect(() => {
         const query: any = {}
-        if (!!filter.term) query.term = filter.term /* daca obiectul !!filter.term exista, atunci noi adaugam in query.term ceia ce este in filter.term */
-        if (filter.friend !== null) query.friend = String(filter.friend) /* daca filter.friend nu e ste null atunci adaugam String(filter.friend) in query.friend. Se scrie String(filter.friend) deoarece */
+        if (!!filter.term) query.term = filter.term 
+        if (filter.friend !== null) query.friend = String(filter.friend)
         if (currentPage !== 1) query.page = String(currentPage)
 
         navigate({
             pathname: '/users',
             search: new URLSearchParams(query).toString()
         })
-    }, [filter, currentPage])// eslint-disable-line react-hooks/exhaustive-deps
+    }, [filter, currentPage])
 
 
 

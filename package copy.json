@@ -1,7 +1,7 @@
 {
   "name": "social_network",
   "version": "0.1.0",
-  "homepage": "https://Kaktus2435.github.io/Social",
+  "homepage": "https://Kaktus2435.github.io",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.3.7",

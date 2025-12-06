@@ -11,6 +11,7 @@ import { Card } from "antd";
 import ProfileInfoRight from "../../components/ProfileInfoRight/ProfileInfoRight.tsx";
 import ProfileInfoLeft from "../../components/ProfileInfoLeft/ProfileInfoLeft.tsx";
 import Contact from "../../components/Contact/Contact.tsx";
+import { useTranslation } from "react-i18next";
 
 
 type PropsType = {
@@ -30,6 +31,7 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
 
     const [editMode, setEditMode] = useState(false);
     const goToEditMode = () => { setEditMode(true) };
+    const { t, i18n } = useTranslation('profile');
 
 
 
@@ -70,10 +72,10 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                         {isOwner &&
                             <label htmlFor="fileInput" className={styles.uploadLabel}>
                                 <VerticalAlignBottomOutlined className={styles.cameraOutlander} />
-                                <h4>Upload img.</h4>
+                                <h4>{t('uploadImg')}.</h4>
                             </label>
                         }
-                        <div style={{height:"20px"}} ></div>
+                        <div style={{ height: "20px" }} ></div>
                     </div>
                 </div>
 
@@ -92,7 +94,7 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
             <div className={styles.secondContainer} >
                 <div className={styles.statusCardContainer}>
                     <Card className={styles.statusCard}
-                        title={<h1 style={{ opacity: "0.8" }} >Status</h1>}>
+                        title={<h1 style={{ opacity: "0.8" }} >{t('status')}</h1>}>
                         <ProfileStatusWithHooks
                             status={status}
                             updateStatus={updateStatus}

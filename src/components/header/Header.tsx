@@ -12,16 +12,23 @@ import { AppDispatch } from "../redux/redux.store.ts";
 import { getCurrentPage, getPageSize, getUsersFilter } from "../redux/users-selectors.ts";
 import { FilterType, requestUsers } from "../redux/usersPageReducer.ts";
 import { SearchForm } from "./search/UsersSearchForm.tsx";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitch } from "./LanguageSwitch/LanguageSwitch.tsx";
 
-const items = [
-  { key: "1", label: <NavLink to="/profile" className={styles.link}>Profile</NavLink> },
-  { key: "2", label: <NavLink to="/chat" className={styles.link}>Chat</NavLink> },
-  { key: "3", label: <NavLink to="/users" className={styles.link}>Users</NavLink> },
-  { key: "4", label: <NavLink to="/dialogs" className={styles.link}>Dialogs</NavLink> },
-
-]
 
 const Header: React.FC = (props) => {
+  
+  const {t, i18n} = useTranslation('main');
+
+  const items = [
+  { key: "1", label: <NavLink to="/profile" className={styles.link}>{t('profile')}</NavLink> },
+  { key: "2", label: <NavLink to="/chat" className={styles.link}>{t('chat')}</NavLink> },
+  { key: "3", label: <NavLink to="/users" className={styles.link}>{t('users')}</NavLink> },
+  { key: "4", label: <NavLink to="/dialogs" className={styles.link}>{t('dialogs')}</NavLink> },
+
+  ]
+
+  
 
   const currentPage = useSelector(getCurrentPage)
   const pageSize = useSelector(getPageSize)
@@ -31,7 +38,6 @@ const Header: React.FC = (props) => {
   const dispatch: AppDispatch = useDispatch()
 
   const [searchParams] = useSearchParams()
-
 
   useEffect(() => {
     const parsed = Object.fromEntries(searchParams) as { page: string, term: string, friend: string }
@@ -114,7 +120,7 @@ const Header: React.FC = (props) => {
               >
                 <SearchOutlined style={{ fontSize: "2em", color: "gray", cursor: "pointer", padding:"10px" }} />
               </Popover>
-
+                <LanguageSwitch />
               <div className={`${styles.logoutButton} ${styles.desktop}`}>
                 <Logout />
               </div>

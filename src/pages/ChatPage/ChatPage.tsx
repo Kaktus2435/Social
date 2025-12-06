@@ -8,13 +8,14 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect.tsx";
 import { AddMessageForm } from "../../components/Chat/AddMessageForm/AddMessageForm.tsx";
 import { Messages } from "../../components/Chat/Messages/Messages.tsx";
 import styles from "./ChatPage.module.css"
+import { useTranslation } from "react-i18next";
 
 
 const ChatPage = () => {
 
     const dispatch: AppDispatch = useDispatch()
     const status = useSelector((state: AppStateType) => state.chatPage.status)
-
+    const {t, i18n} = useTranslation('chat');
 
     useEffect(() => {
         dispatch(startMessagesListening())
@@ -25,7 +26,7 @@ const ChatPage = () => {
     }, [])
 
     return <div className={styles.container}>
-        {status === 'error' ? <div>Some error occurred. Please refresh the page.</div> :
+        {status === 'error' ? <div>{t('error')}</div> :
             <>   
                 <Messages />
                 <AddMessageForm />

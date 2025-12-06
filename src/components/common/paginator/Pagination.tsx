@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import s from "./Pagination.module.css";
 import cn from 'classnames';
 import CustomButton from '../buttons/CustomButton.tsx';
+import { useTranslation } from 'react-i18next';
 
 
 type PropsType = {
@@ -24,16 +25,17 @@ const Pagination: React.FC<PropsType> = ({ totalUsersCount, pageSize, currentPag
 	let currentLeftBorder = (currentPortion - 1) * portionSize + 1;
 	let currentRightBorder = currentPortion * portionSize;
 
+	const {t, i18n} = useTranslation('users');
 	
 	return <div className={s.listPages}>
 		{
 			currentPortion > 1
 				? <span>
-					<CustomButton text='To first' onClick={() => {
+					<CustomButton text={t('toFirst')} onClick={() => {
 						onPageChanged(pages[0])
 						setCurrentPortion(1)
 					}} />
-					<CustomButton text='PREV' onClick={() => {
+					<CustomButton text={t('prev')} onClick={() => {
 						currentPortion !== 1 && setCurrentPortion(currentPortion - 1)
 					}} />
 				</span>
@@ -56,10 +58,10 @@ const Pagination: React.FC<PropsType> = ({ totalUsersCount, pageSize, currentPag
 		{
 			currentPortion < portionCount
 				? <span>
-					<CustomButton text='NEXT' onClick={() => {
+					<CustomButton text={t('next')} onClick={() => {
 						currentPortion !== pagesCount && setCurrentPortion(currentPortion + 1)
 					}} /> 
-					<CustomButton text='To last' onClick={() => {
+					<CustomButton text={t('toLast')} onClick={() => {
 						onPageChanged(pages[pages.length - 1])
 						setCurrentPortion(portionCount)
 					}} />

@@ -6,6 +6,8 @@ import App from './App.tsx';
 import store from './components/redux/redux.store.ts';
 
 
+import './i18n';
+
 // setInterval(() => {
 //   store.dispatch({type:"FAKE"})
 // }, 1000);
