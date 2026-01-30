@@ -126,7 +126,7 @@ const Header: React.FC = (props) => {
               </div>
               <Button type="text" onClick={showDrawer}
                 className={`${styles.mobileMenuButton} ${styles.mobile}`}>
-                <MenuOutlined style={{ fontSize: "2em", color: "gray", padding:"10px" }} />
+                <MenuOutlined style={{ fontSize: "2em", color: "gray",  }} />
               </Button>
               <Drawer className={styles.drawer} placement="right" onClose={closeDrawer}
                 onClick={closeDrawer} open={visible}>

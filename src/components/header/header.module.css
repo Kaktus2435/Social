@@ -4,6 +4,7 @@
     background-color:#fff;
     display: flex; 
     align-items: center; 
+    justify-content: space-between;
     width: 100%; 
 }
 
@@ -78,6 +79,7 @@
   } */
   
 @media (min-width: 768px) {
+    
   .desktop {
     display: flex;
   }
@@ -88,6 +90,9 @@
 }
 
 @media (max-width : 768px) {
+    .containerLinks{
+    width: 60vw;
+  }
     .desktop {
         display: none;
     }
@@ -109,4 +114,8 @@
     .menuContainer {
       width: none;
     }
+}
+
+.mobileMenuButton {
+  padding: 0px;
 }
