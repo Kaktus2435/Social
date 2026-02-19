@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/Social/static/css/main.d790f8a4.css",
-    "main.js": "/Social/static/js/main.b337c5f6.js",
+    "main.css": "/Social/static/css/main.55c352e5.css",
+    "main.js": "/Social/static/js/main.52d69b22.js",
     "static/js/453.ad1281f2.chunk.js": "/Social/static/js/453.ad1281f2.chunk.js",
     "static/js/136.25da2d79.chunk.js": "/Social/static/js/136.25da2d79.chunk.js",
     "static/css/272.2e6a996f.chunk.css": "/Social/static/css/272.2e6a996f.chunk.css",
-    "static/js/272.37a7f70f.chunk.js": "/Social/static/js/272.37a7f70f.chunk.js",
+    "static/js/272.d875f2a0.chunk.js": "/Social/static/js/272.d875f2a0.chunk.js",
     "static/js/403.091b9c00.chunk.js": "/Social/static/js/403.091b9c00.chunk.js",
     "static/media/Basic_Ui_(186).jpg": "/Social/static/media/Basic_Ui_(186).0401c91fd0717d54d04d.jpg",
     "static/media/LogoA.svg": "/Social/static/media/LogoA.26b47f7c9d0133fca026952dd50d6794.svg",
     "index.html": "/Social/index.html",
     "static/media/Dual Ring-1s-200px.svg": "/Social/static/media/Dual Ring-1s-200px.e1da6c776e0aca8617a2587f787908aa.svg",
     "static/media/getFetch.cjs": "/Social/static/media/getFetch.7a7a1c81840c96d5a3ea.cjs",
-    "main.d790f8a4.css.map": "/Social/static/css/main.d790f8a4.css.map",
-    "main.b337c5f6.js.map": "/Social/static/js/main.b337c5f6.js.map",
+    "main.55c352e5.css.map": "/Social/static/css/main.55c352e5.css.map",
+    "main.52d69b22.js.map": "/Social/static/js/main.52d69b22.js.map",
     "453.ad1281f2.chunk.js.map": "/Social/static/js/453.ad1281f2.chunk.js.map",
     "136.25da2d79.chunk.js.map": "/Social/static/js/136.25da2d79.chunk.js.map",
     "272.2e6a996f.chunk.css.map": "/Social/static/css/272.2e6a996f.chunk.css.map",
-    "272.37a7f70f.chunk.js.map": "/Social/static/js/272.37a7f70f.chunk.js.map",
+    "272.d875f2a0.chunk.js.map": "/Social/static/js/272.d875f2a0.chunk.js.map",
     "403.091b9c00.chunk.js.map": "/Social/static/js/403.091b9c00.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d790f8a4.css",
-    "static/js/main.b337c5f6.js"
+    "static/css/main.55c352e5.css",
+    "static/js/main.52d69b22.js"
   ]
 }
