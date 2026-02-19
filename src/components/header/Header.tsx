@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./header.module.css";
 import { Layout, Menu, Drawer, Button, Popover } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,28 +16,23 @@ import { useTranslation } from "react-i18next";
 import { LanguageSwitch } from "./LanguageSwitch/LanguageSwitch.tsx";
 
 
-const Header: React.FC = (props) => {
-  
-  const {t, i18n} = useTranslation('main');
+const Header: React.FC = () => {
+
+  const { t } = useTranslation('main');
 
   const items = [
-  { key: "1", label: <NavLink to="/profile" className={styles.link}>{t('profile')}</NavLink> },
-  { key: "2", label: <NavLink to="/chat" className={styles.link}>{t('chat')}</NavLink> },
-  { key: "3", label: <NavLink to="/users" className={styles.link}>{t('users')}</NavLink> },
-  { key: "4", label: <NavLink to="/dialogs" className={styles.link}>{t('dialogs')}</NavLink> },
-
+    { key: "1", label: <NavLink to="/profile" className={styles.link}>{t('profile')}</NavLink> },
+    { key: "2", label: <NavLink to="/chat" className={styles.link}>{t('chat')}</NavLink> },
+    { key: "3", label: <NavLink to="/users" className={styles.link}>{t('users')}</NavLink> },
+    { key: "4", label: <NavLink to="/dialogs" className={styles.link}>{t('dialogs')}</NavLink> },
   ]
-
-  
 
   const currentPage = useSelector(getCurrentPage)
   const pageSize = useSelector(getPageSize)
   const filter = useSelector(getUsersFilter)
-
-
   const dispatch: AppDispatch = useDispatch()
-
   const [searchParams] = useSearchParams()
+  
 
   useEffect(() => {
     const parsed = Object.fromEntries(searchParams) as { page: string, term: string, friend: string }
@@ -47,17 +42,14 @@ const Header: React.FC = (props) => {
 
     if (!!parsed.page) actualPage = Number(parsed.page)
     if (!!parsed.term) actualFilter = { ...actualFilter, term: parsed.term }
-    if (!!parsed.friend) actualFilter = { ...actualFilter, friend: parsed.friend === "null" ? null : parsed.friend === "true" ? true : false }
-
+    if (!!parsed.friend) actualFilter = { ...actualFilter, friend: parsed.friend === "null" ? null : parsed.friend === "true" ? true : false}
 
     dispatch(requestUsers(actualPage, pageSize, actualFilter))
-  }, [])
+  }, [currentPage, dispatch, pageSize, searchParams])
 
   const onFilterChanged = (filter: FilterType) => {
     dispatch(requestUsers(1, pageSize, filter))
   }
-
-  //
 
   const location = useLocation();
 
@@ -66,37 +58,30 @@ const Header: React.FC = (props) => {
     if (path.startsWith('/chat')) return '2';
     if (path.startsWith('/users')) return '3';
     if (path.startsWith('/dialogs')) return '4';
-    
+
     return '';
   };
 
   const selectedKey = getMenuKey(location.pathname);
-
-
-
   const { Header } = Layout;
 
   const isAuth = useSelector(getIsAuth)
-
-
   const [visible, setVisible] = useState(false);
-
 
   const showDrawer = () => setVisible(true);
   const closeDrawer = () => setVisible(false);
 
 
   return (
-    <Layout style={{ height: "63px" }} >
+    <Layout style={{ height: "63px" }}>
       <Header className={styles.container}>
-
         <NavLink className={styles.containerLogo} to="/profile">
           <img src={logo} className={styles.logo} alt="A" />
         </NavLink>
 
         {isAuth ?
-          <div className={styles.containerLinks} >
-            <div className={styles.menuContainer} >
+          <div className={styles.containerLinks}>
+            <div className={styles.menuContainer}>
               <Menu
                 className={`${styles.menuDesktop} ${styles.desktop}`}
                 theme="light"
@@ -108,7 +93,6 @@ const Header: React.FC = (props) => {
             </div>
 
             <div className={styles.buttonsWrapper}>
-
               <Popover
                 content={
                   <div className={styles.searchForm}>
@@ -118,21 +102,35 @@ const Header: React.FC = (props) => {
                 trigger="click"
                 placement="bottomRight"
               >
-                <SearchOutlined style={{ fontSize: "2em", color: "gray", cursor: "pointer", padding:"10px" }} />
+
+                <SearchOutlined
+                  style={{
+                    fontSize: "2em",
+                    color: "gray",
+                    cursor: "pointer",
+                    padding: "10px"
+                  }}
+                />
               </Popover>
-                <LanguageSwitch />
+
+              <LanguageSwitch />
+
               <div className={`${styles.logoutButton} ${styles.desktop}`}>
                 <Logout />
               </div>
+
               <Button type="text" onClick={showDrawer}
                 className={`${styles.mobileMenuButton} ${styles.mobile}`}>
-                <MenuOutlined style={{ fontSize: "2em", color: "gray",  }} />
+                <MenuOutlined style={{ fontSize: "2em", color: "gray", }} />
               </Button>
+
               <Drawer className={styles.drawer} placement="right" onClose={closeDrawer}
                 onClick={closeDrawer} open={visible}>
+
                 <Menu mode="vertical"
                   items={items}>
                 </Menu>
+
                 <div className={`${styles.logoutButton} ${styles.mobile}`}>
                   <Logout />
                 </div>

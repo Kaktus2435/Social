@@ -59,24 +59,6 @@
     width: 80vw;
   }
 }
-/* 
-@media (min-width: 768px) {
-    .desktopMenu {
-      display: flex !important;
-    }
-    .mobileMenuButton {
-      display: none;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .desktopMenu {
-      display: none !important;
-    }
-    .mobileMenuButton {
-      display: inline-block;
-    }
-  } */
   
 @media (min-width: 768px) {
     
@@ -109,10 +91,10 @@
 
     .buttonsWrapper{
       justify-content: space-between;
-      width: 40vw;
+      min-width: 50px;
     }
     .menuContainer {
-      width: none;
+      width: 0px;
     }
 }
 

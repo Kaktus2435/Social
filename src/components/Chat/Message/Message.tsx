@@ -2,7 +2,12 @@ import React from "react";
 import { ChatMessagesAPIType } from "../../../api/chatAPI";
 import styles from "./Message.module.css";
 
-export const Message: React.FC<{ message: ChatMessagesAPIType; authUserId }> = React.memo((props) => {
+type PropsType = {
+    message: ChatMessagesAPIType;
+    authUserId: number | null;
+}
+
+export const Message: React.FC<PropsType> = React.memo((props) => {
     const message = props.message
 
     const isMyMessage = message.userId === props.authUserId

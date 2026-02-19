@@ -43,6 +43,7 @@
 
 .uploadLabel {
     display: flex;
+    align-items: center;
     flex-direction: row;
     cursor: pointer;
     opacity: 0.80;
@@ -50,6 +51,7 @@
 
 .cameraOutlander {
     color: #f35304;
+    height: 30px;
 }
 
 .cameraOutlander:hover {
@@ -59,6 +61,7 @@
 
 .contacts {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
     min-height: 600px;
@@ -110,9 +113,8 @@
 /* Large Laptops / Desktop */
 
 @media (max-width: 1600px) {
-    .container
-    .firstContainer {
-        margin: 0px 10px 0px 10px; 
+    .container .firstContainer {
+        margin: 0px 10px 0px 10px;
         width: 250px;
     }
 }
@@ -120,18 +122,17 @@
 /* Tablets / Small Laptops */
 @media (max-width: 1200px) {
     .firstContainer {
-        margin: 0px 10px 0px 10px; 
+        margin: 0px 10px 0px 10px;
         width: 200px;
     }
+
     .secondContainer {
         max-width: 65vw;
     }
 }
 
 /* Large Phones / Small Tablets */
-@media (max-width: 992px) {
-    
-}
+@media (max-width: 992px) {}
 
 /* Medium phones */
 @media (max-width: 768px) {
@@ -153,14 +154,16 @@
         align-items: center;
     }
 
-    .photoWrapper{
-         width: 100%;
+    .photoWrapper {
+        width: 100%;
     }
 
     .uploadLabel {
-        border: 2px solid var(--color-dark-gray) ;
+        border: 2px solid var(--color-dark-gray);
         border-radius: 10px;
         padding: 5px;
+        margin-top: 5px;
+        margin-bottom: 20px;
     }
 
     .secondContainer {
@@ -178,4 +181,10 @@
 }
 
 /* Small phones */
-@media (max-width: 576px) {}
+@media (max-width: 576px) {
+ 
+    .uploadLabel {
+        height: 35px;
+    }
+
+}

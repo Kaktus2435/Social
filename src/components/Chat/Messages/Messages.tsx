@@ -5,7 +5,11 @@ import { AppStateType } from "../../redux/redux.store.ts";
 import { Message } from "../Message/Message.tsx";
 import styles from "./Messages.module.css"
 
-export const Messages: React.FC<{}> = ({ }) => {
+type PropsType = {
+
+}
+
+export const Messages: React.FC<PropsType> = ({ }) => {
     const messages = useSelector((state: AppStateType) => state.chatPage.messages);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isAutoScroll, setIsAutoScroll] = useState(true);

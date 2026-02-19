@@ -6,12 +6,16 @@ import styles from "./AddMessageForm.module.css";
 import CustomButton from "../../common/buttons/CustomButton.tsx";
 import { useTranslation } from "react-i18next";
 
-export const AddMessageForm: React.FC<{}> = () => {
+type PropsType = {
+
+}
+
+export const AddMessageForm: React.FC<PropsType> = () => {
     const [message, setMessage] = useState('');
     const dispatch: AppDispatch = useDispatch();
     const status = useSelector((state: AppStateType) => state.chatPage.status);
 
-    const {t, i18n} = useTranslation('chat');
+    const {t} = useTranslation('chat');
 
     const sendMessageHandler = () => {
         if (!message) {

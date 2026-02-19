@@ -41,9 +41,9 @@ export type UserType = {
 
 export type ProfilePageType = {
     posts: PostsType[];
-    profile: ProfileType;
-    status: string;
-    myNewPost: string;
+    profile: ProfileType | null;
+    status: string | null;
+    myNewPost?: string;
     updateStatus: any
 }
 

@@ -14,7 +14,7 @@ i18n
     ns: ['main', 'profile'],
 
     backend: {
-      loadPath: 'https://Kaktus2435.github.io/Social' + '/locales/{{lng}}/{{ns}}.json',
+      loadPath: 'https://kaktus2435.github.io/Social' + '/locales/{{lng}}/{{ns}}.json',
     },
   });
 

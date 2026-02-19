@@ -4,7 +4,7 @@ import CustomButton from "../common/buttons/CustomButton.tsx";
 import { useTranslation } from "react-i18next";
 
 type PropsType = {
-    status: string
+    status: string | null
     updateStatus: (status: string) => void
     isOwner: boolean
 
@@ -12,11 +12,11 @@ type PropsType = {
 
 const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status)
+    let [status, setStatus] = useState<string>(props.status ?? "")
     
 
     useEffect(() => {
-        setStatus(props.status);
+        setStatus(props.status ?? "");
 
     }, [props.status]);
 
@@ -32,7 +32,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
         props.updateStatus(status);
     };
 
-    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onStatusChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setStatus(e.currentTarget.value);
     }
 
@@ -40,7 +40,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = React.memo(props => {
         setStatus("")
     }
     
-    const { t, i18n } = useTranslation('profile');
+    const { t } = useTranslation('profile');
     
 
     /* const calculateHeight = () => {

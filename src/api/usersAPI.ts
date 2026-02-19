@@ -1,15 +1,14 @@
-import { GetItemsType, APIResponseType, instance } from './api.ts';
+import {
+    GetItemsType,
+    APIResponseType,
+    instance
+} from './api.ts';
 
 export const usersAPI = {
-    
+
     getUsers(currentPage: number, pageSize: number, term: string = '', friend: null | boolean = null) {
 
-        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`)
-        /* ,
-            {
-                withCredentials: true,
-                params: { page: currentPage, count: pageSize } 
-            } */)
+        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`))
             .then(res => res.data);
     },
 

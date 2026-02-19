@@ -10,9 +10,11 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect.tsx";
 import { withRouter } from "../../components/utils/withRouter/withRouter.tsx";
 import Preloader from "../../components/utils/preloader/Preloader.jsx";
 
+type PropsType = {
 
+}
 
-const UsersPage: React.FC = (props) => {
+const UsersPage: React.FC<PropsType> = (props) => {
 
     const isFetching = useSelector(getIsFetching)
 

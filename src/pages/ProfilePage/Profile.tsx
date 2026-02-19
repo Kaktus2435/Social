@@ -4,7 +4,6 @@ import defaultAvatar from '../../img/Basic_Ui_(186).jpg'
 import ProfileStatusWithHooks from '../../components/profileStatus/ProfileStatusWithHooks.tsx';
 import styles from './Profile.module.css';
 import ProfileDataForm from '../../components/Profile.Data.Form/Profile.Data.Form.tsx';
-import Preloader from "../../components/utils/preloader/Preloader.jsx";
 import { PhotosType, ProfilePageType, ProfileType } from "../../types/types.js";
 import { VerticalAlignBottomOutlined } from '@ant-design/icons';
 import { Card } from "antd";
@@ -20,7 +19,7 @@ type PropsType = {
     isOwner: boolean
     saveProfile: any
 
-    status: string
+    status: string | null
     updateStatus: (status: string) => void
 
     savePhoto: (files: PhotosType) => void
@@ -31,13 +30,7 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
 
     const [editMode, setEditMode] = useState(false);
     const goToEditMode = () => { setEditMode(true) };
-    const { t, i18n } = useTranslation('profile');
-
-
-
-    if (!profile) {
-        return <Preloader />
-    }
+    const { t } = useTranslation('profile');
 
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
@@ -75,7 +68,6 @@ const Profile: React.FC<PropsType> = ({ profile, isOwner, savePhoto, saveProfile
                                 <h4>{t('uploadImg')}.</h4>
                             </label>
                         }
-                        <div style={{ height: "20px" }} ></div>
                     </div>
                 </div>
 

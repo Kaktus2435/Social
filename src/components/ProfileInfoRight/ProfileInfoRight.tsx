@@ -4,7 +4,7 @@ import { Card } from "antd"
 import { useTranslation } from "react-i18next";
 
 const ProfileInfoRight = ({ profile }) => {
-const { t, i18n } = useTranslation('profile');
+const { t } = useTranslation('profile');
 
     return (
         <div className={styles.container} >
