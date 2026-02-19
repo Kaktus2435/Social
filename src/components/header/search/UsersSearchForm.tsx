@@ -35,7 +35,7 @@ export const SearchForm: React.FC<PropsType> = React.memo((props) => {
     const navigate = useNavigate()
     const filter = useSelector(getUsersFilter)
     
-    const { t, i18n } = useTranslation('usersSearchForm');
+    const { t } = useTranslation('usersSearchForm');
 
     const submit = (values: FormType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         props.onFilterChanged(values)
@@ -56,8 +56,8 @@ export const SearchForm: React.FC<PropsType> = React.memo((props) => {
         >
             {({ isSubmitting }) => (
                 <Form className={styles.formSearch}>
-                    <Field style={{ height: "30px", fontSize: "20px"}} type="text" name="term" />
-                    <Field style={{ height: "36px", fontSize: "20px"}} name="friend" as="select">
+                    <Field style={{ height: "30px", width: "150px", fontSize: "20px"}} type="text" name="term" />
+                    <Field style={{ height: "36px", width: "100px", fontSize: "20px"}} name="friend" as="select">
                         <option value="null">{t('all')}</option>
                         <option value="true">{t('onlyFollow')}</option>
                         <option value="false">{t('onlyUnfollow')}</option>
