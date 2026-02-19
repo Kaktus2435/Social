@@ -13,9 +13,9 @@ i18n
     lng: 'en',
     ns: ['main', 'profile'],
 
-    backend: {
-      loadPath: 'https://kaktus2435.github.io/Social' + '/locales/{{lng}}/{{ns}}.json',
-    },
+   backend: {
+  loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`,
+},
   });
 
 export default i18n;

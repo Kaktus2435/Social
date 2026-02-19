@@ -54,7 +54,7 @@ let AppContainer = compose<ComponentType>(
 let AppMain: React.FC = () => {
   return (
     <Suspense fallback="...is loading">
-      <HashRouter>
+      <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Provider store={store}>
           <AppContainer />
         </Provider>
