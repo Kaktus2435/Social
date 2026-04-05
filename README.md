@@ -1,4 +1,4 @@
-##📱 Social Network App
+📱 Social Network App
 A full-featured social media platform focused on real-time interaction and a fluid user experience. Developed over the course of 2 years as a deep-dive into the React ecosystem.
 
 🚀 Key Features
