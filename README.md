@@ -1,7 +1,7 @@
-📱 Social Network App
+# 📱 Social Network App
 A full-featured social media platform focused on real-time interaction and a fluid user experience. Developed over the course of 2 years as a deep-dive into the React ecosystem.
 
-🚀 Key Features
+## 🚀 Key Features
 Real-time Chat: Built using WebSockets for instantaneous messaging.
 
 Secure Authentication: Complete login/register system with session management.
@@ -12,14 +12,14 @@ Type Safety: Powered by TypeScript for robust and maintainable code.
 
 Responsive Design: Fully optimized for mobile, tablet, and desktop views.
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 Frontend: React.js, TypeScript, CSS3/SASS.
 
 State Management: Redux.
 
 Communication: WebSockets, REST APIs.
 
-📦 Getting Started
+## 📦 Getting Started
 To run this project locally:
 
 Clone the repository:
@@ -35,5 +35,5 @@ Start the development server:
 Bash
 npm start
 
-💡 What I Learned
+## 💡 What I Learned
 Building this application allowed me to master complex React concepts, from component lifecycle management to optimizing performance for live data streams. It was a journey of turning technical challenges into scalable solutions.
